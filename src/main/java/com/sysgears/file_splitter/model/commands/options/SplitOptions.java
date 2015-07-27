@@ -24,14 +24,14 @@ public class SplitOptions {
      */
     @Option(name = "-mb", forbids={"-kb"}, aliases = "--megabytes", required = false,
             usage = "Sets units to megabytes.")
-    private boolean isMegaBytes;
+    private boolean isMegabytes;
 
     /**
      * Kilobytes flag.
      */
     @Option(name = "-kb", forbids={"-mb"}, aliases = "--kilobytes", required = false,
             usage = "Sets units to kilobytes.")
-    private boolean isKiloBytes;
+    private boolean isKilobytes;
 
     /**
      * Returns file path.
@@ -56,8 +56,8 @@ public class SplitOptions {
      *
      * @return boolean
      */
-    public boolean isMegaBytes() {
-        return isMegaBytes;
+    public boolean isMegabytes() {
+        return isMegabytes;
     }
 
     /**
@@ -65,7 +65,7 @@ public class SplitOptions {
      *
      * @return boolean
      */
-    public boolean isKiloBytes() {
-        return isKiloBytes;
+    public boolean isKilobytes() {
+        return isKilobytes;
     }
 }

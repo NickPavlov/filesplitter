@@ -12,9 +12,9 @@ public class SplitOptionsTest {
     public static void main(String[] args) {
         try {
 
-            SplitOptions clOptions = new SplitOptions();
+            SplitOptions splitOptions = new SplitOptions();
 
-            CmdLineParser cmdLineParser = new CmdLineParser(clOptions);
+            CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
 
             List<String> params = new ArrayList<String>();
 
@@ -23,7 +23,7 @@ public class SplitOptionsTest {
             params.add("-s");
             //params.add("1073741824");
             params.add("512");
-            params.add("-kb");
+            params.add("-mb");
 
             cmdLineParser.parseArgument(params);
 
@@ -31,10 +31,10 @@ public class SplitOptionsTest {
             System.out.println();
             cmdLineParser.printUsage(System.out);
             System.out.println();
-            System.out.println("Path: " + clOptions.getPath());
-            System.out.println("Part size: " + clOptions.getPartSize());
-            System.out.println("Megabytes: " + clOptions.isMegaBytes());
-            System.out.println("Megabytes: " + clOptions.isKiloBytes());
+            System.out.println("Path: " + splitOptions.getPath());
+            System.out.println("Part size: " + splitOptions.getPartSize());
+            System.out.println("Megabytes: " + splitOptions.isMegabytes());
+            System.out.println("Kilobytes: " + splitOptions.isKilobytes());
 
 
         } catch (CmdLineException e) {

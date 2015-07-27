@@ -22,14 +22,14 @@ public enum Commands {
     }
 
     /**
-     * Parses the input command and returns the command type from Commands.
+     * Parses the input command and returns the command from the <code>Commands</code>.
      *
-     * @param arg string
-     * @return Commands
+     * @param expression input expression
+     * @return parsed command
      */
-    public static Commands parse(final String arg) {
+    public static Commands parse(final String expression) {
         //Commands result = Commands.UNKNOWN_COMMAND;
-        Commands.values()[0].getName();
+
 
         return null;
     }

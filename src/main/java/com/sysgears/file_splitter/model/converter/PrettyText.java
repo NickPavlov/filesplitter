@@ -17,6 +17,7 @@ public class PrettyText {
         for (int i = 0; i < Math.round(width - title.length()) / 2 - 1; ++i) {
             separator.append("-");
         }
+
         return separator + title + separator;
     }
 
