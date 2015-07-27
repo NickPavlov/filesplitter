@@ -59,4 +59,13 @@ public class SplitOptions {
     public boolean isMegaBytes() {
         return isMegaBytes;
     }
+
+    /**
+     * Returns true if units are kilobytes.
+     *
+     * @return boolean
+     */
+    public boolean isKiloBytes() {
+        return isKiloBytes;
+    }
 }

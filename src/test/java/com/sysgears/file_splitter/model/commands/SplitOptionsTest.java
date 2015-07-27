@@ -20,10 +20,11 @@ public class SplitOptionsTest {
 
             params.add("-p");
             params.add("/home/nick/Documents");
-            params.add("-mb");
             params.add("-s");
             //params.add("1073741824");
             params.add("512");
+            params.add("-kb");
+
             cmdLineParser.parseArgument(params);
 
             System.out.println(params.toString());
@@ -33,6 +34,7 @@ public class SplitOptionsTest {
             System.out.println("Path: " + clOptions.getPath());
             System.out.println("Part size: " + clOptions.getPartSize());
             System.out.println("Megabytes: " + clOptions.isMegaBytes());
+            System.out.println("Megabytes: " + clOptions.isKiloBytes());
 
 
         } catch (CmdLineException e) {
