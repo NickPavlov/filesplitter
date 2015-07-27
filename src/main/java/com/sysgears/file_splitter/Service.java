@@ -1,8 +1,6 @@
 package com.sysgears.file_splitter;
 
-import com.sysgears.file_splitter.model.commands.Command;
-import com.sysgears.file_splitter.model.converter.Converter;
-import com.sysgears.file_splitter.model.converter.PrettyText;
+import com.sysgears.file_splitter.model.commands.Commands;
 import com.sysgears.file_splitter.view.IUserInterface;
 
 import java.io.IOException;
@@ -55,19 +53,7 @@ public class Service {
      * Starts the service.
      */
     public void start() {
-        String message;
-        Command command = null;
-        try {
-            while (command != Command.EXIT) {
-                ui.sendMessage("> ");
-                message = ui.read();
-                command = Command.parse(Converter.removeSpaces(message));
-                execute(command, message);
-                ui.sendMessage("\n");
-            }
-        } catch (IOException e) {
-            System.err.println("Connection is not available");
-        }
+
     }
 
     /**
@@ -77,22 +63,7 @@ public class Service {
      * @param message string
      * @throws IOException when Input/Output error
      */
-    private void execute(final Command command, final String message) throws IOException {
-        String emptySeparator = PrettyText.createSeparator("", separatorWidth);
-        switch (command) {
-            case HELP:
-            case UNKNOWNCOMMAND:
-                ui.sendMessage("\n" + PrettyText.createSeparator("help", separatorWidth) + "\n\n");
-                for (String string : Command.getHelpMessage()) {
-                    ui.sendMessage(string + "\n");
-                }
-                ui.sendMessage("\n" + emptySeparator + "\n");
-                break;
-            case EXIT:
-                ui.sendMessage("\n" + emptySeparator + "\n\n");
-                ui.sendMessage("Goodbye!\n");
-                ui.sendMessage("\n" + emptySeparator + "\n");
-                break;
-        }
+    private void execute(final Commands command, final String message) throws IOException {
+
     }
 }
