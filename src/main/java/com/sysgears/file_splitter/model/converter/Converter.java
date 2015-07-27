@@ -63,6 +63,6 @@ public class Converter {
      * @return regular expression
      */
     public static String buildRegex(final String arg) {
-        return "^(\\\\s)*" + arg.replaceAll(" ", "(\\\\s)+") + "(\\\\s)*$";
+        return "^(\\\\s)*" + arg.replaceAll(" ", "(\\\\s)+");
     }
 }

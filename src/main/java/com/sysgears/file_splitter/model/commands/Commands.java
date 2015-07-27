@@ -6,7 +6,8 @@ package com.sysgears.file_splitter.model.commands;
 public enum Commands {
     HELP("help"),
     EXIT("exit"),
-    UNKNOWNCOMMAND("");
+    SPLIT("split"),
+    UNKNOWN_COMMAND("");
 
     /**
      * The command name.
@@ -14,10 +15,10 @@ public enum Commands {
     private final String name;
 
     /**
-     * @param commandName a command name
+     * @param name a command name
      */
-    private Commands(final String commandName) {
-        this.name = commandName;
+    private Commands(final String name) {
+        this.name = name;
     }
 
     /**
@@ -27,7 +28,7 @@ public enum Commands {
      * @return Commands
      */
     public static Commands parse(final String arg) {
-        //Commands result = Commands.UNKNOWNCOMMAND;
+        //Commands result = Commands.UNKNOWN_COMMAND;
 
         return null;
     }
@@ -35,7 +36,7 @@ public enum Commands {
     /**
      * Returns a command name.
      *
-     * @return string
+     * @return String
      */
     public String getName() {
         return name;
