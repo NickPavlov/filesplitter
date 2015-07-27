@@ -1,12 +1,14 @@
-package com.sysgears.file_splitter.model.commands;
+package com.sysgears.file_splitter.model.commands.options;
 
-import com.sysgears.file_splitter.model.commands.options.SplitOptions;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test unit for <code>com.sysgears.file_splitter.model.commands.options.SplitOptions</code>.
+ */
 public class SplitOptionsTest {
 
     public static void main(String[] args) {
@@ -35,7 +37,6 @@ public class SplitOptionsTest {
             System.out.println("Part size: " + splitOptions.getPartSize());
             System.out.println("Megabytes: " + splitOptions.isMegabytes());
             System.out.println("Kilobytes: " + splitOptions.isKilobytes());
-
 
         } catch (CmdLineException e) {
             System.err.println(e.getLocalizedMessage());
