@@ -22,7 +22,8 @@ public class SplitOptionsTest {
             params.add("/home/nick/Documents");
             params.add("-mb");
             params.add("-s");
-            params.add("1073741824");
+            //params.add("1073741824");
+            params.add("512");
             cmdLineParser.parseArgument(params);
 
             System.out.println(params.toString());

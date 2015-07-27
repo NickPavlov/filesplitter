@@ -22,8 +22,16 @@ public class SplitOptions {
     /**
      * Megabytes flag.
      */
-    @Option(name = "-mb", aliases = "--megabytes", required = false, usage = "Sets units to megabytes.")
+    @Option(name = "-mb", forbids={"-kb"}, aliases = "--megabytes", required = false,
+            usage = "Sets units to megabytes.")
     private boolean isMegaBytes;
+
+    /**
+     * Kilobytes flag.
+     */
+    @Option(name = "-kb", forbids={"-mb"}, aliases = "--kilobytes", required = false,
+            usage = "Sets units to kilobytes.")
+    private boolean isKiloBytes;
 
     /**
      * Returns file path.

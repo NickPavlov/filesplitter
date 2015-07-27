@@ -40,7 +40,7 @@ public class Converter {
      * @return boolean
      */
     public static boolean findString(final String arg, final String regex, final boolean caseInsensitive) {
-        String tmp = (caseInsensitive) ? "(?i)" : "(?-i)";
+        String tmp = caseInsensitive ? "(?i)" : "(?-i)";
 
         return Pattern.compile(tmp + regex).matcher(arg).find();
     }
@@ -63,6 +63,6 @@ public class Converter {
      * @return regular expression
      */
     public static String buildRegex(final String arg) {
-        return "^(\\\\s)*" + arg.replaceAll(" ", "(\\\\s)+");
+        return "^(\\\\s)*" + arg.replaceAll(" ", "(\\\\s)");
     }
 }

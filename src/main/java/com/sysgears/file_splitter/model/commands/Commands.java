@@ -29,6 +29,7 @@ public enum Commands {
      */
     public static Commands parse(final String arg) {
         //Commands result = Commands.UNKNOWN_COMMAND;
+        Commands.values()[0].getName();
 
         return null;
     }
