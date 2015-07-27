@@ -13,7 +13,7 @@ public class Service {
     /**
      * Default width of the text separator in the terminal.
      */
-    public static final int TERMINAL_SEPARATOR_WIDTH = 80;
+    public static final int TERMINAL_SEPARATOR_WIDTH = 90;
 
     /**
      * User interface, used to interact with the user.
