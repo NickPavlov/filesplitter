@@ -1,5 +1,10 @@
 package com.sysgears.file_splitter.model.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Contains the list of all permissible commands.
  */
@@ -29,9 +34,13 @@ public enum Commands {
      */
     public static Commands parse(final String expression) {
         //Commands result = Commands.UNKNOWN_COMMAND;
+        List<Commands> commands = new ArrayList<Commands>(Arrays.asList(Commands.values()));
+        Iterator<Commands> iterator = commands.iterator();
+        Commands command = iterator.hasNext() ? iterator.next() : Commands.UNKNOWN_COMMAND;
+        while (iterator.hasNext()) {
+        }
 
-
-        return null;
+        return command;
     }
 
     /**
