@@ -45,7 +45,7 @@ public class Service {
      *
      * @param ui user interface
      */
-    public Service(IUserInterface ui) {
+    public Service(final IUserInterface ui) {
         this(ui, TERMINAL_SEPARATOR_WIDTH);
     }
 
