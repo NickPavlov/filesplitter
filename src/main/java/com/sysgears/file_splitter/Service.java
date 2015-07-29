@@ -11,42 +11,21 @@ import java.io.IOException;
 public class Service {
 
     /**
-     * Default width of the text separator in the terminal.
-     */
-    public static final int TERMINAL_SEPARATOR_WIDTH = 80;
-
-    /**
      * User interface, used to interact with the user.
      */
     private final IUserInterface ui;
 
     /**
-     * Width of the text separator in the terminal.
-     */
-    private final int separatorWidth;
-
-    /**
      * Constructs The <code>Service</code> object.
      *
-     * @param ui             user interface
-     * @param separatorWidth width of the text separator
+     * @param ui user interface
      * @throws IllegalArgumentException if <code>ui<code/> is null
      */
-    public Service(final IUserInterface ui, final int separatorWidth) {
+    public Service(final IUserInterface ui) {
         if (ui == null) {
             throw new IllegalArgumentException("User interface can't be null.");
         }
         this.ui = ui;
-        this.separatorWidth = separatorWidth;
-    }
-
-    /**
-     * Constructs The <code>Service</code> object.
-     *
-     * @param ui user interface
-     */
-    public Service(final IUserInterface ui) {
-        this(ui, TERMINAL_SEPARATOR_WIDTH);
     }
 
     /**

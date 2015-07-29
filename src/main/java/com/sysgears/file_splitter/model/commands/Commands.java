@@ -78,7 +78,7 @@ public enum Commands {
     }
 
     /**
-     * Returns a regular expression.
+     * Returns a regular expression that matches this command.
      *
      * @return a regex pattern
      */
