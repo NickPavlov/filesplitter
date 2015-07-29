@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
  * Contains the list of all permissible commands.
  */
 public enum Commands {
+
     HELP("help"),
     EXIT("exit"),
     SPLIT("split"),
