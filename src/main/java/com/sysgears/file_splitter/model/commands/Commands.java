@@ -1,13 +1,5 @@
 package com.sysgears.file_splitter.model.commands;
 
-import com.sysgears.file_splitter.model.converter.Converter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Pattern;
-
 /**
  * Contains the list of all permissible commands.
  */
@@ -24,16 +16,10 @@ public enum Commands {
     private final String name;
 
     /**
-     * Regex pattern.
-     */
-    private final String regex;
-
-    /**
      * @param name a command name
      */
-    private Commands(final String name) {
+    Commands(final String name) {
         this.name = name;
-        this.regex = Converter.buildRegex(name);
     }
 
     /**
@@ -44,6 +30,7 @@ public enum Commands {
      */
     public static Commands parse(final String expression) {
         Commands result = Commands.UNKNOWN_COMMAND;
+        /*
         List<Commands> commands = new ArrayList<Commands>(Arrays.asList(Commands.values()));
         Iterator<Commands> iterator = commands.iterator();
         boolean matches = false;
@@ -55,6 +42,7 @@ public enum Commands {
                 result = currentCommand;
             }
         }
+        */
 
         /*
         Commands result = Commands.UNKNOWN_COMMAND;
@@ -76,14 +64,5 @@ public enum Commands {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns a regular expression that matches this command.
-     *
-     * @return a regex pattern
-     */
-    public String getRegex() {
-        return regex;
     }
 }
