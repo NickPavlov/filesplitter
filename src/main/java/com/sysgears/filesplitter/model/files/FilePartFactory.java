@@ -15,16 +15,6 @@ public class FilePartFactory {
     private final IData originalFile;
 
     /**
-     * Part creator.
-     */
-    private final IDataProcessor partCreator;
-
-    /**
-     * Part size.
-     */
-    private final long partSize;
-
-    /**
      * Number of parts.
      */
     private int partCount;
@@ -32,12 +22,10 @@ public class FilePartFactory {
     /**
      * Creates the FilePartFactory object specified by the part size.
      *
-     * @param partSize part size
+     * @param originalFile original file
      */
-    public FilePartFactory(final IData originalFile, final IDataProcessor partCreator, final long partSize) {
+    public FilePartFactory(final IData originalFile) {
         this.originalFile = originalFile;
-        this.partCreator = partCreator;
-        this.partSize = partSize;
     }
 
     /**
@@ -45,7 +33,7 @@ public class FilePartFactory {
      *
      * @return worker
      */
-    public Worker create() {
+    public Worker create(final IDataProcessor partCreator) {
         return null;
     }
 }
