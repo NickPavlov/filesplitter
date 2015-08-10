@@ -1,6 +1,11 @@
 package com.sysgears.filesplitter;
 
+import com.sysgears.filesplitter.model.WorkerFactory;
+import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
+import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.commands.Commands;
+import com.sysgears.filesplitter.model.file.FileFinder;
+import com.sysgears.filesplitter.model.part.PartCreator;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.IOException;
@@ -43,7 +48,11 @@ public class Service {
      * Starts the service.
      */
     public void start() {
-
+        //Test.
+        IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
+        IDataProcessor partCreator = new PartCreator("part_0", 1024);
+        pool.execute(new WorkerFactory(fileFinder.getByName("test.txt")).create(partCreator));
+        pool.shutdown();
     }
 
     /**

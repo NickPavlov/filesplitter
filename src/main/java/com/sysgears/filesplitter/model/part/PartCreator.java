@@ -26,7 +26,7 @@ public class PartCreator implements IDataProcessor {
      * @param partName file part name
      * @param partSize final part size
      */
-    public PartCreator(String partName, long partSize) {
+    public PartCreator(final String partName, final long partSize) {
         this.partName = partName;
         this.partSize = partSize;
     }
@@ -50,6 +50,7 @@ public class PartCreator implements IDataProcessor {
     public boolean process(final IData originalFile) throws IOException {
         System.out.println("Part name: " + partName);
         System.out.println("Part size: " + partSize);
+        System.out.println("File name: " + originalFile.getName());
 
         return false;
     }
