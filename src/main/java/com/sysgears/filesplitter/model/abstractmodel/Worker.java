@@ -1,8 +1,5 @@
 package com.sysgears.filesplitter.model.abstractmodel;
 
-import com.sysgears.filesplitter.model.abstractmodel.IData;
-import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
-
 import java.io.IOException;
 
 /**
@@ -23,7 +20,7 @@ public class Worker implements Runnable {
     /**
      * Creates the Worker object specified by data and data processor.
      *
-     * @param data data
+     * @param data          data
      * @param dataProcessor data processor
      */
     public Worker(final IData data, final IDataProcessor dataProcessor) {

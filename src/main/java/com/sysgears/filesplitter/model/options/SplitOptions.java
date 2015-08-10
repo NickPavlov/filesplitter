@@ -22,14 +22,14 @@ public class SplitOptions {
     /**
      * Megabytes flag.
      */
-    @Option(name = "-mb", forbids={"-kb"}, aliases = "--megabytes", required = false,
+    @Option(name = "-mb", forbids = {"-kb"}, aliases = "--megabytes", required = false,
             usage = "Sets units to megabytes.")
     private boolean isMegabytes;
 
     /**
      * Kilobytes flag.
      */
-    @Option(name = "-kb", forbids={"-mb"}, aliases = "--kilobytes", required = false,
+    @Option(name = "-kb", forbids = {"-mb"}, aliases = "--kilobytes", required = false,
             usage = "Sets units to kilobytes.")
     private boolean isKilobytes;
 

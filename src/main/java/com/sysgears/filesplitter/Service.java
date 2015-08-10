@@ -27,7 +27,7 @@ public class Service {
      * Creates the Service object specified by the pool and user interface.
      *
      * @param pool pool of threads
-     * @param ui user interface
+     * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
     public Service(final ExecutorService pool, final IUserInterface ui) {

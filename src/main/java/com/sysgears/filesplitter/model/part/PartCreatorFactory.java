@@ -23,7 +23,7 @@ public class PartCreatorFactory {
     /**
      * Creates the PartCreatorFactory object specified by part size.
      *
-     * @param partSize part size
+     * @param partSize        part size
      * @param outputDirectory output directory
      */
     public PartCreatorFactory(final long partSize, final String outputDirectory) {
