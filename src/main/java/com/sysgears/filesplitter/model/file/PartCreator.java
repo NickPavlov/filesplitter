@@ -50,12 +50,13 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        //System.out.println(partNumber + " size=" + partSize + " file=" + originalFile.getName());
+
+        //Test.
         ByteBuffer buffer = ByteBuffer.allocate(12);
         FileChannel fileChannel = (FileChannel) originalFile.getChannel();
         fileChannel.read(buffer);
         buffer.flip();
-        new FileOutputStream(new File(new File(outputDirectory), partNumber + ".txt")).getChannel().write(buffer);
+        new FileOutputStream(new File(new File(outputDirectory), "p_" + partNumber + ".txt")).getChannel().write(buffer);
         System.out.println(partNumber + ": " + new String(buffer.array()));
 
         return false;
