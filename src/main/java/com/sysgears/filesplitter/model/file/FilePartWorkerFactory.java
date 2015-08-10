@@ -5,9 +5,9 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.abstractmodel.Worker;
 
 /**
- * The FilePartFactory class provides functionality to create workers.
+ * The FilePartWorkerFactory class provides functionality to create workers.
  */
-public class FilePartFactory {
+public class FilePartWorkerFactory {
 
     /**
      * Original file.
@@ -20,11 +20,11 @@ public class FilePartFactory {
     private int partCount;
 
     /**
-     * Creates the FilePartFactory object specified by the part size.
+     * Creates the FilePartWorkerFactory object specified by the part size.
      *
      * @param originalFile original file
      */
-    public FilePartFactory(final IData originalFile) {
+    public FilePartWorkerFactory(final IData originalFile) {
         this.originalFile = originalFile;
     }
 
@@ -34,6 +34,6 @@ public class FilePartFactory {
      * @return worker
      */
     public Worker create(final IDataProcessor partCreator) {
-        return null;
+        return new Worker(originalFile, partCreator);
     }
 }
