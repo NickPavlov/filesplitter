@@ -29,7 +29,7 @@ public class FilePartWorkerFactory {
     }
 
     /**
-     * Creates new worker object.
+     * Creates a new worker object.
      *
      * @return worker
      */
