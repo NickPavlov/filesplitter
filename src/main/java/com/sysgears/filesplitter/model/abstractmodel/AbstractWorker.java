@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.model.abstractmodel;
 /**
  * Provides a data processing.
  */
-public abstract class Worker implements Runnable {
+public abstract class AbstractWorker implements Runnable {
 
     /**
      * Process a data.
