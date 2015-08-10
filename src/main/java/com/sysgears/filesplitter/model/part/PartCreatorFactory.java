@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.file;
+package com.sysgears.filesplitter.model.part;
 
 /**
  * The PartCreatorFactory class provides functionality to create PartCreator instances.

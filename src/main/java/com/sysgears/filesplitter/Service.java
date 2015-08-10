@@ -3,7 +3,7 @@ package com.sysgears.filesplitter;
 import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
-import com.sysgears.filesplitter.model.file.PartCreatorFactory;
+import com.sysgears.filesplitter.model.part.PartCreatorFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.util.concurrent.ExecutorService;
