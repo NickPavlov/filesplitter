@@ -8,7 +8,7 @@ import java.io.IOException;
 public interface IDataProcessor {
 
     /**
-     * Gets a processor name.
+     * Returns a processor name.
      *
      * @return processor name
      */

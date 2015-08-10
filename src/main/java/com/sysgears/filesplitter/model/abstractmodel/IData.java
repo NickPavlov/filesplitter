@@ -8,14 +8,14 @@ import java.net.URI;
 public interface IData {
 
     /**
-     * Gets a data name.
+     * Returns a data name.
      *
      * @return data name
      */
     public String getName();
 
     /**
-     * Gets a uniform resource identifier.
+     * Returns a uniform resource identifier.
      *
      * @return URI
      */

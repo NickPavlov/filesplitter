@@ -6,7 +6,7 @@ package com.sysgears.filesplitter.model.abstractmodel;
 public interface IDataFinder {
 
     /**
-     * Gets data by name.
+     * Returns data by name.
      *
      * @param name data name
      * @return data object
