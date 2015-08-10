@@ -39,9 +39,7 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        System.out.println("PartCreator name: " + partName);
-        System.out.println("PartCreator size: " + partSize);
-        System.out.println("File name: " + originalFile.getName());
+        System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
 
         return false;
     }

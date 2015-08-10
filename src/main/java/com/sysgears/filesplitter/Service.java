@@ -60,10 +60,11 @@ public class Service {
         System.out.println("MB: " + splitOptions.isMegabytes());
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
-        IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
-        PartCreatorFactory partCreator = new PartCreatorFactory(1024);
-        for (int i = 0; i < 3; ++i) {
-            pool.execute(new WorkerFactory(fileFinder.getByName("test.txt")).create(partCreator.create()));
+        final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
+        final PartCreatorFactory partCreator = new PartCreatorFactory(1024);
+        final WorkerFactory workerFactory = new WorkerFactory(fileFinder.getByName("test.txt"));
+        for (int i = 0; i < 15; ++i) {
+            pool.execute(workerFactory.create(partCreator.create()));
         }
         pool.shutdown();
     }
