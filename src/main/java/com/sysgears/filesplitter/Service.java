@@ -63,6 +63,7 @@ public class Service {
         final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         final PartCreatorFactory partCreator = new PartCreatorFactory(1024);
         final WorkerFactory workerFactory = new WorkerFactory(fileFinder.getByName("test.txt"));
+
         for (int i = 0; i < 15; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
         }

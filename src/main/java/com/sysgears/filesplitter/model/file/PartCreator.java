@@ -3,7 +3,10 @@ package com.sysgears.filesplitter.model.file;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 /**
  * The PartCreator class provides functionality to create a part of the file.
@@ -39,7 +42,11 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
+        //System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
+        ByteBuffer buffer = ByteBuffer.allocate(12);
+        new FileInputStream(new File(originalFile.getURI())).getChannel().read(buffer);
+        System.out.println("Part_0: " + partName + " " + new String(buffer.array()));
+
 
         return false;
     }
