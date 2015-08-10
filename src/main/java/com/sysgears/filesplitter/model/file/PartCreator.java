@@ -45,7 +45,7 @@ public class PartCreator implements IDataProcessor {
         //System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
         ByteBuffer buffer = ByteBuffer.allocate(12);
         new FileInputStream(new File(originalFile.getURI())).getChannel().read(buffer);
-        System.out.println("Part_0: " + partName + " " + new String(buffer.array()));
+        System.out.println(partName + ": " + new String(buffer.array()));
 
 
         return false;

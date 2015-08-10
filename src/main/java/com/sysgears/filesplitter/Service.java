@@ -64,7 +64,7 @@ public class Service {
         final PartCreatorFactory partCreator = new PartCreatorFactory(1024);
         final WorkerFactory workerFactory = new WorkerFactory(fileFinder.getByName("test.txt"));
 
-        for (int i = 0; i < 15; ++i) {
+        for (int i = 0; i < 50; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
         }
         pool.shutdown();
