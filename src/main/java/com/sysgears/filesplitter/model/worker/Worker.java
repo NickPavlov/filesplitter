@@ -1,0 +1,40 @@
+package com.sysgears.filesplitter.model.worker;
+
+import com.sysgears.filesplitter.model.abstractdatamodel.IData;
+import com.sysgears.filesplitter.model.abstractdatamodel.IDataProcessor;
+
+import java.io.IOException;
+
+/**
+ * The Worker class provides functionality for data processing.
+ */
+public class Worker implements Runnable {
+
+    /**
+     * Data to process.
+     */
+    private final IData data;
+
+    /**
+     * Data processor.
+     */
+    private final IDataProcessor dataProcessor;
+
+    /**
+     * Creates the Worker object specified by data and data processor.
+     * @param data data
+     * @param dataProcessor data processor
+     */
+    public Worker(final IData data, final IDataProcessor dataProcessor) {
+        this.data = data;
+        this.dataProcessor = dataProcessor;
+    }
+
+    public void run() {
+        try {
+            dataProcessor.process(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,7 +1,7 @@
 package com.sysgears.filesplitter.model.files;
 
-import com.sysgears.filesplitter.model.abstractmodel.IData;
-import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
+import com.sysgears.filesplitter.model.abstractdatamodel.IData;
+import com.sysgears.filesplitter.model.abstractdatamodel.IDataFinder;
 
 import java.io.File;
 import java.net.URI;

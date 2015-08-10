@@ -1,7 +1,9 @@
 package com.sysgears.filesplitter.model.files;
 
-import com.sysgears.filesplitter.model.abstractmodel.IData;
-import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.abstractdatamodel.IData;
+import com.sysgears.filesplitter.model.abstractdatamodel.IDataProcessor;
+
+import java.io.IOException;
 
 /**
  * The FilePart class provides functionality to create a part of the file.
@@ -43,8 +45,9 @@ public class FilePart implements IDataProcessor {
      *
      * @param originalFile original file
      * @return true if part of the file created successfully, false otherwise
+     * @throws IOException in case of data access error
      */
-    public boolean process(final IData originalFile) {
+    public boolean process(final IData originalFile) throws IOException {
         return false;
     }
 }
