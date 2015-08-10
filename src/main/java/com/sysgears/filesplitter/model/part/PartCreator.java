@@ -47,24 +47,6 @@ public class PartCreator implements IDataProcessor {
     }
 
     /**
-     * Sets a part name.
-     *
-     * @param partName part name
-     */
-    public void setPartName(String partName) {
-        this.partName = partName;
-    }
-
-    /**
-     * Sets part size.
-     *
-     * @param partSize part size
-     */
-    public void setPartSize(long partSize) {
-        this.partSize = partSize;
-    }
-
-    /**
      * Returns a name of the part of the file.
      *
      * @return file part name
