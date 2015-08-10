@@ -11,12 +11,18 @@ public class PartCreatorFactory {
     private final long partSize;
 
     /**
+     * Part number.
+     */
+    private int partNumber;
+
+    /**
      * Creates the PartCreatorFactory object specified by part size.
      *
      * @param partSize part size
      */
     public PartCreatorFactory(final long partSize) {
         this.partSize = partSize;
+        this.partNumber = 0;
     }
 
     /**
@@ -25,6 +31,6 @@ public class PartCreatorFactory {
      * @return PartCreator object
      */
     public PartCreator create() {
-        return null;
+        return new PartCreator("part_" + partNumber++, partSize);
     }
 }
