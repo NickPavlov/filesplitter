@@ -5,6 +5,7 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * The PartCreator class provides functionality to create a part of the file.
@@ -49,7 +50,9 @@ public class PartCreator implements IDataProcessor {
     public boolean process(final IData originalFile) throws IOException {
         //System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
         ByteBuffer buffer = ByteBuffer.allocate(12);
-
+        FileChannel fileChannel = (FileChannel) originalFile.getChannel();
+        fileChannel.read(buffer);
+        System.out.println(partName + ": " + new String(buffer.array()));
 
         return false;
     }
