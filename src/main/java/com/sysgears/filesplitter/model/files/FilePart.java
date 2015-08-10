@@ -35,7 +35,7 @@ public class FilePart implements IDataProcessor {
      * @return file part name
      */
     public String getName() {
-        return "";
+        return partName;
     }
 
     /**
