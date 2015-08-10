@@ -2,12 +2,10 @@ package com.sysgears.filesplitter;
 
 import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
-import com.sysgears.filesplitter.model.commands.Commands;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.PartCreatorFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -49,23 +47,12 @@ public class Service {
      * @param args console arguments
      */
     public void start(final String[] args) {
-        //Test.
+
         IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         PartCreatorFactory partCreator = new PartCreatorFactory(1024);
         for (int i = 0; i < 10; ++i) {
             pool.execute(new WorkerFactory(fileFinder.getByName("test.txt")).create(partCreator.create()));
         }
         pool.shutdown();
-    }
-
-    /**
-     * Performs an action, depending on the type of received command.
-     *
-     * @param command command type
-     * @param message string
-     * @throws IOException in case I/O error
-     */
-    private void execute(final Commands command, final String message) throws IOException {
-
     }
 }
