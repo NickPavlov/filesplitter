@@ -1,4 +1,4 @@
-package com.sysgears.file_splitter.model.abstractmodel;
+package com.sysgears.filesplitter.model.abstractmodel;
 
 import java.net.URI;
 

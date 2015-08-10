@@ -1,4 +1,4 @@
-package com.sysgears.file_splitter.model.commands;
+package com.sysgears.filesplitter.model.commands;
 
 /**
  * Contains the list of all permissible commands.

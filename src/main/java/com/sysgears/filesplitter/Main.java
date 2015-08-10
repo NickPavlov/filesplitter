@@ -1,6 +1,6 @@
-package com.sysgears.file_splitter;
+package com.sysgears.filesplitter;
 
-import com.sysgears.file_splitter.view.UserInterface;
+import com.sysgears.filesplitter.view.UserInterface;
 
 /**
  * The Main class creates the necessary objects for calculator work and passes control to the service.

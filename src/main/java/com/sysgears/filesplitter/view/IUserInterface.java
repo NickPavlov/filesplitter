@@ -1,4 +1,4 @@
-package com.sysgears.file_splitter.view;
+package com.sysgears.filesplitter.view;
 
 import java.io.IOException;
 import java.io.InputStream;

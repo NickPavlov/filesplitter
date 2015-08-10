@@ -1,7 +1,7 @@
-package com.sysgears.file_splitter;
+package com.sysgears.filesplitter;
 
-import com.sysgears.file_splitter.model.commands.Commands;
-import com.sysgears.file_splitter.view.IUserInterface;
+import com.sysgears.filesplitter.model.commands.Commands;
+import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.IOException;
 
