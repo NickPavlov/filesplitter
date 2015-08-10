@@ -61,7 +61,7 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
         final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
-        final PartCreatorFactory partCreator = new PartCreatorFactory(1024);
+        final PartCreatorFactory partCreator = new PartCreatorFactory(1024, "/home/nick/Documents/Part");
         final WorkerFactory workerFactory = new WorkerFactory(fileFinder.getByName("test.txt"));
 
         for (int i = 0; i < 50; ++i) {

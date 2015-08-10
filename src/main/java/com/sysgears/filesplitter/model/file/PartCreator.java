@@ -33,6 +33,7 @@ public class PartCreator implements IDataProcessor {
      *
      * @param partName file part name
      * @param partSize final part size
+     * @param outputDirectory output directory
      */
     public PartCreator(final String partName, final long partSize, final String outputDirectory) {
         this.partName = partName;

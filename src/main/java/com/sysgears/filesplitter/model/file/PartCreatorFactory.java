@@ -16,13 +16,20 @@ public class PartCreatorFactory {
     private int partNumber;
 
     /**
+     * Output directory.
+     */
+    private final String outputDirectory;
+
+    /**
      * Creates the PartCreatorFactory object specified by part size.
      *
      * @param partSize part size
+     * @param outputDirectory output directory
      */
-    public PartCreatorFactory(final long partSize) {
+    public PartCreatorFactory(final long partSize, final String outputDirectory) {
         this.partSize = partSize;
         this.partNumber = 0;
+        this.outputDirectory = outputDirectory;
     }
 
     /**
@@ -31,6 +38,6 @@ public class PartCreatorFactory {
      * @return PartCreator object
      */
     public PartCreator create() {
-        return new PartCreator("part_" + partNumber++, partSize);
+        return new PartCreator("part_" + partNumber++, partSize, outputDirectory);
     }
 }
