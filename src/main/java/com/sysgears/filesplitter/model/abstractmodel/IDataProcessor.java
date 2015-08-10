@@ -8,13 +8,6 @@ import java.io.IOException;
 public interface IDataProcessor {
 
     /**
-     * Returns a processor name.
-     *
-     * @return processor name
-     */
-    public String getName();
-
-    /**
      * Processes the received data.
      *
      * @param data data object

@@ -13,12 +13,12 @@ public class PartCreator implements IDataProcessor {
     /**
      * The file part name.
      */
-    private final String partName;
+    private String partName;
 
     /**
      * The file part size.
      */
-    private final long partSize;
+    private long partSize;
 
     /**
      * Creates the PartCreator object specified by part name and size.
@@ -29,15 +29,6 @@ public class PartCreator implements IDataProcessor {
     public PartCreator(final String partName, final long partSize) {
         this.partName = partName;
         this.partSize = partSize;
-    }
-
-    /**
-     * Returns a name of the part of the file.
-     *
-     * @return file part name
-     */
-    public String getName() {
-        return partName;
     }
 
     /**
@@ -54,4 +45,41 @@ public class PartCreator implements IDataProcessor {
 
         return false;
     }
+
+    /**
+     * Sets a part name.
+     *
+     * @param partName part name
+     */
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
+
+    /**
+     * Sets part size.
+     *
+     * @param partSize part size
+     */
+    public void setPartSize(long partSize) {
+        this.partSize = partSize;
+    }
+
+    /**
+     * Returns a name of the part of the file.
+     *
+     * @return file part name
+     */
+    public String getName() {
+        return partName;
+    }
+
+    /**
+     * Returns part size.
+     *
+     * @return part size
+     */
+    public long getPartSize() {
+        return partSize;
+    }
+
 }

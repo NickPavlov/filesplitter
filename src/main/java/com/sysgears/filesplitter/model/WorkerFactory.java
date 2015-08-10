@@ -15,11 +15,6 @@ public class WorkerFactory {
     private final IData originalFile;
 
     /**
-     * Number of parts.
-     */
-    private int partCount;
-
-    /**
      * Creates the WorkerFactory object specified by the part size.
      *
      * @param originalFile original file
