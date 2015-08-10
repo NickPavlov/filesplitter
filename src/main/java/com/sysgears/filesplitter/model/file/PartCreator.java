@@ -3,6 +3,8 @@ package com.sysgears.filesplitter.model.file;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -13,9 +15,9 @@ import java.nio.channels.FileChannel;
 public class PartCreator implements IDataProcessor {
 
     /**
-     * The file part name.
+     * The file part number.
      */
-    private final String partName;
+    private final int partNumber;
 
     /**
      * The file part size.
@@ -30,12 +32,12 @@ public class PartCreator implements IDataProcessor {
     /**
      * Creates the PartCreator object specified by part name and size.
      *
-     * @param partName file part name
+     * @param partNumber file part number
      * @param partSize final part size
      * @param outputDirectory output directory
      */
-    public PartCreator(final String partName, final long partSize, final String outputDirectory) {
-        this.partName = partName;
+    public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
+        this.partNumber = partNumber;
         this.partSize = partSize;
         this.outputDirectory = outputDirectory;
     }
@@ -48,31 +50,14 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        //System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
+        //System.out.println(partNumber + " size=" + partSize + " file=" + originalFile.getName());
         ByteBuffer buffer = ByteBuffer.allocate(12);
         FileChannel fileChannel = (FileChannel) originalFile.getChannel();
         fileChannel.read(buffer);
-        System.out.println(partName + ": " + new String(buffer.array()));
+        buffer.flip();
+        new FileOutputStream(new File(new File(outputDirectory), partNumber + ".txt")).getChannel().write(buffer);
+        System.out.println(partNumber + ": " + new String(buffer.array()));
 
         return false;
     }
-
-    /**
-     * Returns a name of the part of the file.
-     *
-     * @return file part name
-     */
-    public String getName() {
-        return partName;
-    }
-
-    /**
-     * Returns part size.
-     *
-     * @return part size
-     */
-    public long getPartSize() {
-        return partSize;
-    }
-
 }
