@@ -51,7 +51,7 @@ public class Service {
      *
      * @param command command type
      * @param message string
-     * @throws IOException when Input/Output error
+     * @throws IOException in case I/O error
      */
     private void execute(final Commands command, final String message) throws IOException {
 
