@@ -31,6 +31,9 @@ public class Worker implements Runnable {
         this.dataProcessor = dataProcessor;
     }
 
+    /**
+     * Performs data processing.
+     */
     public void run() {
         try {
             dataProcessor.process(data);
