@@ -14,7 +14,7 @@ public class SplitOptions {
     private String path;
 
     /**
-     * FilePartCreator size.
+     * PartCreator size.
      */
     @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "File part size.")
     private int partSize;
