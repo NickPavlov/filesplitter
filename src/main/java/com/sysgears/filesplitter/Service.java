@@ -4,6 +4,7 @@ import com.sysgears.filesplitter.model.commands.Commands;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
 /**
  * The Service class performs management of the main parts of the application.
@@ -11,20 +12,30 @@ import java.io.IOException;
 public class Service {
 
     /**
+     * Pool of threads.
+     */
+    private final ExecutorService pool;
+
+    /**
      * User interface.
      */
     private final IUserInterface ui;
 
     /**
-     * Constructs The <code>Service</code> object.
+     * Creates the Service object specified by the pool and user interface.
      *
+     * @param pool pool of threads
      * @param ui user interface
-     * @throws IllegalArgumentException if <code>ui<code/> is null
+     * @throws IllegalArgumentException if user interface is null
      */
-    public Service(final IUserInterface ui) {
+    public Service(final ExecutorService pool, final IUserInterface ui) {
+        if (pool == null) {
+            throw new IllegalArgumentException("Pool of threads can't be null.");
+        }
         if (ui == null) {
             throw new IllegalArgumentException("User interface can't be null.");
         }
+        this.pool = pool;
         this.ui = ui;
     }
 
