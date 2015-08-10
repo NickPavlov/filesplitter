@@ -65,6 +65,10 @@ public class FileFinder implements IDataFinder {
                 return file.getName();
             }
 
+            public long getSize() {
+                return file.length();
+            }
+
             public URI getURI() {
                 return file.toURI();
             }

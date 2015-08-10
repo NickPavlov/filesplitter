@@ -19,7 +19,7 @@ public interface IData {
      *
      * @return data size
      */
-    public String getSize();
+    public long getSize();
 
     /**
      * Returns a uniform resource identifier.
