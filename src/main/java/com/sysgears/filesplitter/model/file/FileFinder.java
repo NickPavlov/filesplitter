@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.files;
+package com.sysgears.filesplitter.model.file;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
@@ -7,7 +7,7 @@ import java.io.File;
 import java.net.URI;
 
 /**
- * The FileFinder class provides functionality to find files.
+ * The FileFinder class provides functionality to find file.
  */
 public class FileFinder implements IDataFinder {
 
