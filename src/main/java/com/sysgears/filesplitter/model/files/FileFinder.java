@@ -34,6 +34,13 @@ public class FileFinder implements IDataFinder {
     }
 
     /**
+     * Creates FileFinder object specified by empty root path.
+     */
+    public FileFinder() {
+        this("");
+    }
+
+    /**
      * Returns a file.
      * In case if root directory is unspecified, filename should contain an absolute path.
      *
@@ -48,7 +55,9 @@ public class FileFinder implements IDataFinder {
             throw new IllegalArgumentException("File name can't be empty.");
         }
 
-        final File file = rootDirectory != null ? new File(rootDirectory, name) : new File(name);
+        final File file = (rootDirectory != null) && (rootDirectory.length() != 0)
+                ? new File(rootDirectory, name)
+                : new File(name);
 
         return new IData() {
             public String getName() {
