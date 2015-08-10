@@ -4,7 +4,9 @@ import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 
 import java.io.File;
-import java.net.URI;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  * The FileFinder class provides functionality to find file.
@@ -65,12 +67,8 @@ public class FileFinder implements IDataFinder {
                 return file.getName();
             }
 
-            public long getSize() {
-                return file.length();
-            }
-
-            public URI getURI() {
-                return file.toURI();
+            public FileChannel getChannel() throws IOException {
+                return new FileInputStream(file).getChannel();
             }
         };
     }

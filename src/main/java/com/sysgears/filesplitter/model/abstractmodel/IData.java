@@ -1,6 +1,7 @@
 package com.sysgears.filesplitter.model.abstractmodel;
 
-import java.net.URI;
+import java.io.IOException;
+import java.nio.channels.Channel;
 
 /**
  * The IData interface defines the behavior of the data storage object.
@@ -15,9 +16,10 @@ public interface IData {
     public String getName();
 
     /**
-     * Returns a uniform resource identifier.
+     * Returns a byte channel.
      *
-     * @return URI
+     * @return channel
+     * @throws IOException in case I/O error
      */
-    public URI getURI();
+    public Channel getChannel() throws IOException;
 }

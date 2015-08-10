@@ -3,8 +3,6 @@ package com.sysgears.filesplitter.model.file;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -51,9 +49,6 @@ public class PartCreator implements IDataProcessor {
     public boolean process(final IData originalFile) throws IOException {
         //System.out.println(partName + " size=" + partSize + " file=" + originalFile.getName());
         ByteBuffer buffer = ByteBuffer.allocate(12);
-        File file = new File(originalFile.getURI());
-        new FileInputStream(file).getChannel().read(buffer);
-        String parentFolder = file.getParent();
 
 
         return false;
