@@ -1,7 +1,7 @@
 package com.sysgears.filesplitter.model.files;
 
-import com.sysgears.filesplitter.model.abstractdatamodel.IData;
-import com.sysgears.filesplitter.model.abstractdatamodel.IDataProcessor;
+import com.sysgears.filesplitter.model.abstractmodel.IData;
+import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
 import java.io.IOException;
 
@@ -48,6 +48,9 @@ public class FilePart implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
+        System.out.println("Part name: " + partName);
+        System.out.println("Part size: " + partSize);
+
         return false;
     }
 }

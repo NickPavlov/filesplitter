@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.abstractdatamodel;
+package com.sysgears.filesplitter.model.abstractmodel;
 
 /**
  * The IDataFinder interface defines the behavior of the data finder.

@@ -1,7 +1,7 @@
-package com.sysgears.filesplitter.model.worker;
+package com.sysgears.filesplitter.model.abstractmodel;
 
-import com.sysgears.filesplitter.model.abstractdatamodel.IData;
-import com.sysgears.filesplitter.model.abstractdatamodel.IDataProcessor;
+import com.sysgears.filesplitter.model.abstractmodel.IData;
+import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
 import java.io.IOException;
 
