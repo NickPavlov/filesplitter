@@ -4,10 +4,7 @@ import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.PartCreatorFactory;
-import com.sysgears.filesplitter.model.options.SplitOptions;
 import com.sysgears.filesplitter.view.IUserInterface;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 
 import java.util.concurrent.ExecutorService;
 
@@ -50,6 +47,7 @@ public class Service {
      * @param args console arguments
      */
     public void start(final String[] args) {
+        /*
         SplitOptions splitOptions = new SplitOptions();
         CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
         try {
@@ -61,7 +59,7 @@ public class Service {
         System.out.println("PartSize: " + splitOptions.getPartSize());
         System.out.println("MB: " + splitOptions.isMegabytes());
         System.out.println("kB: " + splitOptions.isKilobytes());
-
+        */
         IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         PartCreatorFactory partCreator = new PartCreatorFactory(1024);
         for (int i = 0; i < 3; ++i) {
