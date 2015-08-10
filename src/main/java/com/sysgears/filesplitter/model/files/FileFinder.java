@@ -44,20 +44,21 @@ public class FileFinder implements IDataFinder {
      * Returns a file.
      * In case if root directory is unspecified, filename should contain an absolute path.
      *
-     * @param name file name
-     * @return FileData object
+     * @param filename filename
+     * @return IData object
+     * @throws IllegalArgumentException if filename null or empty
      */
-    public IData getByName(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("File name can't be null.");
+    public IData getByName(final String filename) {
+        if (filename == null) {
+            throw new IllegalArgumentException("File filename can't be null.");
         }
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("File name can't be empty.");
+        if (filename.isEmpty()) {
+            throw new IllegalArgumentException("File filename can't be empty.");
         }
 
         final File file = (rootDirectory != null) && (rootDirectory.length() != 0)
-                ? new File(rootDirectory, name)
-                : new File(name);
+                ? new File(rootDirectory, filename)
+                : new File(filename);
 
         return new IData() {
             public String getName() {
