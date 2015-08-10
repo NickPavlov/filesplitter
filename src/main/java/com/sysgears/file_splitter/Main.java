@@ -3,7 +3,7 @@ package com.sysgears.file_splitter;
 import com.sysgears.file_splitter.view.UserInterface;
 
 /**
- * The <code>Main</code> class...
+ * The <code>Main</code> class creates the necessary objects for calculator work and passes control to the service.
  */
 public class Main {
 
@@ -13,6 +13,10 @@ public class Main {
      * @param args console arguments
      */
     public static void main(final String[] args) {
-        new Service(new UserInterface(System.in, System.out)).start();
+        try {
+            new Service(new UserInterface(System.in, System.out)).start();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 }

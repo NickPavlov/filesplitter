@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Service {
 
     /**
-     * User interface, used to interact with the user.
+     * User interface.
      */
     private final IUserInterface ui;
 
