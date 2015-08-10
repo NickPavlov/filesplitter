@@ -6,9 +6,9 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import java.io.IOException;
 
 /**
- * The FilePart class provides functionality to create a part of the file.
+ * The FilePartCreator class provides functionality to create a part of the file.
  */
-public class FilePart implements IDataProcessor {
+public class FilePartCreator implements IDataProcessor {
 
     /**
      * The file part name.
@@ -21,12 +21,12 @@ public class FilePart implements IDataProcessor {
     private final long partSize;
 
     /**
-     * Creates the FilePart object specified by part name and size.
+     * Creates the FilePartCreator object specified by part name and size.
      *
      * @param partName file part name
      * @param partSize final part size
      */
-    public FilePart(String partName, long partSize) {
+    public FilePartCreator(String partName, long partSize) {
         this.partName = partName;
         this.partSize = partSize;
     }
