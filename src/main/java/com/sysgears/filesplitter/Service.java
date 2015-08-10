@@ -2,10 +2,9 @@ package com.sysgears.filesplitter;
 
 import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
-import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.commands.Commands;
 import com.sysgears.filesplitter.model.file.FileFinder;
-import com.sysgears.filesplitter.model.file.PartCreator;
+import com.sysgears.filesplitter.model.file.PartCreatorFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.IOException;
@@ -46,12 +45,16 @@ public class Service {
 
     /**
      * Starts the service.
+     *
+     * @param args console arguments
      */
-    public void start() {
+    public void start(final String[] args) {
         //Test.
         IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
-        IDataProcessor partCreator = new PartCreator("part_0", 1024);
-        pool.execute(new WorkerFactory(fileFinder.getByName("test.txt")).create(partCreator));
+        PartCreatorFactory partCreator = new PartCreatorFactory(1024);
+        for (int i = 0; i < 10; ++i) {
+            pool.execute(new WorkerFactory(fileFinder.getByName("test.txt")).create(partCreator.create()));
+        }
         pool.shutdown();
     }
 
