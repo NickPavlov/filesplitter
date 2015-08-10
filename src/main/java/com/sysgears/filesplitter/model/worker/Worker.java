@@ -22,6 +22,7 @@ public class Worker implements Runnable {
 
     /**
      * Creates the Worker object specified by data and data processor.
+     *
      * @param data data
      * @param dataProcessor data processor
      */
