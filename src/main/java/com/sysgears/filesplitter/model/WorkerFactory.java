@@ -12,15 +12,15 @@ public class WorkerFactory {
     /**
      * Original file.
      */
-    private final IData originalFile;
+    private final IData data;
 
     /**
-     * Creates the WorkerFactory object specified by the part size.
+     * Creates the WorkerFactory object.
      *
-     * @param originalFile original file
+     * @param data data
      */
-    public WorkerFactory(final IData originalFile) {
-        this.originalFile = originalFile;
+    public WorkerFactory(final IData data) {
+        this.data = data;
     }
 
     /**
@@ -28,7 +28,7 @@ public class WorkerFactory {
      *
      * @return worker
      */
-    public Worker create(final IDataProcessor partCreator) {
-        return new Worker(originalFile, partCreator);
+    public Worker create(final IDataProcessor processor) {
+        return new Worker(data, processor);
     }
 }

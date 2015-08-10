@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.part;
+package com.sysgears.filesplitter.model.file;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
@@ -6,9 +6,9 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import java.io.IOException;
 
 /**
- * The PartCreator class provides functionality to create a part of the file.
+ * The FilePartCreator class provides functionality to create a part of the file.
  */
-public class PartCreator implements IDataProcessor {
+public class FilePartCreator implements IDataProcessor {
 
     /**
      * The file part name.
@@ -21,12 +21,12 @@ public class PartCreator implements IDataProcessor {
     private long partSize;
 
     /**
-     * Creates the PartCreator object specified by part name and size.
+     * Creates the FilePartCreator object specified by part name and size.
      *
      * @param partName file part name
      * @param partSize final part size
      */
-    public PartCreator(final String partName, final long partSize) {
+    public FilePartCreator(final String partName, final long partSize) {
         this.partName = partName;
         this.partSize = partSize;
     }
@@ -39,8 +39,8 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        System.out.println("Part name: " + partName);
-        System.out.println("Part size: " + partSize);
+        System.out.println("FilePartCreator name: " + partName);
+        System.out.println("FilePartCreator size: " + partSize);
         System.out.println("File name: " + originalFile.getName());
 
         return false;

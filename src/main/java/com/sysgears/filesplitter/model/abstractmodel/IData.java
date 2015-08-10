@@ -15,6 +15,13 @@ public interface IData {
     public String getName();
 
     /**
+     * Returns data size.
+     *
+     * @return data size
+     */
+    public String getSize();
+
+    /**
      * Returns a uniform resource identifier.
      *
      * @return URI
