@@ -79,9 +79,9 @@ public class PartCreator implements IDataProcessor {
             bufferSize = DEFAULT_BUFFER_SIZE;
         }
 
-        final FileLock lock = inputChannel.lock(position, bufferSize, false);
-        ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
+        ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
 
+        final FileLock lock = inputChannel.lock(position, bufferSize, false);
         for (int i = 0; i < fullPartsCount; ++i) {
             buffer.clear();
             inputChannel.read(buffer);
@@ -100,7 +100,6 @@ public class PartCreator implements IDataProcessor {
             buffer.flip();
             outputChannel.write(buffer);
         }
-
         lock.release();
 
         return false;
