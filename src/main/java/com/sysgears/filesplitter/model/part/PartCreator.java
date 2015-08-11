@@ -62,6 +62,7 @@ public class PartCreator implements IDataProcessor {
      * @return true if part of the file created successfully, false otherwise
      */
     public boolean process(final IData originalFile) throws IOException {
+        boolean success = true;
         RandomAccessFile outputFile = new RandomAccessFile(new File(outputDirectory, originalFile.getName()
                 + outputFileNameSuffix), "rw");
 
@@ -108,7 +109,7 @@ public class PartCreator implements IDataProcessor {
         closeQuietly(outputChannel);
         closeQuietly(outputFile);
 
-        return true;
+        return success;
     }
 
     /**
