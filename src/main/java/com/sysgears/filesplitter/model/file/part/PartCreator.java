@@ -67,13 +67,18 @@ public class PartCreator implements IDataProcessor {
         final String partFileName = "part_" + partNumber + ".bin";
         final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
 
-        final int fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
-        //System.out.println(partNumber + " parts: " + fullPartsCount);
-        final int remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-        //System.out.println(partNumber + " remaining: " + remainingBytes);
-
-
-        ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
+        ByteBuffer buffer;
+        int fullPartsCount;
+        int remainingBytes;
+        if (partSize < DEFAULT_BUFFER_SIZE) {
+            fullPartsCount = 1;
+            remainingBytes = 0;
+            buffer = ByteBuffer.allocate((int) partSize);
+        } else {
+            fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
+            remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
+            buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
+        }
 
         FileLock lock = inputChannel.lock(position, DEFAULT_BUFFER_SIZE, false);
         for (int i = 0; i < fullPartsCount; ++i) {

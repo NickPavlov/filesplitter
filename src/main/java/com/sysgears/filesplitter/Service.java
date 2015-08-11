@@ -62,7 +62,7 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 150;
+        int partSize = 1024 * 1024 * 50;
 
         final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, "/home/nick/Documents/Parts");
