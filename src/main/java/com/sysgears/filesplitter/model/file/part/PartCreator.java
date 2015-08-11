@@ -37,7 +37,7 @@ public class PartCreator implements IDataProcessor {
     /**
      * Output file name.
      */
-    private String outputFileName;
+    private String outputFileNameSuffix;
 
     /**
      * Creates the PartCreator object specified by part name and size.
@@ -51,7 +51,7 @@ public class PartCreator implements IDataProcessor {
         this.position = partNumber * partSize;
 
         //temporary
-        this.outputFileName = "_part_" + partNumber + ".bin";
+        this.outputFileNameSuffix = "_part" + partNumber + ".bin";
         this.outputDirectory = outputDirectory;
     }
 
@@ -62,7 +62,8 @@ public class PartCreator implements IDataProcessor {
      * @return true if part of the file created successfully, false otherwise
      */
     public boolean process(final IData originalFile) throws IOException {
-        RandomAccessFile outputFile = new RandomAccessFile(new File(outputDirectory, outputFileName), "rw");
+        RandomAccessFile outputFile = new RandomAccessFile(new File(outputDirectory, originalFile.getName()
+                + outputFileNameSuffix), "rw");
 
         FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
         FileChannel outputChannel = outputFile.getChannel();
@@ -83,7 +84,6 @@ public class PartCreator implements IDataProcessor {
         ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
 
         final FileLock lock = inputChannel.lock(position, bufferSize, false);
-
         for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
             buffer.clear();
             inputChannel.read(buffer);
@@ -104,6 +104,7 @@ public class PartCreator implements IDataProcessor {
             outputChannel.write(buffer);
         }
         lock.release();
+
         closeQuietly(inputChannel);
         closeQuietly(outputChannel);
         closeQuietly(outputFile);
