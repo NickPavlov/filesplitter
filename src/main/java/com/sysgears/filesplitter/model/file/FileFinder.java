@@ -73,7 +73,6 @@ public class FileFinder implements IDataFinder {
             }
 
             public FileChannel getChannel() throws IOException {
-                //return new FileInputStream(file).getChannel();
                 return new RandomAccessFile(file, "rw").getChannel();
             }
         };
