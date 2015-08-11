@@ -18,7 +18,7 @@ public class PartCreator implements IDataProcessor {
     /**
      * Default buffer size - 4MB.
      */
-    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 5;
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 10;
 
     /**
      * The file part number.

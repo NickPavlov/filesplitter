@@ -62,10 +62,13 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 2;
+        int partSize = 1024 * 1024 * 20;
 
-        final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
-        final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, "/home/nick/Documents/Parts");
+        final String rootDirectory = "/home/nick/Documents";
+        final String outputDirectory = rootDirectory + "/Parts";
+
+        final IDataFinder fileFinder = new FileFinder(rootDirectory);
+        final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, outputDirectory);
         final IData file = fileFinder.getByName("jdk.tar.gz");
         final WorkerFactory workerFactory = new WorkerFactory(file);
 
