@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.model.WorkerFactory;
+import com.sysgears.filesplitter.model.WorkersFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
@@ -72,7 +72,7 @@ public class Service {
         final IDataFinder fileFinder = new FileFinder(rootDirectory);
         final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory);
         final IData file = fileFinder.getByName(originalFileName);
-        final WorkerFactory workerFactory = new WorkerFactory(file);
+        final WorkersFactory workerFactory = new WorkersFactory(file);
 
         for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
