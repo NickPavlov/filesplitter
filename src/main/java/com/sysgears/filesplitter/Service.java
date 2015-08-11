@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter;
 
+import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
@@ -62,9 +63,7 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int megaByte = 1024 * 1024;
-
-        int partSize = 20 * megaByte;
+        int partSize = 20 * MemoryUnits.MEGABYTE;
 
         final String rootDirectory = "/home/nick/Documents";
         final String outputDirectory = rootDirectory + "/Parts";

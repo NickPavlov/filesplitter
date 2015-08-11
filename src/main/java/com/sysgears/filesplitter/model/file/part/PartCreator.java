@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter.model.file.part;
 
+import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
@@ -16,7 +17,7 @@ public class PartCreator implements IDataProcessor {
     /**
      * Default buffer size - 4MB.
      */
-    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 10;
+    private static final int DEFAULT_BUFFER_SIZE = 4 * MemoryUnits.MEGABYTE;
 
     /**
      * The file part size.
