@@ -4,7 +4,7 @@ import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
-import com.sysgears.filesplitter.model.file.part.PartCreatorFactory;
+import com.sysgears.filesplitter.model.file.part.PartCreatorsFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.util.concurrent.ExecutorService;
@@ -62,14 +62,14 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 20;
+        int partSize = 1024 * 1024 * 25;
 
         final String rootDirectory = "/home/nick/Documents";
         final String outputDirectory = rootDirectory + "/Parts";
         final String originalFileName = "jdk.tar.gz";
 
         final IDataFinder fileFinder = new FileFinder(rootDirectory);
-        final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, outputDirectory);
+        final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory);
         final IData file = fileFinder.getByName(originalFileName);
         final WorkerFactory workerFactory = new WorkerFactory(file);
 
