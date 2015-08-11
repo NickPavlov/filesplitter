@@ -62,25 +62,26 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
-        final FileChannel inputChannel = (FileChannel) originalFile.getChannel();
-        inputChannel.position(position);
+        final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
         final String partFileName = "part_" + partNumber + ".bin";
         final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
 
-        ByteBuffer buffer;
         int fullPartsCount;
         int remainingBytes;
+        int bufferSize;
         if (partSize < DEFAULT_BUFFER_SIZE) {
             fullPartsCount = 1;
             remainingBytes = 0;
-            buffer = ByteBuffer.allocate((int) partSize);
+            bufferSize = (int) partSize;
         } else {
             fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
             remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-            buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
+            bufferSize = DEFAULT_BUFFER_SIZE;
         }
 
-        FileLock lock = inputChannel.lock(position, DEFAULT_BUFFER_SIZE, false);
+        final FileLock lock = inputChannel.lock(position, bufferSize, false);
+        ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
+
         for (int i = 0; i < fullPartsCount; ++i) {
             buffer.clear();
             inputChannel.read(buffer);
