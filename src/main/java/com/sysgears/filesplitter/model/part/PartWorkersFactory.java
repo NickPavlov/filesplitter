@@ -1,13 +1,13 @@
-package com.sysgears.filesplitter.model;
+package com.sysgears.filesplitter.model.part;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.abstractmodel.Worker;
 
 /**
- * The WorkersFactory class provides functionality to create workers.
+ * The PartWorkersFactory class provides functionality to create workers.
  */
-public class WorkersFactory {
+public class PartWorkersFactory {
 
     /**
      * Original file.
@@ -15,11 +15,11 @@ public class WorkersFactory {
     private final IData data;
 
     /**
-     * Creates the WorkersFactory object.
+     * Creates the PartWorkersFactory object.
      *
      * @param data data
      */
-    public WorkersFactory(final IData data) {
+    public PartWorkersFactory(final IData data) {
         this.data = data;
     }
 
