@@ -1,11 +1,11 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.model.WorkerFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.part.PartCreatorsFactory;
+import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.util.concurrent.ExecutorService;
@@ -49,19 +49,19 @@ public class Service {
      * @param args console arguments
      */
     public void start(final String[] args) {
-        /*
+/*
         SplitOptions splitOptions = new SplitOptions();
         CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
         try {
             cmdLineParser.parseArgument(args);
         } catch (CmdLineException e) {
-            e.printStackTrace();
+            cmdLineParser.printUsage(System.out);
         }
         System.out.println("Path: " + splitOptions.getPath());
         System.out.println("PartSize: " + splitOptions.getPartSize());
         System.out.println("MB: " + splitOptions.isMegabytes());
         System.out.println("kB: " + splitOptions.isKilobytes());
-        */
+*/
 
         int partSize = 75 * MemoryUnits.MEGABYTE;
 
