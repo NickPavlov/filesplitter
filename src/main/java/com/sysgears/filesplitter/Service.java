@@ -1,10 +1,10 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.model.part.PartWorkersFactory;
+import com.sysgears.filesplitter.model.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
-import com.sysgears.filesplitter.model.part.PartCreatorsFactory;
+import com.sysgears.filesplitter.model.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.view.IUserInterface;
 

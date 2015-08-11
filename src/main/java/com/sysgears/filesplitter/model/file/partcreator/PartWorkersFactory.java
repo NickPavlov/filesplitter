@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.part;
+package com.sysgears.filesplitter.model.file.partcreator;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;

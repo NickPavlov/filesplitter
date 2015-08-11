@@ -16,7 +16,7 @@ public class SplitOptions {
     /**
      * PartCreator size.
      */
-    @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "File part size.")
+    @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "File partcreator size.")
     private int partSize;
 
     /**
@@ -43,9 +43,9 @@ public class SplitOptions {
     }
 
     /**
-     * Returns part size.
+     * Returns partcreator size.
      *
-     * @return part size
+     * @return partcreator size
      */
     public int getPartSize() {
         return partSize;
