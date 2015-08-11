@@ -68,9 +68,9 @@ public class PartCreator implements IDataProcessor {
         final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
 
         final int fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
-        System.out.println(partNumber + " parts: " + fullPartsCount);
+        //System.out.println(partNumber + " parts: " + fullPartsCount);
         final int remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-        System.out.println(partNumber + " remaining: " + remainingBytes);
+        //System.out.println(partNumber + " remaining: " + remainingBytes);
 
 
         ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);

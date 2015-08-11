@@ -62,7 +62,7 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 10;
+        int partSize = 1024 * 1024 * 150;
 
         final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, "/home/nick/Documents/Parts");
@@ -71,6 +71,7 @@ public class Service {
 
         for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
+            System.out.println("thread-"+i);
         }
         pool.shutdown();
     }
