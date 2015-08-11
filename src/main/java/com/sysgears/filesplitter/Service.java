@@ -1,6 +1,7 @@
 package com.sysgears.filesplitter;
 
 import com.sysgears.filesplitter.model.WorkerFactory;
+import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.part.PartCreatorFactory;
@@ -60,11 +61,15 @@ public class Service {
         System.out.println("MB: " + splitOptions.isMegabytes());
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
-        final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
-        final PartCreatorFactory partCreator = new PartCreatorFactory(1, "/home/nick/Documents/Parts");
-        final WorkerFactory workerFactory = new WorkerFactory(fileFinder.getByName("test.txt"));
 
-        for (int i = 0; i < 13; ++i) {
+        int partSize = 1024 * 1024 * 4;
+
+        final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
+        final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, "/home/nick/Documents/Parts");
+        final IData file = fileFinder.getByName("jdk.tar.gz");
+        final WorkerFactory workerFactory = new WorkerFactory(file);
+
+        for (int i = 0; i < file.getSize()/partSize+1; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
         }
         pool.shutdown();

@@ -8,11 +8,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 
 /**
  * The PartCreator class provides functionality to create a part of the file.
  */
 public class PartCreator implements IDataProcessor {
+
+    /**
+     * File lock.
+     */
+    private static final Object FILE_LOCK = new Object();
+
+    /**
+     * Default buffer size - 4MB.
+     */
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 4;
 
     /**
      * The file part number.
@@ -23,6 +34,11 @@ public class PartCreator implements IDataProcessor {
      * The file part size.
      */
     private final long partSize;
+
+    /**
+     * Position in file.
+     */
+    private final long position;
 
     /**
      * Output directory.
@@ -39,6 +55,7 @@ public class PartCreator implements IDataProcessor {
     public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
         this.partNumber = partNumber;
         this.partSize = partSize;
+        this.position = partNumber * partSize;
         this.outputDirectory = outputDirectory;
     }
 
@@ -52,14 +69,24 @@ public class PartCreator implements IDataProcessor {
     public boolean process(final IData originalFile) throws IOException {
 
         //Test.
-        ByteBuffer buffer = ByteBuffer.allocate(1);
+        ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
         FileChannel fileChannel = (FileChannel) originalFile.getChannel();
-        fileChannel.position(partNumber * partSize);
+        fileChannel.position(position);
+        FileLock lock = fileChannel.lock(position, DEFAULT_BUFFER_SIZE, false);
         fileChannel.read(buffer);
+        System.out.println(partNumber + ": " + buffer.array().length);
+        /*
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        */
+        lock.release();
+
         //buffer.position(0);
         buffer.flip();
-        new FileOutputStream(new File(outputDirectory, "p_" + partNumber + ".txt")).getChannel().write(buffer);
-        System.out.println(partNumber + ": " + new String(buffer.array()));
+        new FileOutputStream(new File(outputDirectory, "p_" + partNumber + ".bin")).getChannel().write(buffer);
 
         return false;
     }

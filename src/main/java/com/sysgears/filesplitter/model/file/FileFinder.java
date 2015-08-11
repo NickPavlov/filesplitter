@@ -4,8 +4,8 @@ import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
 /**
@@ -68,8 +68,13 @@ public class FileFinder implements IDataFinder {
                 return file.getName();
             }
 
+            public long getSize() {
+                return file.length();
+            }
+
             public FileChannel getChannel() throws IOException {
-                return new FileInputStream(file).getChannel();
+                //return new FileInputStream(file).getChannel();
+                return new RandomAccessFile(file, "rw").getChannel();
             }
         };
     }
