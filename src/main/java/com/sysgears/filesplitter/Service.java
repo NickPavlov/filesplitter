@@ -62,14 +62,14 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 4;
+        int partSize = 1024 * 1024 * 10;
 
         final IDataFinder fileFinder = new FileFinder("/home/nick/Documents");
         final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, "/home/nick/Documents/Parts");
         final IData file = fileFinder.getByName("jdk.tar.gz");
         final WorkerFactory workerFactory = new WorkerFactory(file);
 
-        for (int i = 0; i < file.getSize()/partSize+1; ++i) {
+        for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
             pool.execute(workerFactory.create(partCreator.create()));
         }
         pool.shutdown();

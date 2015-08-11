@@ -16,14 +16,9 @@ import java.nio.channels.FileLock;
 public class PartCreator implements IDataProcessor {
 
     /**
-     * File lock.
-     */
-    private static final Object FILE_LOCK = new Object();
-
-    /**
      * Default buffer size - 4MB.
      */
-    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 4;
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 5;
 
     /**
      * The file part number.
@@ -67,26 +62,40 @@ public class PartCreator implements IDataProcessor {
      * @throws IOException in case of data access error
      */
     public boolean process(final IData originalFile) throws IOException {
+        final FileChannel inputChannel = (FileChannel) originalFile.getChannel();
+        inputChannel.position(position);
+        final String partFileName = "part_" + partNumber + ".bin";
+        final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
 
-        //Test.
+        final int fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
+        System.out.println(partNumber + " parts: " + fullPartsCount);
+        final int remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
+        System.out.println(partNumber + " remaining: " + remainingBytes);
+
+
         ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_BUFFER_SIZE);
-        FileChannel fileChannel = (FileChannel) originalFile.getChannel();
-        fileChannel.position(position);
-        FileLock lock = fileChannel.lock(position, DEFAULT_BUFFER_SIZE, false);
-        fileChannel.read(buffer);
-        System.out.println(partNumber + ": " + buffer.array().length);
-        /*
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
-        lock.release();
 
-        //buffer.position(0);
-        buffer.flip();
-        new FileOutputStream(new File(outputDirectory, "p_" + partNumber + ".bin")).getChannel().write(buffer);
+        FileLock lock = inputChannel.lock(position, DEFAULT_BUFFER_SIZE, false);
+        for (int i = 0; i < fullPartsCount; ++i) {
+            buffer.clear();
+            inputChannel.read(buffer);
+            buffer.flip();
+            outputChannel.write(buffer);
+
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (remainingBytes > 0) {
+            buffer = ByteBuffer.allocate(remainingBytes);
+            inputChannel.read(buffer);
+            buffer.flip();
+            outputChannel.write(buffer);
+        }
+
+        lock.release();
 
         return false;
     }
