@@ -44,7 +44,7 @@ public class PartCreator implements IDataProcessor {
      * Creates the PartCreator object specified by part name and size.
      *
      * @param partNumber      file part number
-     * @param partSize        final part size
+     * @param partSize        part size
      * @param outputDirectory output directory
      */
     public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
