@@ -66,10 +66,11 @@ public class Service {
 
         final String rootDirectory = "/home/nick/Documents";
         final String outputDirectory = rootDirectory + "/Parts";
+        final String originalFileName = "jdk.tar.gz";
 
         final IDataFinder fileFinder = new FileFinder(rootDirectory);
         final PartCreatorFactory partCreator = new PartCreatorFactory(partSize, outputDirectory);
-        final IData file = fileFinder.getByName("jdk.tar.gz");
+        final IData file = fileFinder.getByName(originalFileName);
         final WorkerFactory workerFactory = new WorkerFactory(file);
 
         for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
