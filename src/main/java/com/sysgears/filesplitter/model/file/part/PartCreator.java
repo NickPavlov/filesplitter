@@ -52,11 +52,13 @@ public class PartCreator implements IDataProcessor {
     public boolean process(final IData originalFile) throws IOException {
 
         //Test.
-        ByteBuffer buffer = ByteBuffer.allocate(12);
+        ByteBuffer buffer = ByteBuffer.allocate(1);
         FileChannel fileChannel = (FileChannel) originalFile.getChannel();
+        fileChannel.position(partNumber * partSize);
         fileChannel.read(buffer);
+        //buffer.position(0);
         buffer.flip();
-        new FileOutputStream(new File(new File(outputDirectory), "p_" + partNumber + ".txt")).getChannel().write(buffer);
+        new FileOutputStream(new File(outputDirectory, "p_" + partNumber + ".txt")).getChannel().write(buffer);
         System.out.println(partNumber + ": " + new String(buffer.array()));
 
         return false;

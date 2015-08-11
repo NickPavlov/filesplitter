@@ -16,6 +16,13 @@ public interface IData {
     public String getName();
 
     /**
+     * Returns data size.
+     *
+     * @return data size
+     */
+    public long getSize();
+
+    /**
      * Returns a byte channel.
      *
      * @return channel
