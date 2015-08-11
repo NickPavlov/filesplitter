@@ -94,6 +94,7 @@ public class PartCreator implements IDataProcessor {
                 buffer.flip();
                 outputChannel.write(buffer);
 
+                // ?
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {

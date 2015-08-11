@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.options;
+package com.sysgears.filesplitter.model.consoleoptions;
 
 import org.kohsuke.args4j.Option;
 
