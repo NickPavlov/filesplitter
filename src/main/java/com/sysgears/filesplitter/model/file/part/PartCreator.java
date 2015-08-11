@@ -3,9 +3,7 @@ package com.sysgears.filesplitter.model.file.part;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -19,11 +17,6 @@ public class PartCreator implements IDataProcessor {
      * Default buffer size - 4MB.
      */
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 10;
-
-    /**
-     * The file part number.
-     */
-    private final int partNumber;
 
     /**
      * The file part size.
@@ -41,6 +34,11 @@ public class PartCreator implements IDataProcessor {
     private final String outputDirectory;
 
     /**
+     * Output file name.
+     */
+    private final String outputFileName;
+
+    /**
      * Creates the PartCreator object specified by part name and size.
      *
      * @param partNumber      file part number
@@ -48,9 +46,11 @@ public class PartCreator implements IDataProcessor {
      * @param outputDirectory output directory
      */
     public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
-        this.partNumber = partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
+
+        //temporary
+        this.outputFileName = "part_" + partNumber + ".bin";
         this.outputDirectory = outputDirectory;
     }
 
@@ -62,10 +62,14 @@ public class PartCreator implements IDataProcessor {
      */
     public boolean process(final IData originalFile) {
         boolean success = true;
+        FileChannel inputChannel = null;
+        FileChannel outputChannel = null;
+        RandomAccessFile outputFile = null;
         try {
-            final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
-            final String partFileName = "part_" + partNumber + ".bin";
-            final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
+            outputFile = new RandomAccessFile(new File(outputDirectory, outputFileName), "rw");
+
+            inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
+            outputChannel = new FileOutputStream(new File(outputDirectory, outputFileName)).getChannel();
 
             int fullPartsCount;
             int remainingBytes;
@@ -105,8 +109,27 @@ public class PartCreator implements IDataProcessor {
         } catch (IOException e) {
             e.printStackTrace();
             success = false;
+        } finally {
+            closeQuietly(inputChannel);
+            closeQuietly(outputChannel);
+            closeQuietly(outputFile);
         }
 
         return success;
+    }
+
+    /**
+     * Closes a resource.
+     *
+     * @param closeable resource
+     */
+    private void closeQuietly(final Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException ex) {
+                // ignore
+            }
+        }
     }
 }

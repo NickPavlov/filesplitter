@@ -62,7 +62,7 @@ public class Service {
         System.out.println("kB: " + splitOptions.isKilobytes());
         */
 
-        int partSize = 1024 * 1024 * 25;
+        int partSize = 1024 * 1024 * 150;
 
         final String rootDirectory = "/home/nick/Documents";
         final String outputDirectory = rootDirectory + "/Parts";
