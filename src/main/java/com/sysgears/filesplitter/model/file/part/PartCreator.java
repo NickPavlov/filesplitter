@@ -59,49 +59,54 @@ public class PartCreator implements IDataProcessor {
      *
      * @param originalFile original file
      * @return true if part of the file created successfully, false otherwise
-     * @throws IOException in case of data access error
      */
-    public boolean process(final IData originalFile) throws IOException {
-        final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
-        final String partFileName = "part_" + partNumber + ".bin";
-        final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
+    public boolean process(final IData originalFile) {
+        boolean success = true;
+        try {
+            final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
+            final String partFileName = "part_" + partNumber + ".bin";
+            final FileChannel outputChannel = new FileOutputStream(new File(outputDirectory, partFileName)).getChannel();
 
-        int fullPartsCount;
-        int remainingBytes;
-        int bufferSize;
-        if (partSize < DEFAULT_BUFFER_SIZE) {
-            fullPartsCount = 1;
-            remainingBytes = 0;
-            bufferSize = (int) partSize;
-        } else {
-            fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
-            remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-            bufferSize = DEFAULT_BUFFER_SIZE;
-        }
-
-        ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
-
-        final FileLock lock = inputChannel.lock(position, bufferSize, false);
-        for (int i = 0; i < fullPartsCount; ++i) {
-            buffer.clear();
-            inputChannel.read(buffer);
-            buffer.flip();
-            outputChannel.write(buffer);
-
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            int fullPartsCount;
+            int remainingBytes;
+            int bufferSize;
+            if (partSize < DEFAULT_BUFFER_SIZE) {
+                fullPartsCount = 1;
+                remainingBytes = 0;
+                bufferSize = (int) partSize;
+            } else {
+                fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
+                remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
+                bufferSize = DEFAULT_BUFFER_SIZE;
             }
-        }
-        if (remainingBytes > 0) {
-            buffer = ByteBuffer.allocate(remainingBytes);
-            inputChannel.read(buffer);
-            buffer.flip();
-            outputChannel.write(buffer);
-        }
-        lock.release();
 
-        return false;
+            ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
+
+            final FileLock lock = inputChannel.lock(position, bufferSize, false);
+            for (int i = 0; i < fullPartsCount; ++i) {
+                buffer.clear();
+                inputChannel.read(buffer);
+                buffer.flip();
+                outputChannel.write(buffer);
+
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (remainingBytes > 0) {
+                buffer = ByteBuffer.allocate(remainingBytes);
+                inputChannel.read(buffer);
+                buffer.flip();
+                outputChannel.write(buffer);
+            }
+            lock.release();
+        } catch (IOException e) {
+            e.printStackTrace();
+            success = false;
+        }
+
+        return success;
     }
 }
