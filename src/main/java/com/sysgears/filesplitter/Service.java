@@ -54,7 +54,6 @@ public class Service {
      * @param args console arguments
      */
     public void start(final String[] args) {
-
         SplitOptions splitOptions = new SplitOptions();
         CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
         try {
@@ -72,16 +71,12 @@ public class Service {
                 partSize *= MemoryUnits.KILOBYTE;
             }
 
-            final String filePath = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
+            final String filePath = splitOptions.getFilePath();
             final IData file = new FileFinder().getByName(filePath);
 
-            final IDirectory outputDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
+            final IDirectory outputDirectory = new Directory(filePath)
+                    .appendInnerDirectory(file.getName() + "_parts");
 
-            //final String rootDirectory = new File(filePath).getParent();
-            //final File outputDirectory = new File(rootDirectory, new File(filePath).getName() + "_parts");
-            //outputDirectory.mkdir();
-
-            //final IDataFinder fileFinder = new FileFinder(rootDirectory);
             final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory.getAbsolutePath());
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
