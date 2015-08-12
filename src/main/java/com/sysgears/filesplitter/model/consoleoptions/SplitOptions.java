@@ -8,15 +8,21 @@ import org.kohsuke.args4j.Option;
 public class SplitOptions {
 
     /**
-     * File path.
+     * File filePath.
      */
-    @Option(name = "-p", aliases = "--path", metaVar = "<file>", required = true, usage = "File path.")
-    private String path;
+    @Option(name = "-p", aliases = "--filePath", metaVar = "<file>", required = true, usage = "File filePath.")
+    private String filePath;
+
+    /**
+     * Output directory path..
+     */
+    @Option(name = "-o", aliases = "--output", metaVar = "<directory>", required = true, usage = "Output directory.")
+    private String outputDirectory;
 
     /**
      * PartCreator size.
      */
-    @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "File partcreator size.")
+    @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "Part size.")
     private int partSize;
 
     /**
@@ -34,18 +40,27 @@ public class SplitOptions {
     private boolean isKilobytes;
 
     /**
-     * Returns file path.
+     * Returns file filePath.
      *
-     * @return file path
+     * @return file filePath
      */
-    public String getPath() {
-        return path;
+    public String getFilePath() {
+        return filePath;
     }
 
     /**
-     * Returns partcreator size.
+     * Returns output directory path.
      *
-     * @return partcreator size
+     * @return output directory path
+     */
+    public String getOutputDirectory() {
+        return outputDirectory;
+    }
+
+    /**
+     * Returns part size.
+     *
+     * @return part size
      */
     public int getPartSize() {
         return partSize;
