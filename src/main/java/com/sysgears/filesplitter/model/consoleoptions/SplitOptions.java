@@ -10,13 +10,13 @@ public class SplitOptions {
     /**
      * File filePath.
      */
-    @Option(name = "-p", aliases = "--filePath", metaVar = "<file>", required = true, usage = "File filePath.")
+    @Option(name = "-p", aliases = "--filePath", metaVar = "<file>", required = true, usage = "File path.")
     private String filePath;
 
     /**
-     * Output directory path..
+     * Output directory path.
      */
-    @Option(name = "-o", aliases = "--output", metaVar = "<directory>", required = true, usage = "Output directory.")
+    @Option(name = "-o", aliases = "--output", metaVar = "<directory>", required = false, usage = "Output directory.")
     private String outputDirectory;
 
     /**

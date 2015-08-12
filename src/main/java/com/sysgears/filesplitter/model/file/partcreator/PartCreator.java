@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 
 /**
- * The PartCreator class provides functionality to create a partcreator of the file.
+ * The PartCreator class provides functionality to create a part of the file.
  */
 public class PartCreator implements IDataProcessor {
 
@@ -20,7 +20,7 @@ public class PartCreator implements IDataProcessor {
     private static final int DEFAULT_BUFFER_SIZE = 4 * MemoryUnits.MEGABYTE;
 
     /**
-     * The file partcreator size.
+     * The file part size.
      */
     private final long partSize;
 
@@ -40,10 +40,10 @@ public class PartCreator implements IDataProcessor {
     private String outputFileNameSuffix;
 
     /**
-     * Creates the PartCreator object specified by partcreator name and size.
+     * Creates the PartCreator object specified by part name and size.
      *
-     * @param partNumber      file partcreator number
-     * @param partSize        partcreator size
+     * @param partNumber      file part number
+     * @param partSize        part size
      * @param outputDirectory output directory
      */
     public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
@@ -56,10 +56,10 @@ public class PartCreator implements IDataProcessor {
     }
 
     /**
-     * Initiates the process of the file partcreator creation.
+     * Initiates the process of the file part creation.
      *
      * @param originalFile original file
-     * @return true if partcreator of the file created successfully, false otherwise
+     * @return true if part of the file created successfully, false otherwise
      */
     public boolean process(final IData originalFile) throws IOException {
         boolean success = true;

@@ -10,6 +10,7 @@ import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import java.io.File;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -69,14 +70,15 @@ public class Service {
                 partSize *= MemoryUnits.KILOBYTE;
             }
 
-            final String rootDirectory = "/home/nick/Documents";
-            final String outputDirectory = rootDirectory + "/Parts";
+            final String fileName = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
 
-            final String originalFileName = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
+            final String rootDirectory = new File(fileName).getParent(); // "/home/nick/Documents"
+            final File outputDirectory = new File(rootDirectory, new File(fileName).getName()+"_parts"); // rootDirectory + "/Parts"
+            outputDirectory.mkdir();
 
             //final IDataFinder fileFinder = new FileFinder(rootDirectory);
-            final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory);
-            final IData file = new FileFinder().getByName(originalFileName);
+            final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory.getAbsolutePath());
+            final IData file = new FileFinder().getByName(fileName);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
             System.out.println();
