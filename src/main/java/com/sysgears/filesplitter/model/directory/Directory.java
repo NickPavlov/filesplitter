@@ -33,8 +33,10 @@ public class Directory {
         }
 
         File tempDirectory = new File(directory);
-        if (tempDirectory.exists() && !tempDirectory.isDirectory()) {
-            tempDirectory = tempDirectory.getParentFile();
+        if (tempDirectory.exists()) {
+            if (!tempDirectory.isDirectory()) {
+                tempDirectory = tempDirectory.getParentFile();
+            }
         } else if (!tempDirectory.mkdir()) {
             throw new IOException("Error creating directory.");
         }
@@ -76,5 +78,13 @@ public class Directory {
      */
     public Path getPath() {
         return Paths.get(directory.toURI());
+    }
+
+    public static void main(String[] args) {
+        try {
+            System.out.println(new Directory("/home/nick/Documents").getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
