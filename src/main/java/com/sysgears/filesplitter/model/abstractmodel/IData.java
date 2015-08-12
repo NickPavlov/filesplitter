@@ -26,7 +26,7 @@ public interface IData {
      * Returns a byte channel.
      *
      * @return channel
-     * @throws IOException in case I/O error
+     * @throws IOException in case if I/O error occurred
      */
     public Channel getChannel() throws IOException;
 }

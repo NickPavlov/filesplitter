@@ -12,7 +12,7 @@ public interface IDataProcessor {
      *
      * @param data data object
      * @return true if the data processed successfully, false otherwise
-     * @throws IOException in case of data access error
+     * @throws IOException in case if I/O error occurred
      */
     public boolean process(final IData data) throws IOException;
 }
