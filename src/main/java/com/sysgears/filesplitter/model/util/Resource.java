@@ -11,12 +11,12 @@ public class Resource {
     /**
      * Closes a resource.
      *
-     * @param closeable resource
+     * @param resource resource
      */
-    public static void closeQuietly(final Closeable closeable) {
-        if (closeable != null) {
+    public static void closeQuietly(final Closeable resource) {
+        if (resource != null) {
             try {
-                closeable.close();
+                resource.close();
             } catch (IOException ex) {
                 // ignore
             }
