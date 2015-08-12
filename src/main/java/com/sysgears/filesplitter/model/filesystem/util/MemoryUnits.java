@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.util;
+package com.sysgears.filesplitter.model.filesystem.util;
 
 /**
  * The MemoryUnits class provides set of memory units.
