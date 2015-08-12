@@ -18,7 +18,7 @@ public class Main {
         try {
             final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-            final FileSplitController splitController = (FileSplitController) context.getBean("fileSplitController");
+            final FileSplitController splitController = context.getBean(FileSplitController.class);
 
             splitController.start(args);
         } catch (Throwable t) {

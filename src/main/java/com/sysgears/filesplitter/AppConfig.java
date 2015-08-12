@@ -1,7 +1,6 @@
 package com.sysgears.filesplitter;
 
 import com.sysgears.filesplitter.controller.FileSplitController;
-
 import com.sysgears.filesplitter.view.UserInterface;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
