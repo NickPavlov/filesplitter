@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.file.partcreator;
+package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 
 import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;

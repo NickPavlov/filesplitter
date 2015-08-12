@@ -2,11 +2,11 @@ package com.sysgears.filesplitter.controller;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
-import com.sysgears.filesplitter.model.directory.Directory;
-import com.sysgears.filesplitter.model.directory.IDirectory;
-import com.sysgears.filesplitter.model.file.FileFinder;
-import com.sysgears.filesplitter.model.file.partcreator.PartCreatorsFactory;
-import com.sysgears.filesplitter.model.file.partcreator.PartWorkersFactory;
+import com.sysgears.filesplitter.model.filesystem.directory.Directory;
+import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
+import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
+import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
+import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;

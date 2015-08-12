@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.directory;
+package com.sysgears.filesplitter.model.filesystem.directory;
 
 import java.io.File;
 import java.io.IOException;
