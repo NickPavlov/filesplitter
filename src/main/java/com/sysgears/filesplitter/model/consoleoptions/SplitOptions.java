@@ -3,12 +3,12 @@ package com.sysgears.filesplitter.model.consoleoptions;
 import org.kohsuke.args4j.Option;
 
 /**
- * The <code>SplitOptions</code> class provides functionality to parse a command line parameters.
+ * The SplitOptions class provides functionality to parse a command line parameters.
  */
 public class SplitOptions {
 
     /**
-     * File filePath.
+     * File path.
      */
     @Option(name = "-p", aliases = "--filePath", metaVar = "<file>", required = true, usage = "File path.")
     private String filePath;
@@ -20,7 +20,7 @@ public class SplitOptions {
     private String outputDirectory;
 
     /**
-     * PartCreator size.
+     * Part size.
      */
     @Option(name = "-s", aliases = "--size", metaVar = "<bytes>", required = true, usage = "Part size.")
     private int partSize;
@@ -40,16 +40,16 @@ public class SplitOptions {
     private boolean isKilobytes;
 
     /**
-     * Returns file filePath.
+     * Returns file path.
      *
-     * @return file filePath
+     * @return file path
      */
     public String getFilePath() {
         return filePath;
     }
 
     /**
-     * Returns output directory path.
+     * Returns an output directory path.
      *
      * @return output directory path
      */
@@ -69,7 +69,7 @@ public class SplitOptions {
     /**
      * Returns true if units are megabytes.
      *
-     * @return boolean
+     * @return rue if units are megabytes
      */
     public boolean isMegabytes() {
         return isMegabytes;
@@ -78,7 +78,7 @@ public class SplitOptions {
     /**
      * Returns true if units are kilobytes.
      *
-     * @return boolean
+     * @return true if units are kilobytes
      */
     public boolean isKilobytes() {
         return isKilobytes;

@@ -1,9 +1,9 @@
 package com.sysgears.filesplitter.controller;
 
 /**
- * The FileCreateController class provides functionality to create file form parts.
+ * The FileBuildController class provides functionality to create file form parts.
  */
-public class FileCreateController implements IController {
+public class FileBuildController implements IController {
 
     /**
      * Starts a controller.
