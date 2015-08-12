@@ -61,7 +61,7 @@ public class UserInterface implements IUserInterface {
      * Sends a message to the user.
      *
      * @param message a message to be displayed
-     * @throws IOException when I/O error has occurred
+     * @throws IOException in case if I/O error occurred
      */
     public void sendMessage(final String message) throws IOException {
         if (message == null) {
@@ -73,8 +73,8 @@ public class UserInterface implements IUserInterface {
     /**
      * Receives a message from user.
      *
-     * @return string
-     * @throws IOException when I/O error has occurred
+     * @return message from user
+     * @throws IOException in case if I/O error occurred
      */
     public String read() throws IOException {
         return new BufferedReader(new InputStreamReader(inputStream, charsetName)).readLine();
@@ -101,7 +101,7 @@ public class UserInterface implements IUserInterface {
     /**
      * Returns a charset name.
      *
-     * @return string
+     * @return charset name
      */
     public String getCharsetName() {
         return charsetName;
