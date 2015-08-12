@@ -2,6 +2,7 @@ package com.sysgears.filesplitter;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
+import com.sysgears.filesplitter.model.directory.Directory;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.file.partcreator.PartWorkersFactory;
@@ -10,7 +11,7 @@ import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -71,14 +72,16 @@ public class Service {
             }
 
             final String filePath = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
+            final IData file = new FileFinder().getByName(filePath);
 
-            final String rootDirectory = new File(filePath).getParent();
-            final File outputDirectory = new File(rootDirectory, new File(filePath).getName() + "_parts");
-            outputDirectory.mkdir();
+            final Directory outputDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
+
+            //final String rootDirectory = new File(filePath).getParent();
+            //final File outputDirectory = new File(rootDirectory, new File(filePath).getName() + "_parts");
+            //outputDirectory.mkdir();
 
             //final IDataFinder fileFinder = new FileFinder(rootDirectory);
             final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory.getAbsolutePath());
-            final IData file = new FileFinder().getByName(filePath);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
             System.out.println();
@@ -86,7 +89,8 @@ public class Service {
                 pool.execute(workerFactory.create(partCreator.create()));
                 System.out.println("thread-" + i);
             }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (CmdLineException e) {
             cmdLineParser.printUsage(System.out);
         }

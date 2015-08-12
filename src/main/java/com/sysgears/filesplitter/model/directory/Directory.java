@@ -37,7 +37,7 @@ public class Directory {
             if (!tempDirectory.isDirectory()) {
                 tempDirectory = tempDirectory.getParentFile();
             }
-        } else if (!tempDirectory.mkdir()) {
+        } else if (!tempDirectory.mkdirs()) {
             throw new IOException("Error creating directory.");
         }
         this.directory = tempDirectory;
@@ -52,7 +52,7 @@ public class Directory {
      */
     public Directory appendInnerDirectory(final String innerDirectory) throws IOException {
         File result = new File(directory, innerDirectory);
-        if (!result.exists() && !result.mkdir()) {
+        if (!result.exists() && !result.mkdirs()) {
             throw new IOException("Error creating directory.");
         }
         this.directory = result;
