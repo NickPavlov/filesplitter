@@ -3,6 +3,7 @@ package com.sysgears.filesplitter.model.file.partcreator;
 import com.sysgears.filesplitter.model.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.util.Resource;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -105,25 +106,10 @@ public class PartCreator implements IDataProcessor {
         }
         lock.release();
 
-        closeQuietly(inputChannel);
-        closeQuietly(outputChannel);
-        closeQuietly(outputFile);
+        Resource.closeQuietly(inputChannel);
+        Resource.closeQuietly(outputChannel);
+        Resource.closeQuietly(outputFile);
 
         return success;
-    }
-
-    /**
-     * Closes a resource.
-     *
-     * @param closeable resource
-     */
-    private void closeQuietly(final Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException ex) {
-                // ignore
-            }
-        }
     }
 }
