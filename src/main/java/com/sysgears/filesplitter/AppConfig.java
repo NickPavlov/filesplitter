@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.controller.SplitController;
+import com.sysgears.filesplitter.controller.FileSplitController;
 
 import com.sysgears.filesplitter.view.UserInterface;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +16,10 @@ import java.util.concurrent.Executors;
 public class AppConfig {
 
     @Bean
-    public SplitController splitController(){
+    public FileSplitController fileSplitController(){
         final ExecutorService pool = Executors.newFixedThreadPool(2);
         final UserInterface ui = new UserInterface(System.in, System.out);
 
-        return new SplitController(pool, ui);
+        return new FileSplitController(pool, ui);
     }
 }

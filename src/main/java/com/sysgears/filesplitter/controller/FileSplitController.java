@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
- * The SplitController class performs management of the main parts of the application.
+ * The FileSplitController class performs management of the main parts of the application.
  */
-public class SplitController {
+public class FileSplitController {
 
     /**
      * Pool of threads.
@@ -31,13 +31,13 @@ public class SplitController {
     private final IUserInterface ui;
 
     /**
-     * Creates the SplitController object specified by the pool and user interface.
+     * Creates the FileSplitController object specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
-    public SplitController(final ExecutorService pool, final IUserInterface ui) {
+    public FileSplitController(final ExecutorService pool, final IUserInterface ui) {
         if (pool == null) {
             throw new IllegalArgumentException("Pool of threads can't be null.");
         }

@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.controller.SplitController;
+import com.sysgears.filesplitter.controller.FileSplitController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -18,7 +18,7 @@ public class Main {
         try {
             final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-            final SplitController splitController = (SplitController) context.getBean("splitController");
+            final FileSplitController splitController = (FileSplitController) context.getBean("fileSplitController");
 
             splitController.start(args);
         } catch (Throwable t) {
