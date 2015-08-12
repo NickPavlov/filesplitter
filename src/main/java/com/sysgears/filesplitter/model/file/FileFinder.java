@@ -33,7 +33,7 @@ public class FileFinder implements IDataFinder {
      * @param rootPath root path
      */
     public FileFinder(final String rootPath) {
-        this.rootDirectory = new File(rootPath);
+        this(new File(rootPath));
     }
 
     /**
