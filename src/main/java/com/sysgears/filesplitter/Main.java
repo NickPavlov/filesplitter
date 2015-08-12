@@ -1,9 +1,8 @@
 package com.sysgears.filesplitter;
 
-import com.sysgears.filesplitter.view.UserInterface;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.sysgears.filesplitter.controller.SplitController;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * The Main class creates the necessary objects for calculator work and passes control to the service.
@@ -17,9 +16,11 @@ public class Main {
      */
     public static void main(final String[] args) {
         try {
-            final ExecutorService pool = Executors.newFixedThreadPool(2);
-            final UserInterface ui = new UserInterface(System.in, System.out);
-            new SplitService(pool, ui).start(args);
+            final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+            final SplitController splitController = (SplitController) context.getBean("splitController");
+
+            splitController.start(args);
         } catch (Throwable t) {
             t.printStackTrace();
         }

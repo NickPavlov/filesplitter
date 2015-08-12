@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter;
+package com.sysgears.filesplitter.controller;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
- * The SplitService class performs management of the main parts of the application.
+ * The SplitController class performs management of the main parts of the application.
  */
-public class SplitService {
+public class SplitController {
 
     /**
      * Pool of threads.
@@ -31,13 +31,13 @@ public class SplitService {
     private final IUserInterface ui;
 
     /**
-     * Creates the SplitService object specified by the pool and user interface.
+     * Creates the SplitController object specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
-    public SplitService(final ExecutorService pool, final IUserInterface ui) {
+    public SplitController(final ExecutorService pool, final IUserInterface ui) {
         if (pool == null) {
             throw new IllegalArgumentException("Pool of threads can't be null.");
         }
