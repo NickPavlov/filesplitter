@@ -3,6 +3,7 @@ package com.sysgears.filesplitter;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import com.sysgears.filesplitter.model.directory.Directory;
+import com.sysgears.filesplitter.model.directory.IDirectory;
 import com.sysgears.filesplitter.model.file.FileFinder;
 import com.sysgears.filesplitter.model.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.file.partcreator.PartWorkersFactory;
@@ -74,7 +75,7 @@ public class Service {
             final String filePath = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
             final IData file = new FileFinder().getByName(filePath);
 
-            final Directory outputDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
+            final IDirectory outputDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
 
             //final String rootDirectory = new File(filePath).getParent();
             //final File outputDirectory = new File(rootDirectory, new File(filePath).getName() + "_parts");

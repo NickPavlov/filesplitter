@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 /**
  * The Directory class provides functionality to work with directories.
  */
-public class Directory {
+public class Directory implements IDirectory {
 
     /**
      * Directory.
@@ -50,7 +50,7 @@ public class Directory {
      * @param innerDirectory inner directory name
      * @return current directory
      */
-    public Directory appendInnerDirectory(final String innerDirectory) throws IOException {
+    public IDirectory appendInnerDirectory(final String innerDirectory) throws IOException {
         File result = new File(directory, innerDirectory);
         if (!result.exists() && !result.mkdirs()) {
             throw new IOException("Error creating directory.");
