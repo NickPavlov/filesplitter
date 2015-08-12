@@ -74,10 +74,10 @@ public class FileSplitController implements IController {
             final String filePath = splitOptions.getFilePath();
             final IData file = new FileFinder().getByName(filePath);
 
-            final IDirectory outputDirectory = new Directory(filePath)
+            final IDirectory partsDirectory = new Directory(filePath)
                     .appendInnerDirectory(file.getName() + "_parts");
 
-            final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory.getAbsolutePath());
+            final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath());
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
             System.out.println();
