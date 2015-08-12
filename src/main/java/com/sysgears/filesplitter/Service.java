@@ -70,15 +70,15 @@ public class Service {
                 partSize *= MemoryUnits.KILOBYTE;
             }
 
-            final String fileName = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
+            final String filePath = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
 
-            final String rootDirectory = new File(fileName).getParent();
-            final File outputDirectory = new File(rootDirectory, new File(fileName).getName() + "_parts");
+            final String rootDirectory = new File(filePath).getParent();
+            final File outputDirectory = new File(rootDirectory, new File(filePath).getName() + "_parts");
             outputDirectory.mkdir();
 
             //final IDataFinder fileFinder = new FileFinder(rootDirectory);
             final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, outputDirectory.getAbsolutePath());
-            final IData file = new FileFinder().getByName(fileName);
+            final IData file = new FileFinder().getByName(filePath);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
             System.out.println();

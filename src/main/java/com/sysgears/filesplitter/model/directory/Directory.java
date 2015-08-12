@@ -13,7 +13,7 @@ public class Directory {
     /**
      * Directory.
      */
-    private final File directory;
+    private File directory;
 
     /**
      * Creates the Directory instance specified by directory file.
@@ -48,15 +48,16 @@ public class Directory {
      * The original directory is not changed.
      *
      * @param innerDirectory inner directory name
-     * @return an absolute path
+     * @return current directory
      */
-    public String appendInnerDirectory(final String innerDirectory) throws IOException {
+    public Directory appendInnerDirectory(final String innerDirectory) throws IOException {
         File result = new File(directory, innerDirectory);
         if (!result.exists() && !result.mkdir()) {
             throw new IOException("Error creating directory.");
         }
+        this.directory = result;
 
-        return result.getAbsolutePath();
+        return this;
     }
 
     /**

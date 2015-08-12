@@ -14,9 +14,9 @@ public interface IDirectory {
      * The original directory is not changed.
      *
      * @param innerDirectory inner directory name
-     * @return an absolute path
+     * @return current directory
      */
-    public String appendInnerDirectory(final String innerDirectory) throws IOException;
+    public IDirectory appendInnerDirectory(final String innerDirectory) throws IOException;
 
     /**
      * Returns a directory.
