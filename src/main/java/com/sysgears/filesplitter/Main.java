@@ -19,7 +19,7 @@ public class Main {
         try {
             final ExecutorService pool = Executors.newFixedThreadPool(2);
             final UserInterface ui = new UserInterface(System.in, System.out);
-            new Service(pool, ui).start(args);
+            new SplitService(pool, ui).start(args);
         } catch (Throwable t) {
             t.printStackTrace();
         }

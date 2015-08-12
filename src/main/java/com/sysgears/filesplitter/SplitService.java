@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
- * The Service class performs management of the main parts of the application.
+ * The SplitService class performs management of the main parts of the application.
  */
-public class Service {
+public class SplitService {
 
     /**
      * Pool of threads.
@@ -31,13 +31,13 @@ public class Service {
     private final IUserInterface ui;
 
     /**
-     * Creates the Service object specified by the pool and user interface.
+     * Creates the SplitService object specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
-    public Service(final ExecutorService pool, final IUserInterface ui) {
+    public SplitService(final ExecutorService pool, final IUserInterface ui) {
         if (pool == null) {
             throw new IllegalArgumentException("Pool of threads can't be null.");
         }
