@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.model.consoleoptions;
 import org.kohsuke.args4j.Option;
 
 /**
- * The SplitOptions class provides functionality to parse a command line parameters.
+ * The SplitOptions class provides set of command line options to split a file.
  */
 public class SplitOptions {
 
