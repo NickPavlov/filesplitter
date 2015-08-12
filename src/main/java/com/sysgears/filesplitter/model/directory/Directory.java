@@ -44,13 +44,19 @@ public class Directory {
     }
 
     /**
-     * Returns an absolute path with inner directory.
+     * Returns an absolute path with an inner directory.
+     * The original directory is not changed.
      *
      * @param innerDirectory inner directory name
      * @return an absolute path
      */
-    public String getWithInnerDirectory(final String innerDirectory) {
-        return "";
+    public String appendInnerDirectory(final String innerDirectory) throws IOException {
+        File result = new File(directory, innerDirectory);
+        if (!result.exists() && !result.mkdir()) {
+            throw new IOException("Error creating directory.");
+        }
+
+        return result.getAbsolutePath();
     }
 
     /**
@@ -78,13 +84,5 @@ public class Directory {
      */
     public Path getPath() {
         return Paths.get(directory.toURI());
-    }
-
-    public static void main(String[] args) {
-        try {
-            System.out.println(new Directory("/home/nick/Documents").getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
