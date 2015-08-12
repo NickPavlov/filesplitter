@@ -72,8 +72,8 @@ public class Service {
 
             final String fileName = splitOptions.getFilePath(); //"/home/nick/Documents/jdk.tar.gz";
 
-            final String rootDirectory = new File(fileName).getParent(); // "/home/nick/Documents"
-            final File outputDirectory = new File(rootDirectory, new File(fileName).getName()+"_parts"); // rootDirectory + "/Parts"
+            final String rootDirectory = new File(fileName).getParent();
+            final File outputDirectory = new File(rootDirectory, new File(fileName).getName() + "_parts");
             outputDirectory.mkdir();
 
             //final IDataFinder fileFinder = new FileFinder(rootDirectory);

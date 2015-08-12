@@ -41,7 +41,7 @@ public class PartCreator implements IDataProcessor {
     private String outputFileNameSuffix;
 
     /**
-     * Creates the PartCreator object specified by part name and size.
+     * Creates the PartCreator instance specified by part name and size.
      *
      * @param partNumber      file part number
      * @param partSize        part size

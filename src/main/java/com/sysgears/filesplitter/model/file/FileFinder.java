@@ -19,7 +19,7 @@ public class FileFinder implements IDataFinder {
     private final File rootDirectory;
 
     /**
-     * Creates FileFinder object specified by root path.
+     * Creates FileFinder instance specified by root path.
      *
      * @param rootDirectory root directory
      */
