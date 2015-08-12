@@ -15,7 +15,7 @@ public class PartWorkersFactory {
     private final IData data;
 
     /**
-     * Creates the PartWorkersFactory object.
+     * Creates the PartWorkersFactory instance.
      *
      * @param data data
      */

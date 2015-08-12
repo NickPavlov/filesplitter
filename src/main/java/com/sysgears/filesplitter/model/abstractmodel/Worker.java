@@ -18,7 +18,7 @@ public class Worker implements Runnable {
     private final IDataProcessor dataProcessor;
 
     /**
-     * Creates the Worker object specified by data and data processor.
+     * Creates the Worker instance specified by data and data processor.
      *
      * @param data          data
      * @param dataProcessor data processor

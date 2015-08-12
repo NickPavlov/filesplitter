@@ -21,9 +21,9 @@ public class PartCreatorsFactory {
     private final String outputDirectory;
 
     /**
-     * Creates the PartCreatorsFactory object specified by partcreator size.
+     * Creates the PartCreatorsFactory instance specified by part size.
      *
-     * @param partSize        partcreator size
+     * @param partSize        part size
      * @param outputDirectory output directory
      */
     public PartCreatorsFactory(final long partSize, final String outputDirectory) {

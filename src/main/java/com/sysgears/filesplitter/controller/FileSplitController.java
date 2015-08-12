@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
- * The FileSplitController class performs management of the main parts of the application.
+ * The FileSplitController class provides functionality to split a file into parts.
  */
-public class FileSplitController {
+public class FileSplitController implements IController {
 
     /**
      * Pool of threads.
@@ -31,7 +31,7 @@ public class FileSplitController {
     private final IUserInterface ui;
 
     /**
-     * Creates the FileSplitController object specified by the pool and user interface.
+     * Creates the FileSplitController instance specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
@@ -49,7 +49,7 @@ public class FileSplitController {
     }
 
     /**
-     * Starts the service.
+     * Starts a controller.
      *
      * @param args console arguments
      */
@@ -93,4 +93,9 @@ public class FileSplitController {
         pool.shutdown();
     }
 
+    /**
+     * Stops a controller
+     */
+    public void stop() {
+    }
 }
