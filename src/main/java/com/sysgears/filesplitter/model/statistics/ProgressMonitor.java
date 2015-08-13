@@ -23,6 +23,11 @@ public class ProgressMonitor {
         progressInfo.put(partName, state);
     }
 
+    /**
+     * Returns progress info.
+     *
+     * @return progress info
+     */
     public synchronized Map<String, ProgressState> getProgressInfo() {
         return new HashMap<String, ProgressState>(progressInfo);
     }
