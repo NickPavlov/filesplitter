@@ -48,6 +48,6 @@ public class PartCreatorsFactory {
      * @return PartCreator object
      */
     public PartCreator create() {
-        return new PartCreator(partNumber++, partSize, outputDirectory);
+        return new PartCreator(partNumber++, partSize, outputDirectory, progressMonitor);
     }
 }
