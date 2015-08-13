@@ -3,8 +3,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="system" class="java.lang.System" />
-
     <bean id="userInterface" class="com.sysgears.filesplitter.view.UserInterface">
         <constructor-arg type="java.io.InputStream" value="#{system.in}" index="0" />
         <constructor-arg type="java.io.OutputStream" value="#{system.out}" index="1" />

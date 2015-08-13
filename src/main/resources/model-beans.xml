@@ -5,7 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
     <bean id="fileFinder" class="com.sysgears.filesplitter.model.filesystem.file.FileFinder" />
+
+    <bean id="splitOptions" class="com.sysgears.filesplitter.model.consoleoptions.SplitOptions" />
+
+    <bean id="cmdParser" class="org.kohsuke.args4j.CmdLineParser" >
+        <constructor-arg ref="splitOptions" index="0" />
+    </bean>
 
 </beans>

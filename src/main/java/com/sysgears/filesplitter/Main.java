@@ -8,16 +8,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
+    private static String[] args;
+
     /**
      * Starts the application.
      *
      * @param args command line arguments
      */
     public static void main(final String[] args) {
+        Main.args = args;
+
         try {
             final String[] contextPaths = new String[] {"controller-beans.xml", "model-beans.xml", "view-beans.xml"};
-            //final Map<String, Object> map = new HashMap<String, Object>();
-            //map.put("args", args);
             final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
 
             context.getBean(MainController.class).start(args);
