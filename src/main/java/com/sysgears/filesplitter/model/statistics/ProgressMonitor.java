@@ -28,7 +28,7 @@ public class ProgressMonitor {
      *
      * @return progress info
      */
-    public synchronized Map<String, ProgressState> getProgressInfo() {
-        return new HashMap<String, ProgressState>(progressInfo);
+    public String getProgressInfo() {
+        return progressInfo.toString();
     }
 }

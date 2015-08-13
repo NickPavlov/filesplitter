@@ -102,22 +102,13 @@ public class FileSplitService implements Runnable {
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
-
+            new Thread(new ProgressInfoService(ui, progressMonitor, pool, 10)).start();
             System.out.println();
             for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
                 pool.execute(workerFactory.create(partCreator.create()));
                 System.out.println("thread-" + i);
             }
-
-            while(!pool.isShutdown()) {
-                System.out.println(progressMonitor.getProgressInfo());
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    //
-                }
-            }
-            //pool.shutdown();
+            pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (CmdLineException e) {
