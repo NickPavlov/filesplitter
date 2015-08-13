@@ -43,4 +43,14 @@ public class ProgressState {
     public long getTotal() {
         return total;
     }
+
+    /**
+     * Returns a string representation of the ProgressState object.
+     *
+     * @return string representation
+     */
+    @Override
+    public String toString() {
+        return "";
+    }
 }

@@ -108,11 +108,15 @@ public class FileSplitService implements Runnable {
                 pool.execute(workerFactory.create(partCreator.create()));
                 System.out.println("thread-" + i);
             }
+            pool.shutdown();
+            while(!pool.isShutdown()) {
+                System.out.println(progressMonitor.getProgressInfo());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (CmdLineException e) {
             cmdLineParser.printUsage(System.out);
         }
-        pool.shutdown();
+
     }
 }
