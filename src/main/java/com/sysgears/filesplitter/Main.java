@@ -11,7 +11,7 @@ public class Main {
     /**
      * Application context paths.
      */
-    private static final String[] contextPaths = new String[] {
+    public static final String[] contextPaths = new String[] {
             "system-beans.xml",
             "controller-beans.xml",
             "model-beans.xml",
@@ -20,7 +20,7 @@ public class Main {
     /**
      * Command line arguments.
      */
-    private static String[] args;
+    public static String[] args;
 
     /**
      * Starts the application.
@@ -30,6 +30,7 @@ public class Main {
     public static void main(final String[] args) {
         try {
             Main.args = args;
+
             final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
             context.getBean(MainController.class).start(args);
 

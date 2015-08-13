@@ -36,13 +36,33 @@ public class FileSplitService implements IService {
     private final IDataFinder fileFinder;
 
     /**
+     * Command line parser.
+     */
+    private final CmdLineParser cmdLineParser;
+
+    /**
+     * Split options.
+     */
+    private final SplitOptions splitOptions;
+
+    /**
+     * Command line arguments.
+     */
+    private final String[] args;
+    /**
      * Creates the FileSplitService instance specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
-    public FileSplitService(final ExecutorService pool, final IUserInterface ui, final IDataFinder fileFinder) {
+    public FileSplitService(final ExecutorService pool,
+                            final IUserInterface ui,
+                            final IDataFinder fileFinder,
+                            final CmdLineParser cmdLineParser,
+                            final SplitOptions splitOptions,
+                            final String[] args) {
+        /*
         if (pool == null) {
             throw new IllegalArgumentException("Pool of threads can't be null.");
         }
@@ -52,9 +72,13 @@ public class FileSplitService implements IService {
         if (fileFinder == null) {
             throw new IllegalArgumentException("File finder can't be null.");
         }
+        */
         this.pool = pool;
         this.ui = ui;
         this.fileFinder = fileFinder;
+        this.cmdLineParser = cmdLineParser;
+        this.splitOptions = splitOptions;
+        this.args = args;
     }
 
     /**
@@ -63,8 +87,8 @@ public class FileSplitService implements IService {
      * @param args console arguments
      */
     public void start(final String[] args) {
-        SplitOptions splitOptions = new SplitOptions();
-        CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
+        //SplitOptions splitOptions = new SplitOptions();
+        //CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
 
         try {
             cmdLineParser.parseArgument(args);

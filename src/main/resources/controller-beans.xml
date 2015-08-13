@@ -10,6 +10,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
                          value="#{executors.newFixedThreadPool(2)}" index="0" />
         <constructor-arg ref="userInterface" index="1" />
         <constructor-arg ref="fileFinder" index="2" />
+        <constructor-arg ref="cmdParser" index="3" />
+        <constructor-arg ref="splitOptions" index="4" />
+        <constructor-arg type="java.lang.String[]" value="#{main.args}" index="5" />
     </bean>
 
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService">
