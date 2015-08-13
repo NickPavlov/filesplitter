@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * The FileSplitService class provides functionality to split a file into parts.
  */
-public class FileSplitService implements IService {
+public class FileSplitService implements Runnable {
 
     /**
      * Pool of threads.
@@ -49,8 +49,9 @@ public class FileSplitService implements IService {
      * Command line arguments.
      */
     private final String[] args;
+
     /**
-     * Creates the FileSplitService instance specified by the pool and user interface.
+     * Creates the FileSplitService instance.
      *
      * @param pool pool of threads
      * @param ui   user interface
@@ -62,17 +63,7 @@ public class FileSplitService implements IService {
                             final CmdLineParser cmdLineParser,
                             final SplitOptions splitOptions,
                             final String[] args) {
-        /*
-        if (pool == null) {
-            throw new IllegalArgumentException("Pool of threads can't be null.");
-        }
-        if (ui == null) {
-            throw new IllegalArgumentException("User interface can't be null.");
-        }
-        if (fileFinder == null) {
-            throw new IllegalArgumentException("File finder can't be null.");
-        }
-        */
+
         this.pool = pool;
         this.ui = ui;
         this.fileFinder = fileFinder;
@@ -83,10 +74,8 @@ public class FileSplitService implements IService {
 
     /**
      * Starts the service.
-     *
-     * @param args console arguments
      */
-    public void start(final String[] args) {
+    public void run() {
         //SplitOptions splitOptions = new SplitOptions();
         //CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
 
@@ -122,11 +111,5 @@ public class FileSplitService implements IService {
             cmdLineParser.printUsage(System.out);
         }
         pool.shutdown();
-    }
-
-    /**
-     * Stops the service.
-     */
-    public void stop() {
     }
 }

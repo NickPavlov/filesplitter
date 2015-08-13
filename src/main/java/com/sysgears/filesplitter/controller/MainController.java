@@ -1,21 +1,19 @@
 package com.sysgears.filesplitter.controller;
 
-import com.sysgears.filesplitter.controller.services.IService;
-
 /**
  * The MainController class is the main controller that controls the application.
  */
-public class MainController {
+public class MainController implements IController {
 
     /**
      * FileSplitService instance.
      */
-    private final IService fileSplitService;
+    private final Runnable fileSplitService;
 
     /**
      * FileBuildService instance.
      */
-    private final IService fileBuildService;
+    private final Runnable fileBuildService;
 
     /**
      * Creates the MainController instance specified by FileSplitService and FileBuildService.
@@ -23,17 +21,22 @@ public class MainController {
      * @param fileSplitService FileSplitService
      * @param fileCreateService FileCreateService
      */
-    public MainController(final IService fileSplitService, final IService fileCreateService) {
+    public MainController(final Runnable fileSplitService, final Runnable fileCreateService) {
         this.fileSplitService = fileSplitService;
         this.fileBuildService = fileCreateService;
     }
 
     /**
      * Starts the controller.
-     *
-     * @param args command line arguments
      */
-    public void start(final String[] args) {
-        fileSplitService.start(args);
+    public void start() {
+        fileSplitService.run();
+    }
+
+    /**
+     * Stops the controller.
+     */
+    public void stop() {
+
     }
 }

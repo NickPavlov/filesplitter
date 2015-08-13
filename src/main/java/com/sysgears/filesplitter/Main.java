@@ -32,7 +32,8 @@ public class Main {
             Main.args = args;
 
             final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
-            context.getBean(MainController.class).start(args);
+
+            context.getBean(MainController.class).start();
 
         } catch (Throwable t) {
             t.printStackTrace();
