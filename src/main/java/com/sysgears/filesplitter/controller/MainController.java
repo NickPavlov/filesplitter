@@ -16,14 +16,22 @@ public class MainController implements IController {
     private final Runnable fileBuildService;
 
     /**
+     * Command line arguments.
+     */
+    private final String[] args;
+
+    /**
      * Creates the MainController instance specified by FileSplitService and FileBuildService.
      *
      * @param fileSplitService FileSplitService
      * @param fileCreateService FileCreateService
      */
-    public MainController(final Runnable fileSplitService, final Runnable fileCreateService) {
+    public MainController(final Runnable fileSplitService,
+                          final Runnable fileCreateService,
+                          final String[] args) {
         this.fileSplitService = fileSplitService;
         this.fileBuildService = fileCreateService;
+        this.args = args;
     }
 
     /**

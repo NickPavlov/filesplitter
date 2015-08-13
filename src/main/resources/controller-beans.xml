@@ -22,6 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
         <constructor-arg ref="fileSplitService" index="0" />
         <constructor-arg ref="fileBuildService" index="1" />
+        <constructor-arg type="java.lang.String[]" value="#{main.args}" index="2" />
     </bean>
 
 </beans>
