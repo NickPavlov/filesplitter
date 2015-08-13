@@ -90,7 +90,6 @@ public class PartCreator implements IDataProcessor {
         int bufferSize;
         int fullPartsCount;
         int remainingBytes;
-
         if (partSize < DEFAULT_BUFFER_SIZE) {
             fullPartsCount = 1;
             remainingBytes = 0;
