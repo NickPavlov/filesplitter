@@ -15,8 +15,10 @@ public class Main {
      */
     public static void main(final String[] args) {
         try {
-            final String[] configFiles = new String[] {"controller-components.xml", "view-components.xml"};
-            final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(configFiles);
+            final String[] contextPaths = new String[] {"controller-beans.xml", "model-beans.xml", "view-beans.xml"};
+            //final Map<String, Object> map = new HashMap<String, Object>();
+            //map.put("args", args);
+            final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
 
             context.getBean(MainController.class).start(args);
         } catch (Throwable t) {
