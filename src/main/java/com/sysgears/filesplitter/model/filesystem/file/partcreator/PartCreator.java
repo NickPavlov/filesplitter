@@ -21,6 +21,11 @@ public class PartCreator implements IDataProcessor {
     private static final int DEFAULT_BUFFER_SIZE = 4 * MemoryUnits.MEGABYTE;
 
     /**
+     * Part number.
+     */
+    private final int partNumber;
+
+    /**
      * The file part size.
      */
     private final long partSize;
@@ -48,6 +53,7 @@ public class PartCreator implements IDataProcessor {
      * @param outputDirectory output directory
      */
     public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
+        this.partNumber = partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
 
