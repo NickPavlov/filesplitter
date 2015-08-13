@@ -61,5 +61,6 @@ public class ProgressInfoService implements Runnable {
                 //
             }
         }
+        System.out.println(progressMonitor.getProgressInfo());
     }
 }

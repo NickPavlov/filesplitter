@@ -47,6 +47,11 @@ public class FileSplitService implements Runnable {
     private final SplitOptions splitOptions;
 
     /**
+     * Progress monitor.
+     */
+    private final ProgressMonitor progressMonitor;
+
+    /**
      * Command line arguments.
      */
     private final String[] args;
@@ -63,6 +68,7 @@ public class FileSplitService implements Runnable {
                             final IDataFinder fileFinder,
                             final CmdLineParser cmdLineParser,
                             final SplitOptions splitOptions,
+                            final ProgressMonitor progressMonitor,
                             final String[] args) {
 
         this.pool = pool;
@@ -70,6 +76,7 @@ public class FileSplitService implements Runnable {
         this.fileFinder = fileFinder;
         this.cmdLineParser = cmdLineParser;
         this.splitOptions = splitOptions;
+        this.progressMonitor = progressMonitor;
         this.args = args;
     }
 
@@ -98,11 +105,11 @@ public class FileSplitService implements Runnable {
             final String filePath = splitOptions.getFilePath();
             final IData file = fileFinder.getByName(filePath);
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
-            final ProgressMonitor progressMonitor = new ProgressMonitor();
+            //final ProgressMonitor progressMonitor = new ProgressMonitor();
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
-            new Thread(new ProgressInfoService(ui, progressMonitor, pool, 10)).start();
+            new Thread(new ProgressInfoService(ui, progressMonitor, pool, 100)).start();
             System.out.println();
             for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
                 pool.execute(workerFactory.create(partCreator.create()));
