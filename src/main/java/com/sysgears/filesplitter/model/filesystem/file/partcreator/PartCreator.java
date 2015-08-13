@@ -107,7 +107,6 @@ public class PartCreator implements IDataProcessor {
         for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
             buffer.clear();
             inputChannel.read(buffer);
-
             buffer.flip();
             readBytes += buffer.capacity();
             progressMonitor.update(partName, new ProgressState(readBytes, partSize));
@@ -124,6 +123,7 @@ public class PartCreator implements IDataProcessor {
             buffer = ByteBuffer.allocate(remainingBytes);
             inputChannel.read(buffer);
             buffer.flip();
+            readBytes += buffer.capacity();
             progressMonitor.update(partName, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
         }
