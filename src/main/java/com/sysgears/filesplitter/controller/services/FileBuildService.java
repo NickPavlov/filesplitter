@@ -1,9 +1,9 @@
-package com.sysgears.filesplitter.controller;
+package com.sysgears.filesplitter.controller.services;
 
 /**
- * The FileBuildController class provides functionality to create file form parts.
+ * The FileBuildService class provides functionality to create file form parts.
  */
-public class FileBuildController implements IController {
+public class FileBuildService implements IService {
 
     /**
      * Starts a controller.

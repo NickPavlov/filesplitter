@@ -1,9 +1,9 @@
-package com.sysgears.filesplitter.controller;
+package com.sysgears.filesplitter.controller.services;
 
 /**
- * The IController interface defines the behavior of a controller object.
+ * The IService interface defines the behavior of a controller object.
  */
-public interface IController {
+public interface IService {
 
     /**
      * Starts a controller.
