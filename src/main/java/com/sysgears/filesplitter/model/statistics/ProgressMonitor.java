@@ -8,10 +8,22 @@ import java.util.Map;
  */
 public class ProgressMonitor {
 
-    private final Map<String, String> progressInfo = new HashMap<String, String>();
+    /**
+     * Progress info.
+     */
+    private final Map<String, ProgressState> progressInfo = new HashMap<String, ProgressState>();
 
+    /**
+     * Updates progress info.
+     *
+     * @param partName part name
+     * @param state    progress state
+     */
+    public synchronized void update(final String partName, final ProgressState state) {
+        progressInfo.put(partName, state);
+    }
 
-    public synchronized void update(final String partNumber, final String progress) {
-
+    public synchronized Map<String, ProgressState> getProgressInfo() {
+        return new HashMap<String, ProgressState>(progressInfo);
     }
 }
