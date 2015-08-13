@@ -3,6 +3,7 @@ package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
 import com.sysgears.filesplitter.model.util.Resource;
 
 import java.io.*;
@@ -43,7 +44,12 @@ public class PartCreator implements IDataProcessor {
     /**
      * Output file name.
      */
-    private String outputFileNameSuffix;
+    private final String outputFileNameSuffix;
+
+    /**
+     * Progress monitor.
+     */
+    private final ProgressMonitor progressMonitor;
 
     /**
      * Creates the PartCreator instance specified by part name and size.
@@ -52,14 +58,17 @@ public class PartCreator implements IDataProcessor {
      * @param partSize        part size
      * @param outputDirectory output directory
      */
-    public PartCreator(final int partNumber, final long partSize, final String outputDirectory) {
+    public PartCreator(final int partNumber,
+                       final long partSize,
+                       final String outputDirectory,
+                       final ProgressMonitor progressMonitor) {
         this.partNumber = partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
-
         //temporary
         this.outputFileNameSuffix = "_part" + partNumber + ".bin";
         this.outputDirectory = outputDirectory;
+        this.progressMonitor = progressMonitor;
     }
 
     /**

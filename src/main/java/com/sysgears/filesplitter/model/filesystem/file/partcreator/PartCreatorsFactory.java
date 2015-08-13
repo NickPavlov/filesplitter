@@ -1,5 +1,7 @@
 package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 
+import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
+
 /**
  * The PartCreatorsFactory class provides functionality to create PartCreator instances.
  */
@@ -21,15 +23,23 @@ public class PartCreatorsFactory {
     private final String outputDirectory;
 
     /**
+     * Progress monitor.
+     */
+    private final ProgressMonitor progressMonitor;
+
+    /**
      * Creates the PartCreatorsFactory instance specified by part size.
      *
      * @param partSize        part size
      * @param outputDirectory output directory
      */
-    public PartCreatorsFactory(final long partSize, final String outputDirectory) {
+    public PartCreatorsFactory(final long partSize,
+                               final String outputDirectory,
+                               final ProgressMonitor progressMonitor) {
         this.partSize = partSize;
         this.partNumber = 0;
         this.outputDirectory = outputDirectory;
+        this.progressMonitor = progressMonitor;
     }
 
     /**

@@ -8,6 +8,7 @@ import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
+import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -97,7 +98,9 @@ public class FileSplitService implements Runnable {
             final String filePath = splitOptions.getFilePath();
             final IData file = fileFinder.getByName(filePath);
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
-            final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath());
+            final ProgressMonitor progressMonitor = new ProgressMonitor();
+            final PartCreatorsFactory partCreator =
+                    new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
             System.out.println();
