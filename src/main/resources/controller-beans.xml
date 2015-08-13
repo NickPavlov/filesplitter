@@ -5,11 +5,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="system" class="java.lang.System" />
-    <bean id="executors" class="java.util.concurrent.Executors" />
-    <bean id="main" class="com.sysgears.filesplitter.Main"  />
-
-
     <bean id="fileSplitService" class="com.sysgears.filesplitter.controller.services.FileSplitService">
         <constructor-arg type="java.util.concurrent.ExecutorService"
                          value="#{executors.newFixedThreadPool(2)}" index="0" />
