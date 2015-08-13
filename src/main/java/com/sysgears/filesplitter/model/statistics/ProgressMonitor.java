@@ -28,7 +28,7 @@ public class ProgressMonitor {
      *
      * @return progress info
      */
-    public String getProgressInfo() {
+    public synchronized String getProgressInfo() {
         return progressInfo.toString();
     }
 }
