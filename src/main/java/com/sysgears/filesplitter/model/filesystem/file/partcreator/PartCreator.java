@@ -77,6 +77,7 @@ public class PartCreator implements IDataProcessor {
      *
      * @param originalFile original file
      * @return true if part of the file created successfully, false otherwise
+     * @throws IOException in case if I/O error occurred
      */
     public boolean process(final IData originalFile) throws IOException {
         boolean success = true;
@@ -106,11 +107,8 @@ public class PartCreator implements IDataProcessor {
         final FileLock lock = inputChannel.lock(position, bufferSize, false);
         for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
             buffer.clear();
-            inputChannel.read(buffer);
-            buffer.flip();
-            readBytes += buffer.capacity();
+            readBytes += transferBytes(inputChannel, outputChannel, buffer);
             progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-            outputChannel.write(buffer);
 
             // ?
             try {
@@ -121,11 +119,8 @@ public class PartCreator implements IDataProcessor {
         }
         if (remainingBytes > 0) {
             buffer = ByteBuffer.allocate(remainingBytes);
-            inputChannel.read(buffer);
-            buffer.flip();
-            readBytes += buffer.capacity();
+            readBytes += transferBytes(inputChannel, outputChannel, buffer);
             progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-            outputChannel.write(buffer);
         }
         lock.release();
 
@@ -134,5 +129,26 @@ public class PartCreator implements IDataProcessor {
         Resource.closeQuietly(outputFile);
 
         return success;
+    }
+
+    /**
+     * Transfers bytes from the input file channel into the output file channel.
+     *
+     * @param input input file channel
+     * @param output output file channel
+     * @param buffer byte buffer
+     * @return number of transferred bytes
+     *
+     * @throws IOException in case if I/O error occurred
+     */
+    private int transferBytes(final FileChannel input,
+                              final FileChannel output,
+                              final ByteBuffer buffer) throws IOException {
+        input.read(buffer);
+        buffer.flip();
+        int readBytes = buffer.capacity();
+        output.write(buffer);
+
+        return readBytes;
     }
 }
