@@ -110,7 +110,7 @@ public class PartCreator implements IDataProcessor {
 
             buffer.flip();
             readBytes += buffer.capacity();
-            progressMonitor.update("part-" + partNumber, new ProgressState(readBytes, partSize));
+            progressMonitor.update("part-" + this.partNumber, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
 
             // ?

@@ -51,6 +51,6 @@ public class ProgressState {
      */
     @Override
     public String toString() {
-        return "";
+        return 100 * current / total + "%";
     }
 }
