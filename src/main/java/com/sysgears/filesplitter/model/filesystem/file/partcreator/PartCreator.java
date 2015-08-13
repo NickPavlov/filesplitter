@@ -23,9 +23,9 @@ public class PartCreator implements IDataProcessor {
     private static final int DEFAULT_BUFFER_SIZE = 4 * MemoryUnits.MEGABYTE;
 
     /**
-     * Part number.
+     * Part name.
      */
-    private final int partNumber;
+    private final String partName;
 
     /**
      * The file part size.
@@ -63,11 +63,11 @@ public class PartCreator implements IDataProcessor {
                        final long partSize,
                        final String outputDirectory,
                        final ProgressMonitor progressMonitor) {
-        this.partNumber = partNumber;
+        this.partName = "part" + partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
         //temporary
-        this.outputFileNameSuffix = "_part" + partNumber + ".bin";
+        this.outputFileNameSuffix = "_" + partName + ".bin";
         this.outputDirectory = outputDirectory;
         this.progressMonitor = progressMonitor;
     }
@@ -110,7 +110,7 @@ public class PartCreator implements IDataProcessor {
 
             buffer.flip();
             readBytes += buffer.capacity();
-            progressMonitor.update("part-" + this.partNumber, new ProgressState(readBytes, partSize));
+            progressMonitor.update(partName, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
 
             // ?
@@ -124,7 +124,7 @@ public class PartCreator implements IDataProcessor {
             buffer = ByteBuffer.allocate(remainingBytes);
             inputChannel.read(buffer);
             buffer.flip();
-            progressMonitor.update("part-" + partNumber, new ProgressState(readBytes, partSize));
+            progressMonitor.update(partName, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
         }
         lock.release();
