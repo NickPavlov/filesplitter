@@ -4,7 +4,7 @@ import com.sysgears.filesplitter.controller.MainController;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * The Main class...
+ * The Main class. Configures and starts the application.
  */
 public class Main {
 
