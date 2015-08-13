@@ -28,6 +28,7 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(final String[] args) {
+        //System.out.println(System.getProperty("sun.java.command"));
         try {
             Main.args = args;
 

@@ -15,12 +15,18 @@ public class PartWorkersFactory {
     private final IData data;
 
     /**
+     * Workers count.
+     */
+    private int workersCount;
+
+    /**
      * Creates the PartWorkersFactory instance.
      *
      * @param data data
      */
     public PartWorkersFactory(final IData data) {
         this.data = data;
+        this.workersCount = 0;
     }
 
     /**
@@ -29,6 +35,6 @@ public class PartWorkersFactory {
      * @return worker
      */
     public Worker create(final IDataProcessor processor) {
-        return new Worker(data, processor);
+        return new Worker("worker-" + workersCount++, data, processor);
     }
 }
