@@ -34,6 +34,6 @@ public class MainController {
      * @param args command line arguments
      */
     public void start(final String[] args) {
-        fileBuildService.start(args);
+        fileSplitService.start(args);
     }
 }
