@@ -8,6 +8,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
+    /**
+     * Application context paths.
+     */
+    private static final String[] contextPaths = new String[] {
+            "system-beans.xml",
+            "controller-beans.xml",
+            "model-beans.xml",
+            "view-beans.xml"};
+
+    /**
+     * Command line arguments.
+     */
     private static String[] args;
 
     /**
@@ -16,13 +28,11 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(final String[] args) {
-        Main.args = args;
-
         try {
-            final String[] contextPaths = new String[] {"controller-beans.xml", "model-beans.xml", "view-beans.xml"};
+            Main.args = args;
             final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
-
             context.getBean(MainController.class).start(args);
+
         } catch (Throwable t) {
             t.printStackTrace();
         }
