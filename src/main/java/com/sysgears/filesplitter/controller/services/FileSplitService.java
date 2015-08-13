@@ -90,6 +90,7 @@ public class FileSplitService implements Runnable {
         try {
             cmdLineParser.parseArgument(args);
 
+            System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
             System.out.println("PartSize: " + splitOptions.getPartSize());
             System.out.println("MB: " + splitOptions.isMegabytes());
@@ -114,6 +115,7 @@ public class FileSplitService implements Runnable {
                 pool.execute(workerFactory.create(partCreator.create()));
                 System.out.println("thread-" + i);
             }
+            System.out.println();
             pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
