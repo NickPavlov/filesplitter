@@ -1,10 +1,10 @@
 package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
+import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
-import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
@@ -31,31 +31,41 @@ public class FileSplitService implements IService {
     private final IUserInterface ui;
 
     /**
+     * File finder.
+     */
+    private final IDataFinder fileFinder;
+
+    /**
      * Creates the FileSplitService instance specified by the pool and user interface.
      *
      * @param pool pool of threads
      * @param ui   user interface
      * @throws IllegalArgumentException if user interface is null
      */
-    public FileSplitService(final ExecutorService pool, final IUserInterface ui) {
+    public FileSplitService(final ExecutorService pool, final IUserInterface ui, final IDataFinder fileFinder) {
         if (pool == null) {
             throw new IllegalArgumentException("Pool of threads can't be null.");
         }
         if (ui == null) {
             throw new IllegalArgumentException("User interface can't be null.");
         }
+        if (fileFinder == null) {
+            throw new IllegalArgumentException("File finder can't be null.");
+        }
         this.pool = pool;
         this.ui = ui;
+        this.fileFinder = fileFinder;
     }
 
     /**
-     * Starts a controller.
+     * Starts the service.
      *
      * @param args console arguments
      */
     public void start(final String[] args) {
         SplitOptions splitOptions = new SplitOptions();
         CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
+
         try {
             cmdLineParser.parseArgument(args);
 
@@ -72,11 +82,8 @@ public class FileSplitService implements IService {
             }
 
             final String filePath = splitOptions.getFilePath();
-            final IData file = new FileFinder().getByName(filePath);
-
-            final IDirectory partsDirectory = new Directory(filePath)
-                    .appendInnerDirectory(file.getName() + "_parts");
-
+            final IData file = fileFinder.getByName(filePath);
+            final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
             final PartCreatorsFactory partCreator = new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath());
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
 
@@ -94,7 +101,7 @@ public class FileSplitService implements IService {
     }
 
     /**
-     * Stops a controller
+     * Stops the service.
      */
     public void stop() {
     }

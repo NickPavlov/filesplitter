@@ -8,8 +8,10 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="executors" class="java.util.concurrent.Executors" />
 
     <bean id="fileSplitService" class="com.sysgears.filesplitter.controller.services.FileSplitService">
-        <constructor-arg type="java.util.concurrent.ExecutorService" value="#{executors.newFixedThreadPool(2)}"/>
-        <constructor-arg ref="userInterface"/>
+        <constructor-arg type="java.util.concurrent.ExecutorService"
+                         value="#{executors.newFixedThreadPool(2)}" index="0" />
+        <constructor-arg ref="userInterface" index="1" />
+        <constructor-arg ref="fileFinder" index="2" />
     </bean>
 
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService">
@@ -17,8 +19,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     </bean>
 
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
-        <constructor-arg ref="fileSplitService"/>
-        <constructor-arg ref="fileBuildService"/>
+        <constructor-arg ref="fileSplitService" index="0" />
+        <constructor-arg ref="fileBuildService" index="1" />
     </bean>
 
 </beans>

@@ -8,12 +8,12 @@ import com.sysgears.filesplitter.controller.services.IService;
 public class MainController {
 
     /**
-     * FileSplitService.
+     * FileSplitService instance.
      */
     private final IService fileSplitService;
 
     /**
-     * FileBuildService.
+     * FileBuildService instance.
      */
     private final IService fileBuildService;
 
