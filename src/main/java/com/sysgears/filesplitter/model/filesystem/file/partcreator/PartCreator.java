@@ -4,6 +4,7 @@ import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.ProgressState;
 import com.sysgears.filesplitter.model.util.Resource;
 
 import java.io.*;
@@ -88,6 +89,7 @@ public class PartCreator implements IDataProcessor {
         int bufferSize;
         int fullPartsCount;
         int remainingBytes;
+
         if (partSize < DEFAULT_BUFFER_SIZE) {
             fullPartsCount = 1;
             remainingBytes = 0;
@@ -98,12 +100,17 @@ public class PartCreator implements IDataProcessor {
             bufferSize = DEFAULT_BUFFER_SIZE;
         }
 
+        long readBytes = 0;
+
         ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
         final FileLock lock = inputChannel.lock(position, bufferSize, false);
         for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
             buffer.clear();
             inputChannel.read(buffer);
+
             buffer.flip();
+            readBytes += buffer.capacity();
+            progressMonitor.update("part-" + partNumber, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
 
             // ?
@@ -117,6 +124,7 @@ public class PartCreator implements IDataProcessor {
             buffer = ByteBuffer.allocate(remainingBytes);
             inputChannel.read(buffer);
             buffer.flip();
+            progressMonitor.update("part-" + partNumber, new ProgressState(readBytes, partSize));
             outputChannel.write(buffer);
         }
         lock.release();
