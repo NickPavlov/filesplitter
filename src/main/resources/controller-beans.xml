@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="fileSplitService" class="com.sysgears.filesplitter.controller.services.FileSplitService">
         <constructor-arg type="java.util.concurrent.ExecutorService"
-                         value="#{executors.newFixedThreadPool(2)}" index="0" />
+                         value="#{executors.newFixedThreadPool(4)}" index="0" />
         <constructor-arg ref="userInterface" index="1" />
         <constructor-arg ref="fileFinder" index="2" />
         <constructor-arg ref="cmdParser" index="3" />

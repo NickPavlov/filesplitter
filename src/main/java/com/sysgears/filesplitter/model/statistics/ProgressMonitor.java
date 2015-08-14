@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * The ProgressMonitor class provides functionality to gather information about the work done.
  */
-public class ProgressMonitor {
+public class ProgressMonitor implements IProgressMonitor {
 
     /**
      * Progress info.
@@ -16,11 +16,11 @@ public class ProgressMonitor {
     /**
      * Updates progress info.
      *
-     * @param partName part name
-     * @param state    progress state
+     * @param name  part name
+     * @param state progress state
      */
-    public synchronized void update(final String partName, final ProgressState state) {
-        progressInfo.put(partName, state);
+    public synchronized void update(final String name, final ProgressState state) {
+        progressInfo.put(name, state);
     }
 
     /**
