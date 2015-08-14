@@ -5,7 +5,6 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.statistics.state.ProgressState;
-import com.sysgears.filesplitter.model.util.Resource;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,67 +78,63 @@ public class PartCreator implements IDataProcessor {
      *
      * @param originalFile original file
      * @return true if part of the file created successfully, false otherwise
-     * @throws IOException in case if I/O error occurred
      */
     public boolean process(final IData originalFile) throws IOException {
-        boolean success = true;
-        RandomAccessFile outputFile = new RandomAccessFile(new File(outputDirectory, originalFile.getName()
-                + outputFileNameSuffix), "rw");
+        try (
+                RandomAccessFile outputFile = new RandomAccessFile(
+                        new File(outputDirectory, originalFile.getName() + outputFileNameSuffix), "rw");
 
-        FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
-        FileChannel outputChannel = outputFile.getChannel();
+                FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
+                FileChannel outputChannel = outputFile.getChannel();
+        ) {
 
-        int bufferSize;
-        int fullPartsCount;
-        int remainingBytes;
-        if (partSize < DEFAULT_BUFFER_SIZE) {
-            fullPartsCount = 1;
-            remainingBytes = 0;
-            bufferSize = (int) partSize;
-        } else {
-            fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
-            remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-            bufferSize = DEFAULT_BUFFER_SIZE;
-        }
-
-        long readBytes = 0;
-
-        ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
-        final FileLock lock = inputChannel.lock(position, bufferSize, false);
-        for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
-            buffer.clear();
-            readBytes += transferBytes(inputChannel, outputChannel, buffer);
-            progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-
-            // ?
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            int bufferSize;
+            int fullPartsCount;
+            int remainingBytes;
+            if (partSize < DEFAULT_BUFFER_SIZE) {
+                fullPartsCount = 1;
+                remainingBytes = 0;
+                bufferSize = (int) partSize;
+            } else {
+                fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
+                remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
+                bufferSize = DEFAULT_BUFFER_SIZE;
             }
-        }
-        if (remainingBytes > 0) {
-            buffer = ByteBuffer.allocate(remainingBytes);
-            readBytes += transferBytes(inputChannel, outputChannel, buffer);
-            progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-        }
-        lock.release();
 
-        Resource.closeQuietly(inputChannel);
-        Resource.closeQuietly(outputChannel);
-        Resource.closeQuietly(outputFile);
+            long readBytes = 0;
 
-        return success;
+            ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
+            final FileLock lock = inputChannel.lock(position, bufferSize, false);
+            for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
+                buffer.clear();
+                readBytes += transferBytes(inputChannel, outputChannel, buffer);
+                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
+
+                // ?
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (remainingBytes > 0) {
+                buffer = ByteBuffer.allocate(remainingBytes);
+                readBytes += transferBytes(inputChannel, outputChannel, buffer);
+                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
+            }
+            lock.release();
+        }
+
+        return true;
     }
 
     /**
      * Transfers bytes from the input file channel into the output file channel.
      *
-     * @param input input file channel
+     * @param input  input file channel
      * @param output output file channel
      * @param buffer byte buffer
      * @return number of transferred bytes
-     *
      * @throws IOException in case if I/O error occurred
      */
     private int transferBytes(final FileChannel input,
