@@ -7,7 +7,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="system" class="java.lang.System" />
 
-    <bean id="executors" class="java.util.concurrent.Executors" />
+    <bean id="pool" class="java.util.concurrent.Executors"  factory-method="newFixedThreadPool">
+        <constructor-arg value="4"/>
+    </bean>
 
     <bean id="main" class="com.sysgears.filesplitter.Main"  />
 

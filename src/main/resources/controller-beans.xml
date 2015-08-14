@@ -5,20 +5,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- Services -->
     <bean id="fileSplitService" class="com.sysgears.filesplitter.controller.services.FileSplitService">
-        <constructor-arg type="java.util.concurrent.ExecutorService"
-                         value="#{executors.newFixedThreadPool(4)}" index="0" />
-        <constructor-arg ref="userInterface" index="1" />
-        <constructor-arg ref="fileFinder" index="2" />
-        <constructor-arg ref="cmdParser" index="3" />
-        <constructor-arg ref="splitOptions" index="4" />
-        <constructor-arg ref="progressMonitor" index="5" />
-
-        <constructor-arg type="java.lang.String[]" value="#{main.args}" index="6" />
+        <constructor-arg index="0" ref="pool" />
+        <constructor-arg index="1" ref="userInterface" />
+        <constructor-arg index="2" ref="fileFinder" />
+        <constructor-arg index="3" ref="cmdParser" />
+        <constructor-arg index="4" ref="splitOptions" />
+        <constructor-arg index="5" ref="progressMonitor" />
+        <constructor-arg index="6" type="java.lang.String[]" value="#{main.args}" />
     </bean>
 
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService">
     </bean>
+    <!-- /Services -->
 
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
         <constructor-arg ref="fileSplitService" index="0" />
