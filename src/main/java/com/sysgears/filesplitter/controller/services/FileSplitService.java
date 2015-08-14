@@ -52,6 +52,11 @@ public class FileSplitService implements Runnable {
     private final ProgressMonitor progressMonitor;
 
     /**
+     * Progress info service.
+     */
+    private final ProgressInfoService progressInfoService;
+
+    /**
      * Command line arguments.
      */
     private String[] args;
@@ -68,7 +73,8 @@ public class FileSplitService implements Runnable {
                             final IDataFinder fileFinder,
                             final CmdLineParser cmdLineParser,
                             final SplitOptions splitOptions,
-                            final ProgressMonitor progressMonitor) {
+                            final ProgressMonitor progressMonitor,
+                            final ProgressInfoService progressInfoService) {
 
         this.pool = pool;
         this.ui = ui;
@@ -76,6 +82,7 @@ public class FileSplitService implements Runnable {
         this.cmdLineParser = cmdLineParser;
         this.splitOptions = splitOptions;
         this.progressMonitor = progressMonitor;
+        this.progressInfoService = progressInfoService;
     }
 
     /**
@@ -83,6 +90,8 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
+            System.out.println(pool);
+
             cmdLineParser.parseArgument(args);
 
             System.out.println();
@@ -104,11 +113,11 @@ public class FileSplitService implements Runnable {
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
-            new Thread(new ProgressInfoService(ui, progressMonitor, pool, 100)).start();
+            new Thread(progressInfoService).start();
             System.out.println();
             for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
                 pool.execute(workerFactory.create(partCreator.create()));
-                System.out.println("thread-" + i);
+                System.out.println("worker-" + i);
             }
             System.out.println();
             pool.shutdown();
