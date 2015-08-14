@@ -12,7 +12,6 @@ public class Main {
      * Application context paths.
      */
     public static final String[] contextPaths = new String[] {
-            "system-beans.xml",
             "controller-beans.xml",
             "model-beans.xml",
             "view-beans.xml"};
