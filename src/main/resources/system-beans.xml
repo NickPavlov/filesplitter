@@ -11,6 +11,4 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         <constructor-arg value="4"/>
     </bean>
 
-    <bean id="main" class="com.sysgears.filesplitter.Main"  />
-
 </beans>
