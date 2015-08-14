@@ -2,6 +2,8 @@ package com.sysgears.filesplitter.model.statistics.monitor;
 
 import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 
+import java.util.Map;
+
 /**
  * The IProgressMonitor interface defines the behavior of a progress monitor object.
  */
@@ -20,5 +22,5 @@ public interface IProgressMonitor {
      *
      * @return progress information
      */
-    public String getProgressInfo();
+    public Map<String, IProgressState> getProgressInfo();
 }

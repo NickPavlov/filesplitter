@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter.controller.services;
 
-import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.util.concurrent.ExecutorService;
@@ -18,7 +18,7 @@ public class ProgressInfoService implements Runnable {
     /**
      * Progress monitor.
      */
-    private final ProgressMonitor progressMonitor;
+    private final IProgressMonitor progressMonitor;
 
     /**
      * Pool of threads.
@@ -40,7 +40,7 @@ public class ProgressInfoService implements Runnable {
      * @param updateInterval  interval between updates
      */
     public ProgressInfoService(final IUserInterface ui,
-                               final ProgressMonitor progressMonitor,
+                               final IProgressMonitor progressMonitor,
                                final ExecutorService pool,
                                final int updateInterval) {
         this.ui = ui;
