@@ -66,8 +66,13 @@ public class FileSplitService implements Runnable {
     /**
      * Creates the FileSplitService instance.
      *
-     * @param pool pool of threads
-     * @param ui   user interface
+     * @param pool                pool of threads
+     * @param ui                  user interface
+     * @param fileFinder          file finder
+     * @param cmdLineParser       command line arguments parser
+     * @param splitOptions        command line options
+     * @param progressMonitor     progress info monitor
+     * @param progressInfoService progress info service
      * @throws IllegalArgumentException if user interface is null
      */
     public FileSplitService(final ExecutorService pool,
@@ -78,11 +83,11 @@ public class FileSplitService implements Runnable {
                             final ProgressMonitor progressMonitor,
                             final ProgressInfoService progressInfoService) {
 
-        this.pool = pool;
         this.ui = ui;
+        this.pool = pool;
         this.fileFinder = fileFinder;
-        this.cmdLineParser = cmdLineParser;
         this.splitOptions = splitOptions;
+        this.cmdLineParser = cmdLineParser;
         this.progressMonitor = progressMonitor;
         this.progressInfoService = progressInfoService;
     }
