@@ -97,40 +97,8 @@ public class PartCreator implements IDataProcessor {
                 buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
                 readBytes += transferBytes(inputChannel, outputChannel, buffer);
                 progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-
             }
             lock.release();
-            /*
-            int bufferSize;
-            int fullPartsCount;
-            int remainingBytes;
-            if (partSize < DEFAULT_BUFFER_SIZE) {
-                fullPartsCount = 1;
-                remainingBytes = 0;
-                bufferSize = (int) partSize;
-            } else {
-                fullPartsCount = (int) (partSize / DEFAULT_BUFFER_SIZE);
-                remainingBytes = (int) (partSize - fullPartsCount * DEFAULT_BUFFER_SIZE);
-                bufferSize = DEFAULT_BUFFER_SIZE;
-            }
-
-            long readBytes = 0;
-
-            ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
-            final FileLock lock = inputChannel.lock(position, bufferSize, false);
-            for (int partNumber = 0; partNumber < fullPartsCount; ++partNumber) {
-                buffer.clear();
-                readBytes += transferBytes(inputChannel, outputChannel, buffer);
-                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-            }
-            if (remainingBytes > 0) {
-                buffer = ByteBuffer.allocate(remainingBytes);
-                readBytes += transferBytes(inputChannel, outputChannel, buffer);
-                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-            }
-            lock.release();
-            */
-
         }
 
         return true;
