@@ -6,15 +6,14 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!-- Components -->
+    <!-- components -->
 
     <bean id="pool" class="java.util.concurrent.Executors"  factory-method="newFixedThreadPool">
         <constructor-arg value="4"/>
     </bean>
 
 
-
-    <!-- Services -->
+    <!-- services -->
 
     <bean id="progressInfoService" class="com.sysgears.filesplitter.controller.services.ProgressInfoService">
         <constructor-arg index="0" ref="userInterface" />
@@ -36,8 +35,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService" />
 
 
-
-    <!-- Controllers -->
+    <!-- controllers -->
 
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
         <constructor-arg index="0" ref="fileSplitService" />
