@@ -109,13 +109,6 @@ public class PartCreator implements IDataProcessor {
                 buffer.clear();
                 readBytes += transferBytes(inputChannel, outputChannel, buffer);
                 progressMonitor.update(partName, new ProgressState(readBytes, partSize));
-
-                // ?
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
             if (remainingBytes > 0) {
                 buffer = ByteBuffer.allocate(remainingBytes);
