@@ -43,6 +43,5 @@ public class MainController implements IController {
      * Stops the controller.
      */
     public void stop() {
-
     }
 }

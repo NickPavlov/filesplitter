@@ -6,8 +6,7 @@ package com.sysgears.filesplitter.controller.services;
 public class FileBuildService implements Runnable {
 
     /**
-     * Starts a controller.
-     *
+     * Starts a service.
      */
     public void run() {
         // implementation
