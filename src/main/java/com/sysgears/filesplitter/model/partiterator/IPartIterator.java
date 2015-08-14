@@ -17,5 +17,5 @@ public interface IPartIterator {
      *
      * @return next part size
      */
-    public int nextPartSize();
+    public long nextPartSize();
 }

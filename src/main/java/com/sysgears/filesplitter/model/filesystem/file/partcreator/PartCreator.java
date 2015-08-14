@@ -3,6 +3,8 @@ package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
+import com.sysgears.filesplitter.model.partiterator.IPartIterator;
+import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.statistics.state.ProgressState;
 
@@ -87,6 +89,11 @@ public class PartCreator implements IDataProcessor {
                 FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
                 FileChannel outputChannel = outputFile.getChannel();
         ) {
+            IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
+            while () {
+
+            }
+            /*
             int bufferSize;
             int fullPartsCount;
             int remainingBytes;
@@ -114,6 +121,7 @@ public class PartCreator implements IDataProcessor {
                 readBytes += transferBytes(inputChannel, outputChannel, buffer);
                 progressMonitor.update(partName, new ProgressState(readBytes, partSize));
             }
+            */
             lock.release();
         }
 

@@ -8,17 +8,17 @@ public class PartIterator implements IPartIterator {
     /**
      * Part size.
      */
-    private final int partSize;
+    private final long partSize;
 
     /**
      * Full parts count.
      */
-    private int fullPartsCount;
+    private long fullPartsCount;
 
     /**
      * Remaining values count.
      */
-    private int remainingValuesCount;
+    private long remainingValuesCount;
 
     /**
      * Creates PartIterator instance specified by total size and part size.
@@ -26,7 +26,7 @@ public class PartIterator implements IPartIterator {
      * @param totalSize total values count
      * @param partSize part size
      */
-    public PartIterator(final int totalSize, final int partSize) {
+    public PartIterator(final long totalSize, final int partSize) {
         this.partSize = partSize;
         this.fullPartsCount = totalSize / partSize;
         this.remainingValuesCount = totalSize - fullPartsCount * partSize;
@@ -46,8 +46,8 @@ public class PartIterator implements IPartIterator {
      *
      * @return part size
      */
-    public int nextPartSize() {
-        int partSize = 0;
+    public long nextPartSize() {
+        long partSize = 0;
         if (fullPartsCount > 0) {
             partSize = this.partSize;
             --fullPartsCount;
