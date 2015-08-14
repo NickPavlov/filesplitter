@@ -87,7 +87,6 @@ public class PartCreator implements IDataProcessor {
                 FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
                 FileChannel outputChannel = outputFile.getChannel();
         ) {
-
             int bufferSize;
             int fullPartsCount;
             int remainingBytes;
