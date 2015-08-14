@@ -38,7 +38,7 @@ public class PartIterator implements IPartIterator {
      * @return true in next part is present
      */
     public boolean hasNext() {
-        return fullPartsCount > 0;
+        return (fullPartsCount > 0) || (remainingValuesCount > 0);
     }
 
     /**
