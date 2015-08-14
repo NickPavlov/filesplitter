@@ -25,4 +25,7 @@ public class SystemStreams {
     public static OutputStream getOutputStream() {
         return System.out;
     }
+
+    private SystemStreams() {
+    }
 }
