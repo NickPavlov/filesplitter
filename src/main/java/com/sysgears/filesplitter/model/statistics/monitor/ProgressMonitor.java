@@ -31,6 +31,6 @@ public class ProgressMonitor implements IProgressMonitor {
      * @return progress info
      */
     public synchronized Map<String, IProgressState> getProgressInfo() {
-        return new HashMap<String, IProgressState>(progressInfo);
+        return new HashMap<>(progressInfo);
     }
 }
