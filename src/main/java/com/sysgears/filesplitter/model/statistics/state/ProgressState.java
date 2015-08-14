@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.model.statistics.state;
 /**
  * The ProgressState class provides functionality to display the progress.
  */
-public class ProgressState {
+public class ProgressState implements IProgressState {
 
     /**
      * Current progress value.

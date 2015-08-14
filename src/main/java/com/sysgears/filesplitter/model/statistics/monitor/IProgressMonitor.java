@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter.model.statistics.monitor;
 
-import com.sysgears.filesplitter.model.statistics.state.ProgressState;
+import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 
 /**
  * The IProgressMonitor interface defines the behavior of a progress monitor object.
@@ -13,7 +13,7 @@ public interface IProgressMonitor {
      * @param name name of an object
      * @param state object's state
      */
-    public void update(final String name, final ProgressState state);
+    public void update(final String name, final IProgressState state);
 
     /**
      * Returns progress information.

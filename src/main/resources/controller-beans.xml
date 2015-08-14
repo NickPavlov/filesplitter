@@ -18,7 +18,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     </bean>
 
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService">
-
     </bean>
 
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
