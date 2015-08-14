@@ -12,7 +12,7 @@ public interface IProgressMonitor {
     /**
      * Updates current progress information.
      *
-     * @param name name of an object
+     * @param name  name of an object
      * @param state object's state
      */
     public void update(final String name, final IProgressState state);
