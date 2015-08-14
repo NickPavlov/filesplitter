@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.statistics;
+package com.sysgears.filesplitter.model.statistics.state;
 
 /**
  * The ProgressState class provides functionality to display the progress.

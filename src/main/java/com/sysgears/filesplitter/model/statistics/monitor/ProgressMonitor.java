@@ -1,4 +1,6 @@
-package com.sysgears.filesplitter.model.statistics;
+package com.sysgears.filesplitter.model.statistics.monitor;
+
+import com.sysgears.filesplitter.model.statistics.state.ProgressState;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,8 +3,8 @@ package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
-import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
-import com.sysgears.filesplitter.model.statistics.ProgressState;
+import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.state.ProgressState;
 import com.sysgears.filesplitter.model.util.Resource;
 
 import java.io.*;

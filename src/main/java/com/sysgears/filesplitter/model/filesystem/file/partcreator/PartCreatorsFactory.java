@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 
-import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
 
 /**
  * The PartCreatorsFactory class provides functionality to create PartCreator instances.

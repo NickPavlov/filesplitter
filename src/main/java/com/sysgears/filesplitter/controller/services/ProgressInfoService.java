@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter.controller.services;
 
-import com.sysgears.filesplitter.model.statistics.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.util.concurrent.ExecutorService;
