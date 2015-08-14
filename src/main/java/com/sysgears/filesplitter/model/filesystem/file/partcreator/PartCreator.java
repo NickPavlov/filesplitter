@@ -1,13 +1,15 @@
 package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 
-import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
-import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
+import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
+import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.statistics.state.ProgressState;
 import com.sysgears.filesplitter.model.util.Resource;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -50,7 +52,7 @@ public class PartCreator implements IDataProcessor {
     /**
      * Progress monitor.
      */
-    private final ProgressMonitor progressMonitor;
+    private final IProgressMonitor progressMonitor;
 
     /**
      * Creates the PartCreator instance specified by part name and size.
@@ -62,7 +64,7 @@ public class PartCreator implements IDataProcessor {
     public PartCreator(final int partNumber,
                        final long partSize,
                        final String outputDirectory,
-                       final ProgressMonitor progressMonitor) {
+                       final IProgressMonitor progressMonitor) {
         this.partName = "part" + partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
