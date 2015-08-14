@@ -13,7 +13,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         <constructor-arg index="3" ref="cmdParser" />
         <constructor-arg index="4" ref="splitOptions" />
         <constructor-arg index="5" ref="progressMonitor" />
-        <constructor-arg index="6" type="java.lang.String[]" value="#{main.args}" />
     </bean>
 
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService">
@@ -23,7 +22,6 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="mainController" class="com.sysgears.filesplitter.controller.MainController">
         <constructor-arg ref="fileSplitService" index="0" />
         <constructor-arg ref="fileBuildService" index="1" />
-        <constructor-arg type="java.lang.String[]" value="#{main.args}" index="2" />
     </bean>
 
 </beans>

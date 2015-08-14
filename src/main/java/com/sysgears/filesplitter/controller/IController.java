@@ -7,9 +7,9 @@ public interface IController {
 
     /**
      * Starts a controller.
-     *
+     * @param args command line arguments
      */
-    public void start();
+    public void start(final String[] args);
 
     /**
      * Stops a controller.

@@ -18,23 +18,15 @@ public class Main {
             "view-beans.xml"};
 
     /**
-     * Command line arguments.
-     */
-    public static String[] args;
-
-    /**
      * Starts the application.
      *
      * @param args command line arguments
      */
     public static void main(final String[] args) {
-        //System.out.println(System.getProperty("sun.java.command"));
         try {
-            Main.args = args;
-
             final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(contextPaths);
 
-            context.getBean(MainController.class).start();
+            context.getBean(MainController.class).start(args);
 
         } catch (Throwable t) {
             t.printStackTrace();

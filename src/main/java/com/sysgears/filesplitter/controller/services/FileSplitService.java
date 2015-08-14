@@ -54,7 +54,7 @@ public class FileSplitService implements Runnable {
     /**
      * Command line arguments.
      */
-    private final String[] args;
+    private String[] args;
 
     /**
      * Creates the FileSplitService instance.
@@ -68,8 +68,7 @@ public class FileSplitService implements Runnable {
                             final IDataFinder fileFinder,
                             final CmdLineParser cmdLineParser,
                             final SplitOptions splitOptions,
-                            final ProgressMonitor progressMonitor,
-                            final String[] args) {
+                            final ProgressMonitor progressMonitor) {
 
         this.pool = pool;
         this.ui = ui;
@@ -77,16 +76,12 @@ public class FileSplitService implements Runnable {
         this.cmdLineParser = cmdLineParser;
         this.splitOptions = splitOptions;
         this.progressMonitor = progressMonitor;
-        this.args = args;
     }
 
     /**
      * Starts the service.
      */
     public void run() {
-        //SplitOptions splitOptions = new SplitOptions();
-        //CmdLineParser cmdLineParser = new CmdLineParser(splitOptions);
-
         try {
             cmdLineParser.parseArgument(args);
 
@@ -122,6 +117,14 @@ public class FileSplitService implements Runnable {
         } catch (CmdLineException e) {
             cmdLineParser.printUsage(System.out);
         }
+    }
 
+    /**
+     * Sets command line arguments.
+     *
+     * @param args command line arguments.
+     */
+    public void setArgs(final String[] args) {
+        this.args = args;
     }
 }
