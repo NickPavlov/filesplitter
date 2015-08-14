@@ -16,7 +16,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="splitOptions" class="com.sysgears.filesplitter.model.consoleoptions.SplitOptions" />
 
     <bean id="cmdParser" class="org.kohsuke.args4j.CmdLineParser" >
-        <constructor-arg ref="splitOptions" index="0" />
+        <constructor-arg ref="splitOptions" />
     </bean>
 
 
