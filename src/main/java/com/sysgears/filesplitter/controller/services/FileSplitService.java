@@ -8,6 +8,8 @@ import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
+import com.sysgears.filesplitter.model.partiterator.IPartIterator;
+import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
@@ -90,8 +92,6 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
-            System.out.println(pool);
-
             cmdLineParser.parseArgument(args);
 
             System.out.println();
@@ -115,10 +115,20 @@ public class FileSplitService implements Runnable {
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
             new Thread(progressInfoService).start();
             System.out.println();
+            IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
+            int i = 0;
+            while (partIterator.hasNext()) {
+                pool.execute(workerFactory.create(partCreator.create()));
+                partIterator.nextPartSize();
+                System.out.println("worker-" + i++);
+            }
+
+            /*
             for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
                 pool.execute(workerFactory.create(partCreator.create()));
                 System.out.println("worker-" + i);
             }
+            */
             System.out.println();
             pool.shutdown();
         } catch (IOException e) {
