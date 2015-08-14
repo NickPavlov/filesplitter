@@ -3,18 +3,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="system" class="java.lang.System" />
-
-
-    <bean id="inputStream" class="com.sysgears.filesplitter.model.util.SystemStreams"
+    <bean id="in" class="com.sysgears.filesplitter.model.util.SystemStreams"
           factory-method="getInputStream" />
 
-    <bean id="outputStream" class="com.sysgears.filesplitter.model.util.SystemStreams"
+    <bean id="out" class="com.sysgears.filesplitter.model.util.SystemStreams"
           factory-method="getOutputStream" />
 
     <bean id="userInterface" class="com.sysgears.filesplitter.view.UserInterface">
-        <constructor-arg index="0" ref="inputStream" />
-        <constructor-arg index="1" ref="outputStream" />
+        <constructor-arg index="0" ref="in" />
+        <constructor-arg index="1" ref="out" />
     </bean>
 
 </beans>
