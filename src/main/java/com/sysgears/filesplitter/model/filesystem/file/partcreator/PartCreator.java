@@ -90,9 +90,16 @@ public class PartCreator implements IDataProcessor {
                 FileChannel outputChannel = outputFile.getChannel();
         ) {
             IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
-            while () {
+            long readBytes = 0;
+            ByteBuffer buffer;
+            final FileLock lock = inputChannel.lock(position, partSize, false);
+            while (partIterator.hasNext()) {
+                buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
+                readBytes += transferBytes(inputChannel, outputChannel, buffer);
+                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
 
             }
+            lock.release();
             /*
             int bufferSize;
             int fullPartsCount;
@@ -121,8 +128,9 @@ public class PartCreator implements IDataProcessor {
                 readBytes += transferBytes(inputChannel, outputChannel, buffer);
                 progressMonitor.update(partName, new ProgressState(readBytes, partSize));
             }
-            */
             lock.release();
+            */
+
         }
 
         return true;
