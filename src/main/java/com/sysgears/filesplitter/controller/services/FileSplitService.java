@@ -82,7 +82,6 @@ public class FileSplitService implements Runnable {
                             final SplitOptions splitOptions,
                             final ProgressMonitor progressMonitor,
                             final ProgressInfoService progressInfoService) {
-
         this.ui = ui;
         this.pool = pool;
         this.fileFinder = fileFinder;
