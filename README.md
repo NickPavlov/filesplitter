@@ -1,4 +1,4 @@
 * Project: FileSplitter
 * Language: Java
-* Technologies: Args4j Framework;
+* Technologies: Spring framework, Args4j framework;
 * Author: Nick Pavlov
