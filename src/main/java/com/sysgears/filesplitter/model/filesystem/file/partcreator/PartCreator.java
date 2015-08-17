@@ -85,7 +85,6 @@ public class PartCreator implements IDataProcessor {
         try (
                 RandomAccessFile outputFile = new RandomAccessFile(
                         new File(outputDirectory, originalFile.getName() + outputFileNameSuffix), "rw");
-
                 FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
                 FileChannel outputChannel = outputFile.getChannel();
         ) {
