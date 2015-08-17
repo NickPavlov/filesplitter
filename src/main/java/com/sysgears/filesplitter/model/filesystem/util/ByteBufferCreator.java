@@ -1,11 +1,11 @@
-package com.sysgears.filesplitter.model.util;
+package com.sysgears.filesplitter.model.filesystem.util;
 
 import java.nio.ByteBuffer;
 
 /**
- * The ByteSequenceCreator class provides functionality to create byte sequences.
+ * The ByteBufferCreator class provides functionality to create a byte buffer.
  */
-public class ByteSequenceCreator {
+public class ByteBufferCreator {
 
     /**
      * Creates byte sequence from the given string.
@@ -22,6 +22,6 @@ public class ByteSequenceCreator {
         return result;
     }
 
-    private ByteSequenceCreator() {
+    private ByteBufferCreator() {
     }
 }

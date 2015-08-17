@@ -6,7 +6,7 @@ import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.util.ByteSequenceCreator;
+import com.sysgears.filesplitter.model.filesystem.util.ByteBufferCreator;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,7 +92,7 @@ public class PartCreator implements IDataProcessor {
         ) {
             IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
 
-            ByteBuffer buffer = ByteSequenceCreator.createFromString(originalFile.getName(), 4);
+            ByteBuffer buffer = ByteBufferCreator.createFromString(originalFile.getName(), 4);
             buffer.flip();
             outputChannel.write(buffer);
             buffer = ByteBuffer.allocate(8).putLong(position);
