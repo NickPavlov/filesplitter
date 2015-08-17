@@ -85,6 +85,14 @@ public class FileFinder implements IDataFinder {
      * @return data object
      */
     public IData getNext(final String name) {
+        /*
+        try {
+            DirectoryStream<Path> ds = Files.newDirectoryStream(null);
+            ds.iterator()
+        } catch (IOException e) {
+            //
+        }
+        */
         return null;
     }
 }
