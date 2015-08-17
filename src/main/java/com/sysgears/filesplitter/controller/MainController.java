@@ -38,10 +38,10 @@ public class MainController implements IController {
     /**
      * Creates the MainController instance.
      *
-     * @param fileSplitService  FileSplitService
-     * @param fileCreateService FileCreateService
-     * @param splitCmdOptions split command line arguments options
-     * @param buildCmdOptions build command line arguments options
+     * @param fileSplitService    FileSplitService
+     * @param fileCreateService   FileCreateService
+     * @param splitCmdOptions     split command line arguments options
+     * @param buildCmdOptions     build command line arguments options
      * @param progressInfoService progress info service
      */
     public MainController(final Runnable fileSplitService,
