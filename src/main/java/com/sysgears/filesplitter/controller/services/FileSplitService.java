@@ -84,6 +84,7 @@ public class FileSplitService implements Runnable {
             } else if (splitOptions.isKilobytes()) {
                 partSize *= MemoryUnits.KILOBYTE;
             }
+            System.out.println("partSize: " + partSize);
 
             final String filePath = splitOptions.getFilePath();
             final IData file = fileFinder.getByName(filePath);
