@@ -11,13 +11,11 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="fileFinder" class="com.sysgears.filesplitter.model.filesystem.file.FileFinder" />
 
 
-    <!-- command line arguments -->
+    <!-- command line components -->
 
     <bean id="splitOptions" class="com.sysgears.filesplitter.model.consoleoptions.SplitOptions" />
 
-    <bean id="cmdParser" class="org.kohsuke.args4j.CmdLineParser" >
-        <constructor-arg ref="splitOptions" />
-    </bean>
+    <bean id="buildOptions" class="com.sysgears.filesplitter.model.consoleoptions.BuildOptions" />
 
 
     <!-- statistics -->

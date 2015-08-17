@@ -12,8 +12,6 @@ import com.sysgears.filesplitter.model.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -39,11 +37,6 @@ public class FileSplitService implements Runnable {
     private final IDataFinder fileFinder;
 
     /**
-     * Command line parser.
-     */
-    private final CmdLineParser cmdLineParser;
-
-    /**
      * Split options.
      */
     private final SplitOptions splitOptions;
@@ -53,42 +46,25 @@ public class FileSplitService implements Runnable {
      */
     private final ProgressMonitor progressMonitor;
 
-    /**
-     * Progress info service.
-     */
-    private final ProgressInfoService progressInfoService;
-
-    /**
-     * Command line arguments.
-     */
-    private String[] args;
-
-    /**
+   /**
      * Creates the FileSplitService instance.
      *
      * @param pool                pool of threads
      * @param ui                  user interface
      * @param fileFinder          file finder
-     * @param cmdLineParser       command line arguments parser
      * @param splitOptions        command line options
      * @param progressMonitor     progress info monitor
-     * @param progressInfoService progress info service
-     * @throws IllegalArgumentException if user interface is null
      */
     public FileSplitService(final ExecutorService pool,
                             final IUserInterface ui,
                             final IDataFinder fileFinder,
-                            final CmdLineParser cmdLineParser,
                             final SplitOptions splitOptions,
-                            final ProgressMonitor progressMonitor,
-                            final ProgressInfoService progressInfoService) {
+                            final ProgressMonitor progressMonitor) {
         this.ui = ui;
         this.pool = pool;
         this.fileFinder = fileFinder;
         this.splitOptions = splitOptions;
-        this.cmdLineParser = cmdLineParser;
         this.progressMonitor = progressMonitor;
-        this.progressInfoService = progressInfoService;
     }
 
     /**
@@ -96,7 +72,6 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
-            cmdLineParser.parseArgument(args);
 
             System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
@@ -117,7 +92,6 @@ public class FileSplitService implements Runnable {
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
-            new Thread(progressInfoService).start();
             System.out.println();
             IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
             int i = 0;
@@ -127,27 +101,10 @@ public class FileSplitService implements Runnable {
                 System.out.println("worker-" + i++);
             }
 
-            /*
-            for (int i = 0; i < file.getSize() / partSize + 1; ++i) {
-                pool.execute(workerFactory.create(partCreator.create()));
-                System.out.println("worker-" + i);
-            }
-            */
             System.out.println();
             pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (CmdLineException e) {
-            cmdLineParser.printUsage(System.out);
         }
-    }
-
-    /**
-     * Sets command line arguments.
-     *
-     * @param args command line arguments.
-     */
-    public void setArgs(final String[] args) {
-        this.args = args;
     }
 }

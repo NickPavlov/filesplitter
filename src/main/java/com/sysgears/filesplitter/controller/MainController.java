@@ -2,6 +2,11 @@ package com.sysgears.filesplitter.controller;
 
 import com.sysgears.filesplitter.controller.services.FileBuildService;
 import com.sysgears.filesplitter.controller.services.FileSplitService;
+import com.sysgears.filesplitter.controller.services.ProgressInfoService;
+import com.sysgears.filesplitter.model.consoleoptions.BuildOptions;
+import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * The MainController class is the main controller that controls the application.
@@ -19,14 +24,40 @@ public class MainController implements IController {
     private final FileBuildService fileBuildService;
 
     /**
-     * Creates the MainController instance specified by FileSplitService and FileBuildService.
-     *
-     * @param fileSplitService FileSplitService
-     * @param fileCreateService FileCreateService
+     * Progress info service.
      */
-    public MainController(final FileSplitService fileSplitService, final FileBuildService fileCreateService) {
+    private final ProgressInfoService progressInfoService;
+
+    /**
+     * Command line split options.
+     */
+    private final SplitOptions splitCmdOptions;
+
+    /**
+     * Command line build options.
+     */
+    private final BuildOptions buildCmdOptions;
+
+    /**
+     * Creates the MainController instance.
+     *
+     * @param fileSplitService  FileSplitService
+     * @param fileCreateService FileCreateService
+     * @param splitCmdOptions split command line arguments options
+     * @param buildCmdOptions build command line arguments options
+     * @param progressInfoService progress info service
+     */
+    public MainController(final FileSplitService fileSplitService,
+                          final FileBuildService fileCreateService,
+                          final ProgressInfoService progressInfoService,
+                          final SplitOptions splitCmdOptions,
+                          final BuildOptions buildCmdOptions) {
+
         this.fileSplitService = fileSplitService;
         this.fileBuildService = fileCreateService;
+        this.progressInfoService = progressInfoService;
+        this.splitCmdOptions = splitCmdOptions;
+        this.buildCmdOptions = buildCmdOptions;
     }
 
     /**
@@ -35,7 +66,13 @@ public class MainController implements IController {
      * @param args command line arguments
      */
     public void start(final String[] args) {
-        fileSplitService.setArgs(args);
+        try {
+            new CmdLineParser(splitCmdOptions).parseArgument(args);
+        } catch (CmdLineException e) {
+            e.getParser().printUsage(System.out);
+            return;
+        }
+        new Thread(progressInfoService).start();
         fileSplitService.run();
     }
 
