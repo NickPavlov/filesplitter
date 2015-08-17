@@ -53,14 +53,14 @@ public class ProgressInfoService implements Runnable {
      * Starts the service.
      */
     public void run() {
-        while (!pool.isTerminated()) {
-            System.out.println(progressMonitor.getProgressInfo());
-            try {
+        try {
+            while (!pool.isTerminated()) {
+                System.out.println(progressMonitor.getProgressInfo());
                 Thread.sleep(updateInterval);
-            } catch (InterruptedException e) {
-                //
             }
+            System.out.println(progressMonitor.getProgressInfo());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        System.out.println(progressMonitor.getProgressInfo());
     }
 }
