@@ -14,9 +14,9 @@ public class ByteSequenceCreator {
      * @param string string to create byte sequence.
      * @return byte sequence
      */
-    public static ByteBuffer createFromString(final String string) {
+    public static ByteBuffer createFromString(final String string, final int bytesForLength) {
         byte[] bytes = string.getBytes();
-        ByteBuffer result = ByteBuffer.allocate(4 + bytes.length).putInt(bytes.length).put(bytes);
+        ByteBuffer result = ByteBuffer.allocate(bytesForLength + bytes.length).putInt(bytes.length).put(bytes);
         result.flip();
 
         return result;

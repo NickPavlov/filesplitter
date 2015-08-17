@@ -92,7 +92,7 @@ public class PartCreator implements IDataProcessor {
         ) {
             IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
 
-            ByteBuffer buffer = ByteSequenceCreator.createFromString(originalFile.getName());
+            ByteBuffer buffer = ByteSequenceCreator.createFromString(originalFile.getName(), 4);
             buffer.flip();
             outputChannel.write(buffer);
             buffer = ByteBuffer.allocate(8).putLong(position);
