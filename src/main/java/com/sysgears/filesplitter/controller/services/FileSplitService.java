@@ -46,14 +46,14 @@ public class FileSplitService implements Runnable {
      */
     private final ProgressMonitor progressMonitor;
 
-   /**
+    /**
      * Creates the FileSplitService instance.
      *
-     * @param pool                pool of threads
-     * @param ui                  user interface
-     * @param fileFinder          file finder
-     * @param splitOptions        command line options
-     * @param progressMonitor     progress info monitor
+     * @param pool            pool of threads
+     * @param ui              user interface
+     * @param fileFinder      file finder
+     * @param splitOptions    command line options
+     * @param progressMonitor progress info monitor
      */
     public FileSplitService(final ExecutorService pool,
                             final IUserInterface ui,
