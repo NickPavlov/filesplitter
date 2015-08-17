@@ -77,4 +77,14 @@ public class FileFinder implements IDataFinder {
             }
         };
     }
+
+    /**
+     * Gets the next data object corresponds to the <code>name</code>.
+     *
+     * @param name data name
+     * @return data object
+     */
+    public IData getNext(final String name) {
+        return null;
+    }
 }

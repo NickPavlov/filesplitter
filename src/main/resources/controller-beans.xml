@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- components -->
 
     <bean id="pool" class="java.util.concurrent.Executors"  factory-method="newFixedThreadPool">
-        <constructor-arg value="4"/>
+        <constructor-arg value="2"/>
     </bean>
 
 
