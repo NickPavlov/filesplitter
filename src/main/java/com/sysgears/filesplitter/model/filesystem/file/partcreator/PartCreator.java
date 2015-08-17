@@ -93,7 +93,8 @@ public class PartCreator implements IDataProcessor {
             IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
 
             ByteBuffer buffer = ByteSequenceCreator.createFromString(originalFile.getName());
-            buffer.putLong(position).flip();
+            buffer.putLong(position);
+            buffer.flip();
             outputChannel.write(buffer);
 
             long readBytes = 0;
@@ -110,5 +111,17 @@ public class PartCreator implements IDataProcessor {
         }
 
         return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        FileChannel fileChannel =
+                new RandomAccessFile("/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin", "rw").getChannel();
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        int size = buffer.getInt();
+        System.out.println("size=" + size);
+        byte[] bytes = new byte[size];
+        buffer.get(bytes);
+        System.out.println("name=" + new String(bytes));
+        buffer.getLong();
     }
 }
