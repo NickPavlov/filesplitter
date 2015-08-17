@@ -96,8 +96,8 @@ public class PartCreator implements IDataProcessor {
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
                 inputChannel.read(buffer);
-                buffer.flip();
                 readBytes += buffer.capacity();
+                buffer.flip();
                 outputChannel.write(buffer);
                 progressMonitor.update(partName, readBytes);
             }
