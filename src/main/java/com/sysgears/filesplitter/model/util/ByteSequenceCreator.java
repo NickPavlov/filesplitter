@@ -3,9 +3,9 @@ package com.sysgears.filesplitter.model.util;
 import java.nio.ByteBuffer;
 
 /**
- * The BytesCreator class provides functionality to create byte sequences.
+ * The ByteSequenceCreator class provides functionality to create byte sequences.
  */
-public class BytesCreator {
+public class ByteSequenceCreator {
 
 
     /**
