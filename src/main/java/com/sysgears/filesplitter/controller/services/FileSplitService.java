@@ -72,7 +72,6 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
-
             System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
             System.out.println("PartSize: " + splitOptions.getPartSize());

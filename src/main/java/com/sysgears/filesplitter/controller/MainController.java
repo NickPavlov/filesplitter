@@ -1,8 +1,5 @@
 package com.sysgears.filesplitter.controller;
 
-import com.sysgears.filesplitter.controller.services.FileBuildService;
-import com.sysgears.filesplitter.controller.services.FileSplitService;
-import com.sysgears.filesplitter.controller.services.ProgressInfoService;
 import com.sysgears.filesplitter.model.consoleoptions.BuildOptions;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import org.kohsuke.args4j.CmdLineException;
@@ -16,17 +13,17 @@ public class MainController implements IController {
     /**
      * FileSplitService instance.
      */
-    private final FileSplitService fileSplitService;
+    private final Runnable fileSplitService;
 
     /**
      * FileBuildService instance.
      */
-    private final FileBuildService fileBuildService;
+    private final Runnable fileBuildService;
 
     /**
      * Progress info service.
      */
-    private final ProgressInfoService progressInfoService;
+    private final Runnable progressInfoService;
 
     /**
      * Command line split options.
@@ -47,9 +44,9 @@ public class MainController implements IController {
      * @param buildCmdOptions build command line arguments options
      * @param progressInfoService progress info service
      */
-    public MainController(final FileSplitService fileSplitService,
-                          final FileBuildService fileCreateService,
-                          final ProgressInfoService progressInfoService,
+    public MainController(final Runnable fileSplitService,
+                          final Runnable fileCreateService,
+                          final Runnable progressInfoService,
                           final SplitOptions splitCmdOptions,
                           final BuildOptions buildCmdOptions) {
 
