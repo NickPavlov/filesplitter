@@ -6,7 +6,6 @@ import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.statistics.state.ProgressState;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +72,7 @@ public class PartCreator implements IDataProcessor {
         this.outputFileNameSuffix = "_" + partName + ".bin";
         this.outputDirectory = outputDirectory;
         this.progressMonitor = progressMonitor;
+        progressMonitor.register(partName, partSize);
     }
 
     /**
@@ -96,7 +96,7 @@ public class PartCreator implements IDataProcessor {
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
                 readBytes += transferBytes(inputChannel, outputChannel, buffer);
-                progressMonitor.update(partName, new ProgressState(readBytes, partSize));
+                progressMonitor.update(partName, readBytes);
             }
             lock.release();
         }

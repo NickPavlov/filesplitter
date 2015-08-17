@@ -12,9 +12,15 @@ import java.util.Map;
 public class ProgressMonitor implements IProgressMonitor {
 
     /**
-     * Progress info.
+     * Total progress info.
      */
-    private final Map<String, IProgressState> progressInfo = new HashMap<String, IProgressState>();
+    private final Map<String, Long> totalProgress = new HashMap<>();
+
+
+    /**
+     * Current progress info.
+     */
+    private final Map<String, Long> currentProgress = new HashMap<>();
 
     /**
      * Registers a new worker.
@@ -26,8 +32,8 @@ public class ProgressMonitor implements IProgressMonitor {
      */
     public synchronized boolean register(final String name, final long total) {
         boolean registered = false;
-        if (progressInfo.containsKey(name)) {
-            progressInfo.put(name, new ProgressState(0, total));
+        if (!totalProgress.containsKey(name)) {
+            totalProgress.put(name, total);
             registered = true;
         }
 
@@ -40,8 +46,14 @@ public class ProgressMonitor implements IProgressMonitor {
      * @param name    part name
      * @param current current value
      */
-    public synchronized void update(final String name, final long current) {
+    public synchronized boolean update(final String name, final long current) {
+        boolean updated = false;
+        if (totalProgress.containsKey(name)) {
+            currentProgress.put(name, current);
+            updated = true;
+        }
 
+        return updated;
     }
 
     /**
@@ -50,6 +62,15 @@ public class ProgressMonitor implements IProgressMonitor {
      * @return progress info
      */
     public synchronized Map<String, IProgressState> getProgressInfo() {
-        return new HashMap<>(progressInfo);
+        Map<String, IProgressState> result = new HashMap<>();
+        Long currentState;
+        String key;
+        for (Map.Entry<String, Long> entry : totalProgress.entrySet()) {
+            key = entry.getKey();
+            currentState = currentProgress.containsKey(key) ? currentProgress.get(key) : 0L;
+            result.put(key, new ProgressState(currentState, totalProgress.get(key)));
+        }
+
+        return result;
     }
 }

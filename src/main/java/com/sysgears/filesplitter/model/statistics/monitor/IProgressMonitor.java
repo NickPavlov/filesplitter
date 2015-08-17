@@ -25,7 +25,7 @@ public interface IProgressMonitor {
      * @param name    name of an object
      * @param current current value
      */
-    public void update(final String name, final long current);
+    public boolean update(final String name, final long current);
 
     /**
      * Returns progress information.
