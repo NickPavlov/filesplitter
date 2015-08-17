@@ -65,6 +65,7 @@ public class PartCreator implements IDataProcessor {
                        final long partSize,
                        final String outputDirectory,
                        final IProgressMonitor progressMonitor) {
+
         this.partName = "part" + partNumber;
         this.partSize = partSize;
         this.position = partNumber * partSize;
