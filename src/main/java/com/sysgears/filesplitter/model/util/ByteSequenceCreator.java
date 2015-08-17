@@ -14,13 +14,16 @@ public class ByteSequenceCreator {
      * @param string string to create byte sequence.
      * @return byte sequence
      */
-    public static byte[] createFromString(final String string) {
+    public static ByteBuffer createFromString(final String string) {
         byte[] bytes = string.getBytes();
         ByteBuffer buffer = ByteBuffer.allocate(4 + bytes.length);
         buffer.putInt(bytes.length);
         buffer.put(bytes);
         buffer.flip();
 
-        return buffer.array();
+        return buffer;
+    }
+
+    private ByteSequenceCreator() {
     }
 }
