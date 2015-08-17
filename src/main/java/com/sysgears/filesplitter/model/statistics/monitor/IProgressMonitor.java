@@ -10,12 +10,22 @@ import java.util.Map;
 public interface IProgressMonitor {
 
     /**
-     * Updates current progress information.
+     * Registers a new worker.
+     * Returns true if worker is not registered.
      *
-     * @param name  name of an object
-     * @param state object's state
+     * @param name  worker's name
+     * @param total total value
+     * @return true if worker is registered, false otherwise
      */
-    public void update(final String name, final IProgressState state);
+    public boolean register(final String name, final long total);
+
+    /**
+     * Updates progress information.
+     *
+     * @param name    name of an object
+     * @param current current value
+     */
+    public void update(final String name, final long current);
 
     /**
      * Returns progress information.
