@@ -3,20 +3,33 @@ package com.sysgears.filesplitter.model.filesystem.util;
 import java.nio.ByteBuffer;
 
 /**
- * The ByteBufferCreator class provides functionality to create a byte buffer.
+ * The ByteBufferCreator class provides functionality to create a <code>ByteBuffer</code> instances.
  */
 public class ByteBufferCreator {
 
     /**
-     * Creates byte sequence from the given string.
-     * Appends length of the string at the beginning (4 bytes).
+     * Creates <code>ByteBuffer</code> from a string.
+     * Appends length of the string at the beginning.
      *
-     * @param string string to create byte sequence.
-     * @return byte sequence
+     * @param string string to create <code>ByteBuffer</code>.
+     * @return <code>ByteBuffer</code>
      */
     public static ByteBuffer createFromString(final String string, final int bytesForLength) {
         byte[] bytes = string.getBytes();
         ByteBuffer result = ByteBuffer.allocate(bytesForLength + bytes.length).putInt(bytes.length).put(bytes);
+        result.flip();
+
+        return result;
+    }
+
+    /**
+     * Creates <code>ByteBuffer</code> from a long value.
+     *
+     * @param longValue long value to create <code>ByteBuffer</code>
+     * @return <code>ByteBuffer</code>
+     */
+    public static ByteBuffer createFromLong(final long longValue) {
+        ByteBuffer result = ByteBuffer.allocate(8).putLong(longValue);
         result.flip();
 
         return result;
