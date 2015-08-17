@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
  */
 public class ByteSequenceCreator {
 
-
     /**
      * Creates byte sequence from the given string.
      * Appends length of the string at the beginning (4 bytes).
@@ -15,7 +14,7 @@ public class ByteSequenceCreator {
      * @param string string to create byte sequence.
      * @return byte sequence
      */
-    public byte[] createFromString(final String string) {
+    public static byte[] createFromString(final String string) {
         byte[] bytes = string.getBytes();
         ByteBuffer buffer = ByteBuffer.allocate(4 + bytes.length);
         buffer.putInt(bytes.length);
