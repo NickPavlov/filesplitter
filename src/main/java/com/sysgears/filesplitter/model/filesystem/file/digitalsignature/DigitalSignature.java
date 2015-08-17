@@ -1,7 +1,7 @@
 package com.sysgears.filesplitter.model.filesystem.file.digitalsignature;
 
 /**
- * The DigitalSignature class provides functionality to create digital signature.
+ * The DigitalSignature class provides functionality to work with digital signature.
  */
 public class DigitalSignature {
 
@@ -11,7 +11,7 @@ public class DigitalSignature {
     private final String text;
 
     /**
-     * Signature bytes.
+     * Bytes.
      */
     private final byte[] bytes;
 
@@ -41,6 +41,6 @@ public class DigitalSignature {
      */
     DigitalSignature(final String text, final byte[] bytes) {
         this.text = text;
-        this.bytes = null;
+        this.bytes = bytes;
     }
 }
