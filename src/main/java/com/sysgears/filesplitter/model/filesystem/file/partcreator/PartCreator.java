@@ -94,32 +94,15 @@ public class PartCreator implements IDataProcessor {
             final FileLock lock = inputChannel.lock(position, partSize, false);
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
-                readBytes += transferBytes(inputChannel, outputChannel, buffer);
+                inputChannel.read(buffer);
+                buffer.flip();
+                readBytes += buffer.capacity();
+                outputChannel.write(buffer);
                 progressMonitor.update(partName, readBytes);
             }
             lock.release();
         }
 
         return true;
-    }
-
-    /**
-     * Transfers bytes from the input file channel into the output file channel.
-     *
-     * @param input  input file channel
-     * @param output output file channel
-     * @param buffer byte buffer
-     * @return number of transferred bytes
-     * @throws IOException in case if I/O error occurred
-     */
-    private int transferBytes(final FileChannel input,
-                              final FileChannel output,
-                              final ByteBuffer buffer) throws IOException {
-        input.read(buffer);
-        buffer.flip();
-        int readBytes = buffer.capacity();
-        output.write(buffer);
-
-        return readBytes;
     }
 }
