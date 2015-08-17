@@ -10,7 +10,7 @@ public class ByteSequenceCreator {
 
     /**
      * Creates byte sequence from the given string.
-     * appends the length of the string at the beginning.
+     * Appends length of the string at the beginning (4 bytes).
      *
      * @param string string to create byte sequence.
      * @return byte sequence
