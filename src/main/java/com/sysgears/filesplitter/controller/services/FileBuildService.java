@@ -1,10 +1,13 @@
 package com.sysgears.filesplitter.controller.services;
 
-import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
+import com.sysgears.filesplitter.model.abstractmodel.IData;
+import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
+import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -32,7 +35,14 @@ public class FileBuildService implements Runnable {
      */
     private final IProgressMonitor progressMonitor;
 
-
+    /**
+     * Creates the FileBuildService instance.
+     *
+     * @param pool            pool of threads
+     * @param ui              user interface
+     * @param splitOptions    command line options
+     * @param progressMonitor progress info monitor
+     */
     public FileBuildService(final ExecutorService pool,
                             final IUserInterface ui,
                             final SplitOptions splitOptions,
@@ -47,6 +57,17 @@ public class FileBuildService implements Runnable {
      * Starts a service.
      */
     public void run() {
-
+        try {
+            IDataIterator fileIterator = new FileFinder("/home/nick/Documents/jdk.tar.gz_parts").iterator();
+            IData file;
+            while (fileIterator.hasNext()) {
+                file = fileIterator.next();
+                System.out.println("File name: " + file.getName());
+                System.out.println("File size: " + file.getSize());
+                System.out.println("");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

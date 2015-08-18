@@ -64,9 +64,13 @@ public class MainController implements IController {
      */
     public void start(final String[] args) {
         try {
+
             new CmdLineParser(splitCmdOptions).parseArgument(args);
+            /*
             new Thread(progressInfoService).start();
             fileSplitService.run();
+            */
+            fileBuildService.run();
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
         }
