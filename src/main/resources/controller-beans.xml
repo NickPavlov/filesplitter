@@ -32,7 +32,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService" >
         <constructor-arg index="0" ref="pool" />
         <constructor-arg index="1" ref="userInterface" />
-        <constructor-arg index="2" ref="splitOptions" />
+        <constructor-arg index="2" ref="buildOptions" />
         <constructor-arg index="3" ref="progressMonitor" />
     </bean>
 
