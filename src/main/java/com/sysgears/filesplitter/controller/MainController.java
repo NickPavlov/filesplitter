@@ -66,11 +66,11 @@ public class MainController implements IController {
         try {
 
             new CmdLineParser(splitCmdOptions).parseArgument(args);
+            new Thread(progressInfoService).start();
 
-            //new Thread(progressInfoService).start();
             //fileSplitService.run();
-
             fileBuildService.run();
+
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
         }

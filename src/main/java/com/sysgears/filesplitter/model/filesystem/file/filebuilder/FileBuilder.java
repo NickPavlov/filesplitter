@@ -2,6 +2,7 @@ package com.sysgears.filesplitter.model.filesystem.file.filebuilder;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.filesystem.util.Bytes;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
@@ -59,13 +60,11 @@ public class FileBuilder implements IDataProcessor {
 
             IPartIterator partIterator = new PartIterator(filePart.getSize(), DEFAULT_BUFFER_SIZE);
             outputChannel.position(position);
-
+            long readBytes = 0;
             final FileLock lock = outputChannel.lock(position, partSize, false);
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.next());
-                inputChannel.read(buffer);
-                buffer.flip();
-                outputChannel.write(buffer);
+                readBytes += Bytes.transfer(inputChannel, outputChannel, buffer);
             }
             lock.release();
         }
