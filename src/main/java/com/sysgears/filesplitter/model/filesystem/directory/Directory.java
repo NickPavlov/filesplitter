@@ -22,7 +22,7 @@ public class Directory implements IDirectory {
      *
      * @param directory directory path
      * @throws IllegalArgumentException if <code>directory</code> is null
-     * @throws IOException              if an I/O error
+     * @throws IOException              if an I/O error occurred
      */
     public Directory(final String directory) throws IOException {
         if (directory == null) {
