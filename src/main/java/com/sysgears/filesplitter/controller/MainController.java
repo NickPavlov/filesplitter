@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter.controller;
 
+import com.sysgears.filesplitter.model.console.commands.Command;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
 import org.kohsuke.args4j.CmdLineException;
@@ -64,15 +65,15 @@ public class MainController implements IController {
      */
     public void start(final String[] args) {
         try {
-            if ("split".equals(args[0])) {
+            if (Command.SPLIT.equals(args[0])) {
                 int length = args.length - 1;
                 String[] argsCopy = new String[length];
                 System.arraycopy(args, 1, argsCopy, 0, length);
                 new CmdLineParser(splitCmdOptions).parseArgument(argsCopy);
                 new Thread(progressInfoService).start();
-                fileBuildService.run();
+                fileSplitService.run();
             }
-            //fileSplitService.run();
+            //fileBuildService.run();
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
         }
