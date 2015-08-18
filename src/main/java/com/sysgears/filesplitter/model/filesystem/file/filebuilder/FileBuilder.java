@@ -6,6 +6,7 @@ import com.sysgears.filesplitter.model.filesystem.util.Bytes;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
+import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -28,12 +29,20 @@ public class FileBuilder implements IDataProcessor {
     private final IData file;
 
     /**
+     * Progress monitor.
+     */
+    private final IProgressMonitor progressMonitor;
+
+    /**
      * Creates the FileBuilder instance.
      *
      * @param file file to build
      */
-    public FileBuilder(final IData file) {
+    public FileBuilder(final IData file,
+                       final IProgressMonitor progressMonitor) {
+
         this.file = file;
+        this.progressMonitor = progressMonitor;
     }
 
     /**
@@ -48,6 +57,7 @@ public class FileBuilder implements IDataProcessor {
                 final FileChannel inputChannel = (FileChannel) filePart.getChannel();
                 final FileChannel outputChannel = (FileChannel) file.getChannel();
         ) {
+
             byte longValueSize = 8;
             ByteBuffer buffer = ByteBuffer.allocate(longValueSize);
             inputChannel.read(buffer);
@@ -56,7 +66,9 @@ public class FileBuilder implements IDataProcessor {
             long position = buffer.getLong();
             long partSize = filePart.getSize() - longValueSize;
 
-            System.out.println(filePart.getName() + " position=" + position + " size=" + partSize);
+            //System.out.println(filePart.getName() + " position=" + position + " size=" + partSize);
+
+            progressMonitor.register(filePart.getName(), partSize);
 
             IPartIterator partIterator = new PartIterator(filePart.getSize(), DEFAULT_BUFFER_SIZE);
             outputChannel.position(position);
@@ -65,6 +77,7 @@ public class FileBuilder implements IDataProcessor {
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.next());
                 readBytes += Bytes.transfer(inputChannel, outputChannel, buffer);
+                progressMonitor.update(filePart.getName(), readBytes);
             }
             lock.release();
         }

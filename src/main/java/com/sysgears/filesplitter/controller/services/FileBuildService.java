@@ -83,7 +83,7 @@ public class FileBuildService implements Runnable {
             while (fileIterator.hasNext()) {
                 filePart = fileIterator.next();
                 if (pattern.matcher(filePart.getName()).find()) {
-                    pool.execute(new Worker("worker-" + i++, filePart, new FileBuilder(fileData)));
+                    pool.execute(new Worker("worker-" + i++, filePart, new FileBuilder(fileData, progressMonitor)));
                 }
             }
             pool.shutdown();

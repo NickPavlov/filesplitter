@@ -3,6 +3,7 @@ package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.filesystem.util.ByteBufferCreator;
+import com.sysgears.filesplitter.model.filesystem.util.Bytes;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
@@ -99,10 +100,7 @@ public class PartCreator implements IDataProcessor {
             final FileLock lock = inputChannel.lock(position, partSize, false);
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.next());
-                inputChannel.read(buffer);
-                buffer.flip();
-                readBytes += buffer.capacity();
-                outputChannel.write(buffer);
+                readBytes += Bytes.transfer(inputChannel, outputChannel, buffer);
                 progressMonitor.update(partName, readBytes);
             }
             lock.release();
