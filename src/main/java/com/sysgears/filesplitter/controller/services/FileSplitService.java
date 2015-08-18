@@ -6,7 +6,7 @@ import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
-import com.sysgears.filesplitter.model.filesystem.file.WorkersFactory;
+import com.sysgears.filesplitter.model.workers.WorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;

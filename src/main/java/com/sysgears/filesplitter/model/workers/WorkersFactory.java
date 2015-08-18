@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.filesystem.file;
+package com.sysgears.filesplitter.model.workers;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
