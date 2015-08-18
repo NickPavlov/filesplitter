@@ -64,7 +64,6 @@ public class MainController implements IController {
      */
     public void start(final String[] args) {
         try {
-
             //int length = args.length - 1;
             //String[] argsCopy = new String[length];
             //System.arraycopy(args, 1, argsCopy, 0, length);

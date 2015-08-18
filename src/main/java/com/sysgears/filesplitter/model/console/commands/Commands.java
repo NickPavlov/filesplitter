@@ -1,7 +1,7 @@
 package com.sysgears.filesplitter.model.console.commands;
 
 /**
- *
+ * The Commands class provides set of commands.
  */
 public enum Commands {
 
