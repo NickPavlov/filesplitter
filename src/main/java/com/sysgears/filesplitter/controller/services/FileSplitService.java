@@ -1,7 +1,6 @@
 package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
-import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
@@ -11,7 +10,7 @@ import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFa
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
-import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class FileSplitService implements Runnable {
     /**
      * Progress monitor.
      */
-    private final ProgressMonitor progressMonitor;
+    private final IProgressMonitor progressMonitor;
 
     /**
      * Creates the FileSplitService instance.
@@ -53,7 +52,7 @@ public class FileSplitService implements Runnable {
     public FileSplitService(final ExecutorService pool,
                             final IUserInterface ui,
                             final SplitOptions splitOptions,
-                            final ProgressMonitor progressMonitor) {
+                            final IProgressMonitor progressMonitor) {
         this.ui = ui;
         this.pool = pool;
         this.splitOptions = splitOptions;
