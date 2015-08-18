@@ -79,6 +79,7 @@ public class PartCreator implements IDataProcessor {
 
     /**
      * Initiates the process of the file part creation.
+     * Placed at the beginning of the file number of the position (long value, 8 bytes) in the original file.
      *
      * @param originalFile original file
      * @return true if part of the file created successfully

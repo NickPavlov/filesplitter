@@ -47,12 +47,13 @@ public class FileBuilder implements IDataProcessor {
                 final FileChannel inputChannel = (FileChannel) filePart.getChannel();
                 final FileChannel outputChannel = (FileChannel) file.getChannel();
         ) {
-            ByteBuffer buffer = ByteBuffer.allocate(8);
+            byte longValueSize = 8;
+            ByteBuffer buffer = ByteBuffer.allocate(longValueSize);
             inputChannel.read(buffer);
             buffer.flip();
 
             long position = buffer.getLong();
-            long partSize = filePart.getSize() - 8;
+            long partSize = filePart.getSize() - longValueSize;
 
             System.out.println(filePart.getName() + " position=" + position + " size=" + partSize);
 
