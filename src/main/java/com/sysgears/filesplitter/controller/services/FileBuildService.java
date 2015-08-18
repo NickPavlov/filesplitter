@@ -59,12 +59,17 @@ public class FileBuildService implements Runnable {
     public void run() {
         try {
             IDataIterator fileIterator = new FileFinder("/home/nick/Documents/jdk.tar.gz_parts").iterator();
+
+            //WorkersFactory factory = new WorkersFactory();
             IData file;
             while (fileIterator.hasNext()) {
                 file = fileIterator.next();
+                //pool.execute();
+                /*
                 System.out.println("File name: " + file.getName());
                 System.out.println("File size: " + file.getSize());
                 System.out.println("");
+                */
             }
         } catch (IOException e) {
             e.printStackTrace();
