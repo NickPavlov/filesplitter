@@ -4,7 +4,11 @@ import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.Channel;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -26,8 +30,12 @@ public class FileIterator implements IDataIterator {
      * @throws IOException if an I/O error occurred
      */
     public FileIterator(final Directory rootDirectory) throws IOException {
-        fileIterator = Files.newDirectoryStream(rootDirectory.getPath()).iterator();
-
+        DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
+            public boolean accept(final Path path) throws IOException {
+                return !Files.isDirectory(path);
+            }
+        };
+        fileIterator = Files.newDirectoryStream(rootDirectory.getPath(), filter).iterator();
     }
 
     /**
@@ -45,6 +53,23 @@ public class FileIterator implements IDataIterator {
      * @return data object
      */
     public IData next() {
-        return null;
+        final File file = fileIterator.next().toFile();
+
+        return new IData() {
+            @Override
+            public String getName() {
+                return file.getName();
+            }
+
+            @Override
+            public long getSize() {
+                return file.length();
+            }
+
+            @Override
+            public Channel getChannel() throws IOException {
+                return new RandomAccessFile(file, "rw").getChannel();
+            }
+        };
     }
 }
