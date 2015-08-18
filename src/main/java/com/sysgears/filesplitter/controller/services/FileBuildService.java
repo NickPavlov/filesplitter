@@ -65,6 +65,7 @@ public class FileBuildService implements Runnable {
     public void run() {
         try {
             String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
+            String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
 
             final String regexPattern = ".+(?=_part[0-9]+\\.bin)";
             final Pattern pattern = Pattern.compile(regexPattern);
@@ -76,7 +77,7 @@ public class FileBuildService implements Runnable {
             System.out.println("originalFileName: " + originalFileName);
 
             IDataIterator fileIterator = new FileFinder(partPath).iterator();
-            FileData fileData = new FileData(new File("/home/nick/Documents/jdk.tar.gz_parts/" + originalFileName));
+            FileData fileData = new FileData(new File(outputPath + originalFileName));
 
             IData filePart;
             int i = 0;
