@@ -64,14 +64,17 @@ public class FileFinder implements IDataFinder {
                 : new File(filename);
 
         return new IData() {
+            @Override
             public String getName() {
                 return file.getName();
             }
 
+            @Override
             public long getSize() {
                 return file.length();
             }
 
+            @Override
             public FileChannel getChannel() throws IOException {
                 return new RandomAccessFile(file, "rw").getChannel();
             }
