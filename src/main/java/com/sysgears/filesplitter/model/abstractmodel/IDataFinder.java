@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.model.abstractmodel;
 /**
  * The IDataFinder interface defines the behavior of the data finder.
  */
-public interface IDataFinder extends IDataIterator<IData> {
+public interface IDataFinder {
 
     /**
      * Gets the data object by name.
