@@ -85,10 +85,10 @@ public class PartCreator implements IDataProcessor {
      */
     public boolean process(final IData originalFile) throws IOException {
         try (
-                RandomAccessFile outputFile = new RandomAccessFile(
+                final RandomAccessFile outputFile = new RandomAccessFile(
                         new File(outputDirectory, originalFile.getName() + outputFileNameSuffix), "rw");
-                FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
-                FileChannel outputChannel = outputFile.getChannel();
+                final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
+                final FileChannel outputChannel = outputFile.getChannel();
         ) {
             outputChannel.write(ByteBufferCreator.createFromString(originalFile.getName(), 4));
             outputChannel.write(ByteBufferCreator.createFromLong(position));
