@@ -2,6 +2,8 @@ package com.sysgears.filesplitter.model.filesystem.file;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
+import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
+import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,5 +81,15 @@ public class FileFinder implements IDataFinder {
                 return new RandomAccessFile(file, "rw").getChannel();
             }
         };
+    }
+
+    /**
+     * Returns <code>FileIterator</code> instance.
+     *
+     * @return <code>FileIterator</code>
+     * @throws IOException
+     */
+    public IDataIterator iterator() throws IOException {
+        return new FileIterator(new Directory(rootDirectory.getAbsolutePath()));
     }
 }
