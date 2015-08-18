@@ -2,14 +2,14 @@ package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
-import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
-import com.sysgears.filesplitter.model.partiterator.PartIterator;
+import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
+import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.ProgressMonitor;
 import com.sysgears.filesplitter.view.IUserInterface;
 
@@ -93,7 +93,7 @@ public class FileSplitService implements Runnable {
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
             System.out.println();
-            IDataIterator partIterator = new PartIterator(file.getSize(), partSize);
+            IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
             int i = 0;
             while (partIterator.hasNext()) {
                 pool.execute(workerFactory.create(partCreator.create()));

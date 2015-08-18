@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.model.partiterator;
+package com.sysgears.filesplitter.model.math.partiterator;
 
 /**
  * The PartIterator class provides functionality to split the interval into parts and iterate over them.
@@ -46,7 +46,7 @@ public class PartIterator implements IPartIterator {
      *
      * @return part size
      */
-    public Long next() {
+    public long next() {
         long partSize = 0;
         if (fullPartsCount > 0) {
             partSize = this.partSize;
