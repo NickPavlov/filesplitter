@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.model.abstractmodel;
 /**
  * The IDataIterator interface defines the behavior of an iterator object.
  */
-public interface IDataIterator<T> {
+public interface IDataIterator {
 
     /**
      * Returns true if the next object exist, false otherwise.
@@ -17,5 +17,5 @@ public interface IDataIterator<T> {
      *
      * @return data object
      */
-    public T next();
+    public IData next();
 }
