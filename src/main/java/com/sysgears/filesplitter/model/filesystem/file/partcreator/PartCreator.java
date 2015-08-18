@@ -82,6 +82,7 @@ public class PartCreator implements IDataProcessor {
      *
      * @param originalFile original file
      * @return true if part of the file created successfully
+     * @throws IOException if an I/O error occurred
      */
     public boolean process(final IData originalFile) throws IOException {
         try (
