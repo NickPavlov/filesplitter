@@ -2,11 +2,11 @@ package com.sysgears.filesplitter.model.filesystem.file.partcreator;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.filesystem.util.ByteBufferCreator;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.filesystem.util.ByteBufferCreator;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class PartCreator implements IDataProcessor {
             long readBytes = 0;
             final FileLock lock = inputChannel.lock(position, partSize, false);
             while (partIterator.hasNext()) {
-                buffer = ByteBuffer.allocate((int) partIterator.nextPartSize());
+                buffer = ByteBuffer.allocate(partIterator.next().intValue());
                 inputChannel.read(buffer);
                 buffer.flip();
                 readBytes += buffer.capacity();

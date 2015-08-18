@@ -1,21 +1,9 @@
 package com.sysgears.filesplitter.model.partiterator;
 
+import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
+
 /**
  * The IPartIterator interface defines the behavior of a part iterator object.
  */
-public interface IPartIterator {
-
-    /**
-     * Returns true if next part is present.
-     *
-     * @return true if next part is present
-     */
-    public boolean hasNext();
-
-    /**
-     * Returns next part size.
-     *
-     * @return next part size
-     */
-    public long nextPartSize();
+public interface IPartIterator extends IDataIterator<Long> {
 }
