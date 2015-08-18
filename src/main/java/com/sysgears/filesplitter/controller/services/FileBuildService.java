@@ -65,7 +65,6 @@ public class FileBuildService implements Runnable {
         try {
             IDataIterator fileIterator = new FileFinder("/home/nick/Documents/jdk.tar.gz_parts").iterator();
             FileData fileData = new FileData(new File("/home/nick/Documents/jdk.tar.gz_parts/restored.tar.gz"));
-            StaticDataWorkersFactory factory = new StaticDataWorkersFactory(fileData);
             IData filePart;
             int i = 0;
             while (fileIterator.hasNext()) {
