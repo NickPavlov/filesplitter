@@ -14,9 +14,16 @@ public interface IDataFinder {
     public IData getByName(final String name);
 
     /**
+     * Returns true if the next object exist, false otherwise.
+     *
+     * @return true if the next object exist, false otherwise.
+     */
+    public boolean hasNext();
+
+    /**
      * Gets the next data object.
      *
      * @return data object
      */
-    public IData getNext();
+    public IData next();
 }

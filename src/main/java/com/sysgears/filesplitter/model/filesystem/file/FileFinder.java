@@ -79,11 +79,20 @@ public class FileFinder implements IDataFinder {
     }
 
     /**
+     * Returns true if the next object exist, false otherwise.
+     *
+     * @return true if the next object exist, false otherwise.
+     */
+    public boolean hasNext() {
+        return false;
+    }
+
+    /**
      * Gets the next data object corresponds to the <code>name</code>.
      *
      * @return data object
      */
-    public IData getNext() {
+    public IData next() {
         /*
         try {
             DirectoryStream<Path> ds = Files.newDirectoryStream(null);
