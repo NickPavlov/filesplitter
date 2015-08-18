@@ -3,7 +3,7 @@ package com.sysgears.filesplitter.controller.services;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.abstractmodel.Worker;
-import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
+import com.sysgears.filesplitter.model.consoleoptions.BuildOptions;
 import com.sysgears.filesplitter.model.filesystem.file.FileData;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.filebuilder.FileBuilder;
@@ -34,7 +34,7 @@ public class FileBuildService implements Runnable {
     /**
      * Split options.
      */
-    private final SplitOptions splitOptions;
+    private final BuildOptions buildOptions;
 
     /**
      * Progress monitor.
@@ -46,16 +46,16 @@ public class FileBuildService implements Runnable {
      *
      * @param pool            pool of threads
      * @param ui              user interface
-     * @param splitOptions    command line options
+     * @param buildOptions    command line options
      * @param progressMonitor progress info monitor
      */
     public FileBuildService(final ExecutorService pool,
                             final IUserInterface ui,
-                            final SplitOptions splitOptions,
+                            final BuildOptions buildOptions,
                             final IProgressMonitor progressMonitor) {
         this.ui = ui;
         this.pool = pool;
-        this.splitOptions = splitOptions;
+        this.buildOptions = buildOptions;
         this.progressMonitor = progressMonitor;
     }
 
@@ -73,29 +73,18 @@ public class FileBuildService implements Runnable {
             if (matcher.find()) {
                 originalFileName = matcher.group();
             }
-            System.out.println(originalFileName);
-
-
+            System.out.println("originalFileName: " + originalFileName);
 
             IDataIterator fileIterator = new FileFinder(partPath).iterator();
-            FileData fileData = new FileData(new File("/home/nick/Documents/jdk.tar.gz_parts/restored.tar.gz"));
+            FileData fileData = new FileData(new File("/home/nick/Documents/jdk.tar.gz_parts/" + originalFileName));
+
             IData filePart;
-
-
             int i = 0;
             while (fileIterator.hasNext()) {
                 filePart = fileIterator.next();
-
                 if (pattern.matcher(filePart.getName()).find()) {
                     pool.execute(new Worker("worker-" + i++, filePart, new FileBuilder(fileData)));
                 }
-
-                /*
-                System.out.println("File name: " + filePart.getName());
-                System.out.println("File size: " + filePart.getSize());
-                System.out.println("");
-                */
-
             }
             pool.shutdown();
         } catch (IOException e) {
