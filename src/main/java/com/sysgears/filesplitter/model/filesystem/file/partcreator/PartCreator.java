@@ -110,21 +110,4 @@ public class PartCreator implements IDataProcessor {
 
         return true;
     }
-
-    public static void main(String[] args) throws IOException {
-        FileChannel fileChannel =
-                new RandomAccessFile("/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part1.bin", "rw").getChannel();
-
-        ByteBuffer buffer = ByteBuffer.allocate(512);
-        fileChannel.read(buffer);
-        buffer.flip();
-
-
-        int size = buffer.getInt();
-        System.out.println("size=" + size);
-        byte[] bytes = new byte[size];
-        buffer.get(bytes);
-        System.out.println("name=" + new String(bytes));
-        System.out.println(buffer.getLong());
-    }
 }
