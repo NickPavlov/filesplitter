@@ -2,15 +2,24 @@ package com.sysgears.filesplitter.model.filesystem.file.filebuilder;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
+import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
+import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
+import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 
 /**
  * The FileBuilder class provides functionality to build file from parts.
  */
 public class FileBuilder implements IDataProcessor {
+
+    /**
+     * Default buffer size - 4MB.
+     */
+    private static final int DEFAULT_BUFFER_SIZE = 4 * MemoryUnits.MEGABYTE;
 
     /**
      * File data.
@@ -42,14 +51,24 @@ public class FileBuilder implements IDataProcessor {
             inputChannel.read(buffer);
             buffer.flip();
 
-            //int size = buffer.getInt();
-            //byte[] bytes = new byte[size];
-            //buffer.get(bytes);
-            //String name = new String(bytes);
             long position = buffer.getLong();
-            System.out.println(filePart.getName() + " position=" + position);
+            long partSize = filePart.getSize() - 8;
+
+            System.out.println(filePart.getName() + " position=" + position + " size=" + partSize);
+
+            IPartIterator partIterator = new PartIterator(filePart.getSize(), DEFAULT_BUFFER_SIZE);
+            outputChannel.position(position);
+
+            final FileLock lock = outputChannel.lock(position, partSize, false);
+            while (partIterator.hasNext()) {
+                buffer = ByteBuffer.allocate((int) partIterator.next());
+                inputChannel.read(buffer);
+                buffer.flip();
+                outputChannel.write(buffer);
+            }
+            lock.release();
         }
 
-        return false;
+        return true;
     }
 }
