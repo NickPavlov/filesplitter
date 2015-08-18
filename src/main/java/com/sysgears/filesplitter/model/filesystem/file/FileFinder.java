@@ -7,8 +7,6 @@ import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
 
 /**
  * The FileFinder class provides functionality to find file.
@@ -65,22 +63,7 @@ public class FileFinder implements IDataFinder {
                 ? new File(rootDirectory, filename)
                 : new File(filename);
 
-        return new IData() {
-            @Override
-            public String getName() {
-                return file.getName();
-            }
-
-            @Override
-            public long getSize() {
-                return file.length();
-            }
-
-            @Override
-            public FileChannel getChannel() throws IOException {
-                return new RandomAccessFile(file, "rw").getChannel();
-            }
-        };
+        return new FileData(file);
     }
 
     /**

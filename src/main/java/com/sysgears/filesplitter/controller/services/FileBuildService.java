@@ -65,11 +65,11 @@ public class FileBuildService implements Runnable {
             while (fileIterator.hasNext()) {
                 file = fileIterator.next();
                 //pool.execute();
-                /*
+
                 System.out.println("File name: " + file.getName());
                 System.out.println("File size: " + file.getSize());
                 System.out.println("");
-                */
+
             }
         } catch (IOException e) {
             e.printStackTrace();
