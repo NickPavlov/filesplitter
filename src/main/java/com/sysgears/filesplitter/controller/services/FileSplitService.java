@@ -5,6 +5,7 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataFinder;
 import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
+import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
@@ -32,11 +33,6 @@ public class FileSplitService implements Runnable {
     private final IUserInterface ui;
 
     /**
-     * File finder.
-     */
-    private final IDataFinder fileFinder;
-
-    /**
      * Split options.
      */
     private final SplitOptions splitOptions;
@@ -51,18 +47,15 @@ public class FileSplitService implements Runnable {
      *
      * @param pool            pool of threads
      * @param ui              user interface
-     * @param fileFinder      file finder
      * @param splitOptions    command line options
      * @param progressMonitor progress info monitor
      */
     public FileSplitService(final ExecutorService pool,
                             final IUserInterface ui,
-                            final IDataFinder fileFinder,
                             final SplitOptions splitOptions,
                             final ProgressMonitor progressMonitor) {
         this.ui = ui;
         this.pool = pool;
-        this.fileFinder = fileFinder;
         this.splitOptions = splitOptions;
         this.progressMonitor = progressMonitor;
     }
@@ -87,7 +80,7 @@ public class FileSplitService implements Runnable {
             System.out.println("partSize: " + partSize);
 
             final String filePath = splitOptions.getFilePath();
-            final IData file = fileFinder.getByName(filePath);
+            final IData file = new FileFinder().getByName(filePath);
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);

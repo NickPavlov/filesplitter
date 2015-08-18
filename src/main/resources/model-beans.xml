@@ -6,11 +6,6 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!-- file system -->
-
-    <bean id="fileFinder" class="com.sysgears.filesplitter.model.filesystem.file.FileFinder" />
-
-
     <!-- command line components -->
 
     <bean id="splitOptions" class="com.sysgears.filesplitter.model.consoleoptions.SplitOptions" />
