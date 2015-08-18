@@ -14,10 +14,9 @@ public interface IDataFinder {
     public IData getByName(final String name);
 
     /**
-     * Gets the next data object corresponds to the <code>name</code>.
+     * Gets the next data object.
      *
-     * @param name data name
      * @return data object
      */
-    public IData getNext(final String name);
+    public IData getNext();
 }
