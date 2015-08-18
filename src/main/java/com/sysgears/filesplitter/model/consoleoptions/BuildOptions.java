@@ -8,18 +8,34 @@ import org.kohsuke.args4j.Option;
 public class BuildOptions {
 
     /**
-     * Source directory.
+     * File part.
      */
-    @Option(name = "-s", aliases = "--source", metaVar = "<directory>", required = true,
+    @Option(name = "-p", aliases = "--part", metaVar = "<file>", required = true,
             usage = "Source directory.")
-    private String partsSource;
+    private String partPath;
 
     /**
-     * Returns a source directory.
+     * Output directory.
+     */
+    @Option(name = "-o", aliases = "--output", metaVar = "<directory>", required = true,
+            usage = "Source directory.")
+    private String outputDirectory;
+
+    /**
+     * Returns a part path.
      *
-     * @return source directory
+     * @return part path
      */
     public String getPartsSource() {
-        return partsSource;
+        return partPath;
+    }
+
+    /**
+     * Returns an output directory path.
+     *
+     * @return output directory path
+     */
+    public String getOutputDirectory() {
+        return outputDirectory;
     }
 }
