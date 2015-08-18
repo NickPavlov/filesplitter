@@ -91,7 +91,7 @@ public class PartCreator implements IDataProcessor {
                 final FileChannel inputChannel = ((FileChannel) originalFile.getChannel()).position(position);
                 final FileChannel outputChannel = outputFile.getChannel();
         ) {
-            outputChannel.write(ByteBufferCreator.createFromString(originalFile.getName(), 4));
+            //outputChannel.write(ByteBufferCreator.createFromString(originalFile.getName(), 4));
             outputChannel.write(ByteBufferCreator.createFromLong(position));
 
             IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
