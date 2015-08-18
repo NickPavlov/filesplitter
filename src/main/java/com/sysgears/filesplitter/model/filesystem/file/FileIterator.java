@@ -1,6 +1,7 @@
 package com.sysgears.filesplitter.model.filesystem.file;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
+import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Iterator;
 /**
  * The FileIterator class provides functionality to iterate over files.
  */
-public class FileIterator {
+public class FileIterator implements IDataIterator {
 
     /**
      * Path iterator.
