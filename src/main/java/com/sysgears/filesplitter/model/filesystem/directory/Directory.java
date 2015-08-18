@@ -18,7 +18,7 @@ public class Directory implements IDirectory {
     /**
      * Creates the Directory instance specified by directory file.
      * Path can be specified for a particular file, in this case
-     * the constructor takes the parent directory of the file
+     * the constructor takes the parent directory of the file.
      *
      * @param directory directory path
      * @throws IllegalArgumentException if <code>directory</code> is null
