@@ -8,7 +8,7 @@ import com.sysgears.filesplitter.model.filesystem.file.FileData;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.filebuilder.FileBuilder;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.workers.WorkersFactory;
+import com.sysgears.filesplitter.model.workers.StaticDataWorkersFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 
 import java.io.File;
@@ -65,7 +65,7 @@ public class FileBuildService implements Runnable {
         try {
             IDataIterator fileIterator = new FileFinder("/home/nick/Documents/jdk.tar.gz_parts").iterator();
             FileData fileData = new FileData(new File("/home/nick/Documents/jdk.tar.gz_parts/restored.tar.gz"));
-            WorkersFactory factory = new WorkersFactory(fileData);
+            StaticDataWorkersFactory factory = new StaticDataWorkersFactory(fileData);
             IData filePart;
             int i = 0;
             while (fileIterator.hasNext()) {

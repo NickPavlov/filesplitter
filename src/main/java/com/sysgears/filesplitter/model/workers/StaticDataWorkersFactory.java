@@ -5,9 +5,9 @@ import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 import com.sysgears.filesplitter.model.abstractmodel.Worker;
 
 /**
- * The WorkersFactory class provides functionality to create workers.
+ * The StaticDataWorkersFactory class provides functionality to create workers.
  */
-public class WorkersFactory {
+public class StaticDataWorkersFactory {
 
     /**
      * Original file.
@@ -20,11 +20,11 @@ public class WorkersFactory {
     private int workersCount;
 
     /**
-     * Creates the WorkersFactory instance.
+     * Creates the StaticDataWorkersFactory instance.
      *
      * @param data data
      */
-    public WorkersFactory(final IData data) {
+    public StaticDataWorkersFactory(final IData data) {
         this.data = data;
         this.workersCount = 0;
     }
