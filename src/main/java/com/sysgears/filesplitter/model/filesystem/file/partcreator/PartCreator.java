@@ -16,7 +16,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 
 /**
- * The PartCreator class provides functionality to create a part of the file.
+ * The PartCreator class provides functionality to create a part of a file.
  */
 public class PartCreator implements IDataProcessor {
 
