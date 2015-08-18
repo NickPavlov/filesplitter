@@ -4,11 +4,28 @@ import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * The FileBuilder class provides functionality to build file from parts.
  */
 public class FileBuilder implements IDataProcessor {
+
+    /**
+     * File.
+     */
+    private final RandomAccessFile file;
+
+    /**
+     * Creates the FileBuilder instance.
+     *
+     * @param file file to build
+     */
+    public FileBuilder(final RandomAccessFile file) {
+        this.file = file;
+    }
 
     /**
      * Initiates the process of appending a file part into the main file.
@@ -18,6 +35,23 @@ public class FileBuilder implements IDataProcessor {
      * @throws IOException if an I/O error occurred
      */
     public boolean process(final IData filePart) throws IOException {
+        try (
+                final FileChannel inputChannel = (FileChannel) filePart.getChannel();
+                final FileChannel outputChannel = file.getChannel();
+        ) {
+
+            ByteBuffer buffer = ByteBuffer.allocate(512);
+            inputChannel.read(buffer);
+            buffer.flip();
+
+            int size = buffer.getInt();
+            System.out.println("size=" + size);
+            byte[] bytes = new byte[size];
+            buffer.get(bytes);
+            System.out.println("name=" + new String(bytes));
+            System.out.println(buffer.getLong());
+        }
+
         return false;
     }
 }

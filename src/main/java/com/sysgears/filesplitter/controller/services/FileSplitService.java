@@ -6,7 +6,7 @@ import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
-import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartWorkersFactory;
+import com.sysgears.filesplitter.model.filesystem.file.WorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
@@ -83,7 +83,7 @@ public class FileSplitService implements Runnable {
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
-            final PartWorkersFactory workerFactory = new PartWorkersFactory(file);
+            final WorkersFactory workerFactory = new WorkersFactory(file);
             System.out.println();
             IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
             int i = 0;
