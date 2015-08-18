@@ -8,9 +8,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- command line components -->
 
-    <bean id="splitOptions" class="com.sysgears.filesplitter.model.consoleoptions.SplitOptions" />
+    <bean id="splitOptions" class="com.sysgears.filesplitter.model.console.options.SplitOptions" />
 
-    <bean id="buildOptions" class="com.sysgears.filesplitter.model.consoleoptions.BuildOptions" />
+    <bean id="buildOptions" class="com.sysgears.filesplitter.model.console.options.BuildOptions" />
 
 
     <!-- statistics -->

@@ -2,7 +2,7 @@ package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
-import com.sysgears.filesplitter.model.consoleoptions.BuildOptions;
+import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.filesystem.file.FileData;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.filebuilder.FileBuilder;

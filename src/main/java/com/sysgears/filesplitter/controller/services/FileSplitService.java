@@ -1,7 +1,7 @@
 package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
-import com.sysgears.filesplitter.model.consoleoptions.SplitOptions;
+import com.sysgears.filesplitter.model.console.options.SplitOptions;
 import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
