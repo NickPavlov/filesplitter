@@ -4,7 +4,6 @@ import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -14,16 +13,16 @@ import java.nio.channels.FileChannel;
 public class FileBuilder implements IDataProcessor {
 
     /**
-     * File.
+     * File data.
      */
-    private final RandomAccessFile file;
+    private final IData file;
 
     /**
      * Creates the FileBuilder instance.
      *
      * @param file file to build
      */
-    public FileBuilder(final RandomAccessFile file) {
+    public FileBuilder(final IData file) {
         this.file = file;
     }
 
@@ -37,19 +36,21 @@ public class FileBuilder implements IDataProcessor {
     public boolean process(final IData filePart) throws IOException {
         try (
                 final FileChannel inputChannel = (FileChannel) filePart.getChannel();
-                final FileChannel outputChannel = file.getChannel();
+                final FileChannel outputChannel = (FileChannel) file.getChannel();
         ) {
 
             ByteBuffer buffer = ByteBuffer.allocate(512);
             inputChannel.read(buffer);
             buffer.flip();
-
+            System.out.println(filePart.getName());
+            /*
             int size = buffer.getInt();
             System.out.println("size=" + size);
             byte[] bytes = new byte[size];
             buffer.get(bytes);
             System.out.println("name=" + new String(bytes));
             System.out.println(buffer.getLong());
+            */
         }
 
         return false;
