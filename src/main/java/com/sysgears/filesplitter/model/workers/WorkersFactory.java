@@ -2,7 +2,6 @@ package com.sysgears.filesplitter.model.workers;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataProcessor;
-import com.sysgears.filesplitter.model.abstractmodel.Worker;
 
 /**
  * The StaticDataWorkersFactory class provides functionality to create workers.
