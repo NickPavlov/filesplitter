@@ -3,6 +3,7 @@ package com.sysgears.filesplitter.controller.services;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 import com.sysgears.filesplitter.view.IUserInterface;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -11,6 +12,11 @@ import java.util.concurrent.ExecutorService;
  * The ProgressInfoService class provides functionality to display progress.
  */
 public class ProgressInfoService implements IService {
+
+    /**
+     * Logger.
+     */
+    private final static Logger LOG = Logger.getLogger(ProgressInfoService.class);
 
     /**
      * User interface.
@@ -56,12 +62,14 @@ public class ProgressInfoService implements IService {
      */
     public void start() {
         try {
+            LOG.info("ProgressInfoService started.");
             while (!pool.isTerminated()) {
                 sendProgressMessage(progressMonitor.getProgressInfo(), ui);
                 Thread.sleep(updateInterval);
             }
             sendProgressMessage(progressMonitor.getProgressInfo(), ui);
         } catch (InterruptedException e) {
+            LOG.error(e.getMessage());
             e.printStackTrace();
         }
     }
