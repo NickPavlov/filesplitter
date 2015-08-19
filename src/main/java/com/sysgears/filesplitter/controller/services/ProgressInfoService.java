@@ -39,6 +39,11 @@ public class ProgressInfoService implements IService {
     private final int updateInterval;
 
     /**
+     * Running state.
+     */
+    private boolean isRunning;
+
+    /**
      * Creates the ProgressInfoService instance specified by:
      * user interface, progress monitor, poll of threads, update interval.
      *
@@ -61,9 +66,10 @@ public class ProgressInfoService implements IService {
      * Starts the service.
      */
     public void start() {
+        isRunning = true;
         try {
             LOG.info("ProgressInfoService started.");
-            while (!pool.isTerminated()) {
+            while (!pool.isTerminated() && isRunning) {
                 sendProgressMessage(progressMonitor.getProgressInfo(), ui);
                 Thread.sleep(updateInterval);
             }
@@ -72,12 +78,14 @@ public class ProgressInfoService implements IService {
             LOG.error(e.getMessage());
             e.printStackTrace();
         }
+        LOG.info("ProgressInfoService stopped.");
     }
 
     /**
      * Stops a service.
      */
     public void stop() {
+        isRunning = false;
     }
 
     /**
