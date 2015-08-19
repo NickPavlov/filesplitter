@@ -64,6 +64,7 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
+            // only for testing
             System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
             System.out.println("PartSize: " + splitOptions.getPartSize());
@@ -81,19 +82,13 @@ public class FileSplitService implements Runnable {
             final String filePath = splitOptions.getFilePath();
             final IData file = new FileFinder().getByName(filePath);
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
-            final PartCreatorsFactory partCreator =
-                    new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
+            final PartCreatorsFactory creators =
+                    new PartCreatorsFactory(partsDirectory.getAbsolutePath(), progressMonitor);
             final StaticDataWorkersFactory workerFactory = new StaticDataWorkersFactory(file);
-            System.out.println();
-            IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
-            int i = 0;
+            final IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
             while (partIterator.hasNext()) {
-                pool.execute(workerFactory.create(partCreator.create()));
-                partIterator.next();
-                System.out.println("worker-" + i++);
+                pool.execute(workerFactory.create(creators.create(partIterator.next())));
             }
-
-            System.out.println();
             pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();

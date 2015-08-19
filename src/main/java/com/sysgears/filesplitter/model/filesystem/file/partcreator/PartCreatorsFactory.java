@@ -8,11 +8,6 @@ import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 public class PartCreatorsFactory {
 
     /**
-     * Part size.
-     */
-    private final long partSize;
-
-    /**
      * Part number.
      */
     private int partNumber;
@@ -30,13 +25,9 @@ public class PartCreatorsFactory {
     /**
      * Creates the PartCreatorsFactory instance specified by part size.
      *
-     * @param partSize        part size
      * @param outputDirectory output directory
      */
-    public PartCreatorsFactory(final long partSize,
-                               final String outputDirectory,
-                               final IProgressMonitor progressMonitor) {
-        this.partSize = partSize;
+    public PartCreatorsFactory(final String outputDirectory, final IProgressMonitor progressMonitor) {
         this.partNumber = 0;
         this.outputDirectory = outputDirectory;
         this.progressMonitor = progressMonitor;
@@ -47,7 +38,7 @@ public class PartCreatorsFactory {
      *
      * @return PartCreator object
      */
-    public PartCreator create() {
+    public PartCreator create(final long partSize) {
         return new PartCreator(partNumber++, partSize, outputDirectory, progressMonitor);
     }
 }

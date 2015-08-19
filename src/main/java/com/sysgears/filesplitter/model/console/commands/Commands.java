@@ -23,7 +23,7 @@ public enum Commands {
     }
 
     /**
-     * Returns a command which corresponds to the expression.
+     * Returns a command which corresponds to the <code>expression</code>.
      *
      * @param expression expression, to find an appropriate command
      * @return appropriate command
