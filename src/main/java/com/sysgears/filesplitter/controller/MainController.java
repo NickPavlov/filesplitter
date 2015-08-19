@@ -78,6 +78,7 @@ public class MainController implements IController {
                         fileSplitService.run();
                         break;
                     case BUILD:
+                        new CmdLineParser(buildCmdOptions).parseArgument(options);
                         fileBuildService.run();
                         break;
                 }
