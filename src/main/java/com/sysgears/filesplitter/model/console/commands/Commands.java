@@ -29,7 +29,15 @@ public enum Commands {
      * @return appropriate command
      */
     public Commands getCommand(final String expression) {
-        return null;
+        Commands result = UNKNOWN_COMMAND;
+        for (Commands command : Commands.values()) {
+            if (command.name.equals(expression)) {
+                result = command;
+                break;
+            }
+        }
+
+        return result;
     }
 
     /**
