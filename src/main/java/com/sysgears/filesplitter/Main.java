@@ -12,9 +12,9 @@ public class Main {
      * Application context paths.
      */
     public static final String[] contextPaths = new String[] {
-            "controller-beans.xml",
-            "model-beans.xml",
-            "view-beans.xml"};
+            "beans/controller-beans.xml",
+            "beans/model-beans.xml",
+            "beans/view-beans.xml"};
 
     /**
      * Starts the application.
