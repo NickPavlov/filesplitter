@@ -31,9 +31,8 @@ public class TestPartIterator {
         System.out.println("PartIterator test starts.");
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterClass
     public void tearDown() {
-        System.out.println("PartIterator test ends.");
     }
 
     @Test
