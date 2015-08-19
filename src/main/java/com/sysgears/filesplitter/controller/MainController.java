@@ -79,7 +79,6 @@ public class MainController implements IController {
                 String[] options = new String[args.length - 1];
                 System.arraycopy(args, 1, options, 0, args.length - 1);
                 new Thread(progressInfoService).start();
-                LOG.info("ProgressInfoService started.");
                 switch (command) {
                     case SPLIT:
                         new CmdLineParser(splitCmdOptions).parseArgument(options);
