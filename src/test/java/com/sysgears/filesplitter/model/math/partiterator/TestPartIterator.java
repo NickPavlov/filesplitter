@@ -28,12 +28,12 @@ public class TestPartIterator {
 
     @BeforeClass
     public void init() {
-        System.out.println("init");
+        System.out.println("PartIterator test starts.");
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        System.out.println("tearDown");
+        System.out.println("PartIterator test ends.");
     }
 
     @Test
