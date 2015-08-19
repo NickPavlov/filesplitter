@@ -95,7 +95,6 @@ public class MainController implements IController {
                         break;
                     case BUILD:
                         new CmdLineParser(buildCmdOptions).parseArgument(options);
-                        LOG.info("FileBuildService started.");
                         fileBuildService.start();
                         break;
                 }

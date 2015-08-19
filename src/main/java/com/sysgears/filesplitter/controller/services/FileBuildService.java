@@ -9,6 +9,7 @@ import com.sysgears.filesplitter.model.filesystem.file.filebuilder.FileBuilder;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.workers.WorkersFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,11 @@ import java.util.regex.Pattern;
  * The FileBuildService class provides functionality to create file form parts.
  */
 public class FileBuildService implements IService {
+
+    /**
+     * Logger.
+     */
+    private final static Logger LOG = Logger.getLogger(FileBuildService.class);
 
     /**
      * Pool of threads.
@@ -64,6 +70,8 @@ public class FileBuildService implements IService {
      */
     public void start() {
         try {
+            LOG.info("FileBuildService started.");
+
             // temporarily
             final String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
             final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
@@ -96,6 +104,7 @@ public class FileBuildService implements IService {
      * Stops a service.
      */
     public void stop() {
+        LOG.info("FileBuildService stopped.");
         pool.shutdown();
     }
 

@@ -100,6 +100,7 @@ public class FileSplitService implements IService {
      * Stops a service.
      */
     public void stop() {
+        LOG.info("FileSplitService stopped.");
         pool.shutdown();
     }
 
