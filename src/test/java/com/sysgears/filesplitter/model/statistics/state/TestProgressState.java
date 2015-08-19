@@ -10,16 +10,16 @@ import org.testng.annotations.Test;
  */
 public class TestProgressState {
 
-    @BeforeClass()
+    @BeforeClass
     public void init() {
         System.out.println("ProgressState test starts.");
     }
 
-    @AfterClass()
+    @AfterClass
     public void tearDown() {
     }
 
-    @Test()
+    @Test
     public void toString50PercentTest() {
         ProgressState progressState = new ProgressState(50, 100);
         Assert.assertEquals(progressState.toString(), "50%");
