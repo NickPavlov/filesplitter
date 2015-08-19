@@ -71,10 +71,10 @@ public class ProgressInfoService implements IService {
         LOG.info("ProgressInfoService started.");
         try {
             while (!pool.isTerminated() && isRunning) {
-                sendProgressMessage(progressMonitor.getProgressInfo(), ui);
+                sendProgressInfo(progressMonitor.getProgressInfo(), ui);
                 Thread.sleep(updateInterval);
             }
-            sendProgressMessage(progressMonitor.getProgressInfo(), ui);
+            sendProgressInfo(progressMonitor.getProgressInfo(), ui);
         } catch (InterruptedException e) {
             LOG.error(e.getMessage());
             e.printStackTrace();
@@ -96,9 +96,17 @@ public class ProgressInfoService implements IService {
         start();
     }
 
-    private void sendProgressMessage(final Map<String, IProgressState> progressState, final IUserInterface ui) {
-        if ((progressState != null) && !progressState.isEmpty()) {
-            System.out.println(progressState);
+    /**
+     * Sends progress info to the user interface.
+     *
+     * @param progress progress state
+     * @param ui       user interface
+     */
+    private void sendProgressInfo(final Map<String, IProgressState> progress,
+                                  final IUserInterface ui) {
+
+        if ((progress != null) && !progress.isEmpty()) {
+            System.out.println(progress);
         }
     }
 }
