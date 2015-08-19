@@ -48,8 +48,8 @@ public class PartCreatorsFactory {
      * @return PartCreator object
      */
     public PartCreator create(final long partSize) {
-        PartCreator partCreator
-                = new PartCreator(partNumber, userPartSize * partNumber, partSize, outputDirectory, progressMonitor);
+        final PartCreator partCreator = new PartCreator("part" + partNumber,
+                userPartSize * partNumber, partSize, outputDirectory, progressMonitor);
         ++partNumber;
         return partCreator;
     }
