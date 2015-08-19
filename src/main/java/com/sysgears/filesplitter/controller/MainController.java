@@ -10,6 +10,8 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+
 /**
  * The MainController class is the main controller that controls the application.
  */
@@ -80,46 +82,50 @@ public class MainController implements IController {
      * @param args command line arguments
      */
     public void start(final String[] args) {
-        Commands command = Commands.getCommand(args[0]);
-        if (command == Commands.UNKNOWN_COMMAND) {
-            System.out.println("Unknown command.");
+        try {
+            Commands command = Commands.getCommand(args[0]);
+            if (command == Commands.UNKNOWN_COMMAND) {
+                ui.sendMessage("Unknown command.\n");
+            } else {
+                String[] options = new String[args.length - 1];
+                System.arraycopy(args, 1, options, 0, args.length - 1);
+                new Thread(progressInfoService).start();
 
-        } else {
-            String[] options = new String[args.length - 1];
-            System.arraycopy(args, 1, options, 0, args.length - 1);
-            new Thread(progressInfoService).start();
+                switch (command) {
+                    case SPLIT:
+                        try {
+                            new CmdLineParser(splitCmdOptions).parseArgument(options);
 
-            switch (command) {
-                case SPLIT:
-                    try {
-                        new CmdLineParser(splitCmdOptions).parseArgument(options);
-                        // only for testing
-                        System.out.println();
-                        System.out.println("Path: " + splitCmdOptions.getFilePath());
-                        System.out.println("PartSize: " + splitCmdOptions.getPartSize());
-                        System.out.println("MB: " + splitCmdOptions.isMegabytes());
-                        System.out.println("kB: " + splitCmdOptions.isKilobytes());
+                            // only for testing
+                            ui.sendMessage("\n");
+                            ui.sendMessage("Path: " + splitCmdOptions.getFilePath() + "\n");
+                            ui.sendMessage("PartSize: " + splitCmdOptions.getPartSize() + "\n");
+                            ui.sendMessage("MB: " + splitCmdOptions.isMegabytes() + "\n");
+                            ui.sendMessage("kB: " + splitCmdOptions.isKilobytes() + "\n");
 
-                        fileSplitService.start();
-                    } catch (CmdLineException e) {
-                        LOG.error(e.getMessage());
-                        e.getParser().printUsage(System.out);
-                    } finally {
-                        fileSplitService.stop();
-                    }
-                    break;
-                case BUILD:
-                    try {
-                        new CmdLineParser(buildCmdOptions).parseArgument(options);
-                        fileBuildService.start();
-                    } catch (CmdLineException e) {
-                        LOG.error(e.getMessage());
-                        e.getParser().printUsage(System.out);
-                    } finally {
-                        fileBuildService.stop();
-                    }
-                    break;
+                            fileSplitService.start();
+                        } catch (CmdLineException e) {
+                            LOG.error(e.getMessage());
+                            e.getParser().printUsage(System.out);
+                        } finally {
+                            fileSplitService.stop();
+                        }
+                        break;
+                    case BUILD:
+                        try {
+                            new CmdLineParser(buildCmdOptions).parseArgument(options);
+                            fileBuildService.start();
+                        } catch (CmdLineException e) {
+                            LOG.error(e.getMessage());
+                            e.getParser().printUsage(System.out);
+                        } finally {
+                            fileBuildService.stop();
+                        }
+                        break;
+                }
             }
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
         }
     }
 
