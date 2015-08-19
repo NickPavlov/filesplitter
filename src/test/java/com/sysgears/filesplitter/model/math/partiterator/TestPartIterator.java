@@ -27,7 +27,7 @@ public class TestPartIterator {
 
 
     @BeforeClass
-    public void beforeClass() {
+    public void init() {
     }
 
     @Test
@@ -41,6 +41,6 @@ public class TestPartIterator {
     }
 
     @AfterClass
-    public void afterClass() {
+    public void tearDown() {
     }
 }
