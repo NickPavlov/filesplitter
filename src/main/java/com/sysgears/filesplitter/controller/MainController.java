@@ -5,11 +5,17 @@ import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
+import org.apache.log4j.Logger;
 
 /**
  * The MainController class is the main controller that controls the application.
  */
 public class MainController implements IController {
+
+    /**
+     * Logger.
+     */
+    private final static Logger LOG = Logger.getLogger(MainController.class);
 
     /**
      * FileSplitService instance.
@@ -72,19 +78,23 @@ public class MainController implements IController {
                 String[] options = new String[args.length - 1];
                 System.arraycopy(args, 1, options, 0, args.length - 1);
                 new Thread(progressInfoService).start();
+                LOG.info("ProgressInfoService started.");
                 switch (command) {
                     case SPLIT:
                         new CmdLineParser(splitCmdOptions).parseArgument(options);
+                        LOG.info("FileSplitService started.");
                         fileSplitService.run();
                         break;
                     case BUILD:
                         new CmdLineParser(buildCmdOptions).parseArgument(options);
+                        LOG.info("FileBuildService started.");
                         fileBuildService.run();
                         break;
                 }
             }
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
+            LOG.error(e.toString());
         }
     }
 
