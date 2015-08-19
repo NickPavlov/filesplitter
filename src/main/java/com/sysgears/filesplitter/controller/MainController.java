@@ -31,7 +31,7 @@ public class MainController implements IController {
     /**
      * Progress info service.
      */
-    private final Runnable progressInfoService;
+    private final IService progressInfoService;
 
     /**
      * Command line split options.
@@ -54,7 +54,7 @@ public class MainController implements IController {
      */
     public MainController(final IService fileSplitService,
                           final IService fileCreateService,
-                          final Runnable progressInfoService,
+                          final IService progressInfoService,
                           final SplitOptions splitCmdOptions,
                           final BuildOptions buildCmdOptions) {
 

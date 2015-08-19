@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * The ProgressInfoService class provides functionality to display progress.
  */
-public class ProgressInfoService implements Runnable {
+public class ProgressInfoService implements IService {
 
     /**
      * User interface.
@@ -54,7 +54,7 @@ public class ProgressInfoService implements Runnable {
     /**
      * Starts the service.
      */
-    public void run() {
+    public void start() {
         try {
             while (!pool.isTerminated()) {
                 sendProgressMessage(progressMonitor.getProgressInfo(), ui);
@@ -64,6 +64,20 @@ public class ProgressInfoService implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Stops a service.
+     */
+    public void stop() {
+        pool.shutdown();
+    }
+
+    /**
+     * Starts a service. It behaves exactly like method <code>start()</code>.
+     */
+    public void run() {
+        start();
     }
 
     private void sendProgressMessage(final Map<String, IProgressState> progressState, final IUserInterface ui) {
