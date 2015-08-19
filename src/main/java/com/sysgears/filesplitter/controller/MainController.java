@@ -111,7 +111,6 @@ public class MainController implements IController {
                     }
                     break;
             }
-            progressInfoService.stop();
         }
     }
 
