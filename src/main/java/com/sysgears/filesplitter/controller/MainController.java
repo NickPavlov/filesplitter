@@ -26,7 +26,7 @@ public class MainController implements IController {
     /**
      * FileBuildService instance.
      */
-    private final Runnable fileBuildService;
+    private final IService fileBuildService;
 
     /**
      * Progress info service.
@@ -53,7 +53,7 @@ public class MainController implements IController {
      * @param progressInfoService progress info service
      */
     public MainController(final IService fileSplitService,
-                          final Runnable fileCreateService,
+                          final IService fileCreateService,
                           final Runnable progressInfoService,
                           final SplitOptions splitCmdOptions,
                           final BuildOptions buildCmdOptions) {

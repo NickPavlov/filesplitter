@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * The FileSplitService class provides functionality to split a file into parts.
  */
-public class FileSplitService implements Runnable {
+public class FileSplitService implements IService {
 
     /**
      * Pool of threads.
@@ -62,7 +62,7 @@ public class FileSplitService implements Runnable {
     /**
      * Starts the service.
      */
-    public void run() {
+    public void start() {
         try {
             System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
@@ -92,5 +92,19 @@ public class FileSplitService implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Stops a service.
+     */
+    public void stop() {
+        pool.shutdown();
+    }
+
+    /**
+     * Starts a service. It behaves exactly like method <code>start()</code>.
+     */
+    public void run() {
+        start();
     }
 }
