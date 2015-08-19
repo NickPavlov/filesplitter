@@ -101,6 +101,9 @@ public class MainController implements IController {
         } catch (CmdLineException e) {
             LOG.error(e.getMessage());
             e.getParser().printUsage(System.out);
+            fileBuildService.stop();
+            fileSplitService.stop();
+            progressInfoService.stop();
         }
     }
 

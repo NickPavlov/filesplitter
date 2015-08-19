@@ -78,7 +78,6 @@ public class ProgressInfoService implements IService {
      * Stops a service.
      */
     public void stop() {
-        pool.shutdown();
     }
 
     /**
