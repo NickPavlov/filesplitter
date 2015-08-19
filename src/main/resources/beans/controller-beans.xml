@@ -45,6 +45,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         <constructor-arg index="2" ref="progressInfoService" />
         <constructor-arg index="3" ref="splitOptions" />
         <constructor-arg index="4" ref="buildOptions" />
+        <constructor-arg index="5" ref="userInterface" />
     </bean>
 
 </beans>

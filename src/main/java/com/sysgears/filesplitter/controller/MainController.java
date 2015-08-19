@@ -5,6 +5,7 @@ import com.sysgears.filesplitter.controller.util.IController;
 import com.sysgears.filesplitter.model.console.commands.Commands;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
+import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.apache.log4j.Logger;
@@ -45,6 +46,11 @@ public class MainController implements IController {
     private final BuildOptions buildCmdOptions;
 
     /**
+     * User interface.
+     */
+    private final IUserInterface ui;
+
+    /**
      * Creates the MainController instance.
      *
      * @param fileSplitService    FileSplitService
@@ -57,13 +63,15 @@ public class MainController implements IController {
                           final IService fileCreateService,
                           final IService progressInfoService,
                           final SplitOptions splitCmdOptions,
-                          final BuildOptions buildCmdOptions) {
+                          final BuildOptions buildCmdOptions,
+                          final IUserInterface userInterface) {
 
         this.fileSplitService = fileSplitService;
         this.fileBuildService = fileCreateService;
         this.progressInfoService = progressInfoService;
         this.splitCmdOptions = splitCmdOptions;
         this.buildCmdOptions = buildCmdOptions;
+        this.ui = userInterface;
     }
 
     /**
@@ -75,6 +83,7 @@ public class MainController implements IController {
         Commands command = Commands.getCommand(args[0]);
         if (command == Commands.UNKNOWN_COMMAND) {
             System.out.println("Unknown command.");
+
         } else {
             String[] options = new String[args.length - 1];
             System.arraycopy(args, 1, options, 0, args.length - 1);
