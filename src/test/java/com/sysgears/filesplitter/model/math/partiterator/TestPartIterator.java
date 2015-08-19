@@ -10,22 +10,6 @@ import org.testng.annotations.Test;
  */
 public class TestPartIterator {
 
-    /**
-     * Total interval.
-     */
-    private final int totalSize = 10;
-
-    /**
-     * Part size.
-     */
-    private final int partSize = 10;
-
-    /**
-     * PartIterator instance.
-     */
-    private final PartIterator partIterator = new PartIterator(totalSize, partSize);
-
-
     @BeforeClass
     public void init() {
         System.out.println("PartIterator test starts.");
@@ -36,12 +20,28 @@ public class TestPartIterator {
     }
 
     @Test
-    public void hasNextTest() {
+    public void hasNextOnePartTest() {
+        final PartIterator partIterator = new PartIterator(10, 10);
         Assert.assertEquals(partIterator.hasNext(), true);
     }
 
     @Test
-    public void nextTest() {
+    public void hasNextTwoPartTest() {
+        final PartIterator partIterator = new PartIterator(20, 10);
+        Assert.assertEquals(partIterator.hasNext(), true);
+        Assert.assertEquals(partIterator.hasNext(), true);
+    }
+
+    @Test
+    public void nextOnePartTest() {
+        final PartIterator partIterator = new PartIterator(10, 10);
+        Assert.assertEquals(partIterator.next(), 10);
+    }
+
+    @Test
+    public void nextTwoPartTest() {
+        final PartIterator partIterator = new PartIterator(20, 10);
+        Assert.assertEquals(partIterator.next(), 10);
         Assert.assertEquals(partIterator.next(), 10);
     }
 }
