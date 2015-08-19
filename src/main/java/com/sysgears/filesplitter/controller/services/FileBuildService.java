@@ -96,6 +96,7 @@ public class FileBuildService implements IService {
                 }
             }
         } catch (IOException e) {
+            LOG.error(e.getMessage());
             e.printStackTrace();
         }
     }
