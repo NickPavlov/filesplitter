@@ -94,9 +94,9 @@ public class PartCreator implements IDataProcessor {
                 final FileChannel outputChannel = outputFile.getChannel();
         ) {
             outputChannel.write(ByteBufferCreator.createFromLong(position));
-            IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
             ByteBuffer buffer;
             long readBytes = 0;
+            final IPartIterator partIterator = new PartIterator(partSize, DEFAULT_BUFFER_SIZE);
             final FileLock lock = inputChannel.lock(position, partSize, false);
             while (partIterator.hasNext()) {
                 buffer = ByteBuffer.allocate((int) partIterator.next());
