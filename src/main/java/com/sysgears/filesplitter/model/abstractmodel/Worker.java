@@ -1,11 +1,18 @@
 package com.sysgears.filesplitter.model.abstractmodel;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 
 /**
  * The Worker class provides functionality for data processing.
  */
 public class Worker implements Runnable {
+
+    /**
+     * Logger.
+     */
+    private final static Logger LOG = Logger.getLogger(Worker.class);
 
     /**
      * Worker's name.
@@ -42,6 +49,7 @@ public class Worker implements Runnable {
         try {
             dataProcessor.process(data);
         } catch (IOException e) {
+            LOG.error("<" + name + "> " + e.getMessage());
             System.err.println("An I/O error has occurred while processing " + data.getName());
         }
     }
