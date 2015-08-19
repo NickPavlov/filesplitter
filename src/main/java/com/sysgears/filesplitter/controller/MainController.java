@@ -1,6 +1,7 @@
 package com.sysgears.filesplitter.controller;
 
 import com.sysgears.filesplitter.controller.services.util.IService;
+import com.sysgears.filesplitter.controller.util.IController;
 import com.sysgears.filesplitter.model.console.commands.Commands;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
