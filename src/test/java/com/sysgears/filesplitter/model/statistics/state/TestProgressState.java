@@ -24,4 +24,10 @@ public class TestProgressState {
         ProgressState progressState = new ProgressState(50, 100);
         Assert.assertEquals(progressState.toString(), "50%");
     }
+
+    @Test
+    public void toString30PercentTest() {
+        ProgressState progressState = new ProgressState(300, 1000);
+        Assert.assertEquals(progressState.toString(), "30%");
+    }
 }
