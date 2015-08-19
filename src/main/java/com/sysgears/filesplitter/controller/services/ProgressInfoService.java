@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter.controller.services;
 
+import com.sysgears.filesplitter.controller.services.util.IService;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
 import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 import com.sysgears.filesplitter.view.IUserInterface;
