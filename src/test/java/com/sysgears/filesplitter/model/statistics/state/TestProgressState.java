@@ -1,6 +1,6 @@
 package com.sysgears.filesplitter.model.statistics.state;
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,16 +10,16 @@ import org.testng.annotations.Test;
  */
 public class TestProgressState {
 
-    @BeforeClass
+    @BeforeClass()
     public void init() {
         System.out.println("ProgressState test starts.");
     }
 
-    @AfterClass
+    @AfterClass()
     public void tearDown() {
     }
 
-    @Test
+    @Test()
     public void toString50PercentTest() {
         ProgressState progressState = new ProgressState(50, 100);
         Assert.assertEquals(progressState.toString(), "50%");
