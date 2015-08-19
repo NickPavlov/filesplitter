@@ -26,7 +26,7 @@ public class BuildOptions {
      *
      * @return part path
      */
-    public String getPartsSource() {
+    public String getPartSource() {
         return partPath;
     }
 
