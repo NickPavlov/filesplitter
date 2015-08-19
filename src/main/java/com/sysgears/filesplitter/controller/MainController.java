@@ -83,19 +83,26 @@ public class MainController implements IController {
                 switch (command) {
                     case SPLIT:
                         new CmdLineParser(splitCmdOptions).parseArgument(options);
-                        LOG.info("FileSplitService started.");
-                        fileSplitService.run();
+
+                        // only for testing
+                        System.out.println();
+                        System.out.println("Path: " + splitCmdOptions.getFilePath());
+                        System.out.println("PartSize: " + splitCmdOptions.getPartSize());
+                        System.out.println("MB: " + splitCmdOptions.isMegabytes());
+                        System.out.println("kB: " + splitCmdOptions.isKilobytes());
+
+                        fileSplitService.start();
                         break;
                     case BUILD:
                         new CmdLineParser(buildCmdOptions).parseArgument(options);
                         LOG.info("FileBuildService started.");
-                        fileBuildService.run();
+                        fileBuildService.start();
                         break;
                 }
             }
         } catch (CmdLineException e) {
+            LOG.error(e.getMessage());
             e.getParser().printUsage(System.out);
-            LOG.error(e.toString());
         }
     }
 

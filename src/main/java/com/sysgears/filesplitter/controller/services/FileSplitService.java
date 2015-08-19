@@ -6,12 +6,13 @@ import com.sysgears.filesplitter.model.filesystem.directory.Directory;
 import com.sysgears.filesplitter.model.filesystem.directory.IDirectory;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.partcreator.PartCreatorsFactory;
-import com.sysgears.filesplitter.model.workers.StaticDataWorkersFactory;
 import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
+import com.sysgears.filesplitter.model.workers.StaticDataWorkersFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -20,6 +21,11 @@ import java.util.concurrent.ExecutorService;
  * The FileSplitService class provides functionality to split a file into parts.
  */
 public class FileSplitService implements IService {
+
+    /**
+     * Logger.
+     */
+    private final static Logger LOG = Logger.getLogger(FileSplitService.class);
 
     /**
      * Pool of threads.
@@ -64,11 +70,7 @@ public class FileSplitService implements IService {
      */
     public void start() {
         try {
-            System.out.println();
-            System.out.println("Path: " + splitOptions.getFilePath());
-            System.out.println("PartSize: " + splitOptions.getPartSize());
-            System.out.println("MB: " + splitOptions.isMegabytes());
-            System.out.println("kB: " + splitOptions.isKilobytes());
+            LOG.info("FileSplitService started.");
 
             int userPartSize = splitOptions.getPartSize();
             if (splitOptions.isMegabytes()) {
@@ -76,7 +78,6 @@ public class FileSplitService implements IService {
             } else if (splitOptions.isKilobytes()) {
                 userPartSize *= MemoryUnits.KILOBYTE;
             }
-            System.out.println("partSize: " + userPartSize);
 
             final String filePath = splitOptions.getFilePath();
             final IData file = new FileFinder().getByName(filePath);
@@ -90,6 +91,7 @@ public class FileSplitService implements IService {
             }
             pool.shutdown();
         } catch (IOException e) {
+            LOG.error(e.getMessage());
             e.printStackTrace();
         }
     }
