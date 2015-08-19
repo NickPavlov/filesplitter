@@ -84,7 +84,6 @@ public class FileBuildService implements IService {
             if (matcher.find()) {
                 originalFileName = matcher.group();
             }
-            System.out.println("originalFileName: " + originalFileName);
 
             IDataIterator fileIterator = new FileFinder(partPath).iterator();
             FileData fileData = new FileData(new File(outputPath + originalFileName));
