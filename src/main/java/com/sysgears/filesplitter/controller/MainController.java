@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter.controller;
 
+import com.sysgears.filesplitter.model.console.commands.Commands;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
 import org.kohsuke.args4j.CmdLineException;
@@ -64,14 +65,25 @@ public class MainController implements IController {
      */
     public void start(final String[] args) {
         try {
-            //int length = args.length - 1;
-            //String[] argsCopy = new String[length];
-            //System.arraycopy(args, 1, argsCopy, 0, length);
-            new CmdLineParser(splitCmdOptions).parseArgument(args);
+            Commands command = Commands.getCommand(args[0]);
+            String[] options = new String[args.length - 1];
+            System.arraycopy(args, 1, options, 0, args.length - 1);
             new Thread(progressInfoService).start();
-            fileSplitService.run();
+            switch (command) {
+                case SPLIT:
 
-            //fileBuildService.run();
+                    new CmdLineParser(splitCmdOptions).parseArgument(options);
+
+                    fileSplitService.run();
+
+                    break;
+                case BUILD:
+                    fileBuildService.run();
+                    break;
+                case UNKNOWN_COMMAND:
+                    System.out.println("Unknown command.");
+                    break;
+            }
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
         }

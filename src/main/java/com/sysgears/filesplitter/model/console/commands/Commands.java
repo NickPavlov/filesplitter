@@ -28,7 +28,7 @@ public enum Commands {
      * @param expression expression, to find an appropriate command
      * @return appropriate command
      */
-    public Commands getCommand(final String expression) {
+    public static Commands getCommand(final String expression) {
         Commands result = UNKNOWN_COMMAND;
         for (Commands command : Commands.values()) {
             if (command.name.equals(expression)) {
