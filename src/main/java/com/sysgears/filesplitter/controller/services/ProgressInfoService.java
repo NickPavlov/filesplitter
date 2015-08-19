@@ -1,8 +1,10 @@
 package com.sysgears.filesplitter.controller.services;
 
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
+import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 import com.sysgears.filesplitter.view.IUserInterface;
 
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -55,12 +57,18 @@ public class ProgressInfoService implements Runnable {
     public void run() {
         try {
             while (!pool.isTerminated()) {
-                System.out.println(progressMonitor.getProgressInfo());
+                sendProgressMessage(progressMonitor.getProgressInfo(), ui);
                 Thread.sleep(updateInterval);
             }
-            System.out.println(progressMonitor.getProgressInfo());
+            sendProgressMessage(progressMonitor.getProgressInfo(), ui);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void sendProgressMessage(final Map<String, IProgressState> progressState, final IUserInterface ui) {
+        if ((progressState != null) && !progressState.isEmpty()) {
+            System.out.println(progressState);
         }
     }
 }
