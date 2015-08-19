@@ -84,7 +84,7 @@ public class FileSplitService implements Runnable {
             final PartCreatorsFactory partCreator =
                     new PartCreatorsFactory(userPartSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final StaticDataWorkersFactory workerFactory = new StaticDataWorkersFactory(file);
-            IPartIterator partIterator = new PartIterator(file.getSize(), userPartSize);
+            final IPartIterator partIterator = new PartIterator(file.getSize(), userPartSize);
             while (partIterator.hasNext()) {
                 pool.execute(workerFactory.create(partCreator.create(partIterator.next())));
             }
