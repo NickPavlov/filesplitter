@@ -28,6 +28,12 @@ public class TestPartIterator {
 
     @BeforeClass
     public void init() {
+        System.out.println("init");
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
+        System.out.println("tearDown");
     }
 
     @Test
@@ -38,9 +44,5 @@ public class TestPartIterator {
     @Test
     public void nextTest() {
         Assert.assertEquals(partIterator.next(), 10);
-    }
-
-    @AfterClass
-    public void tearDown() {
     }
 }
