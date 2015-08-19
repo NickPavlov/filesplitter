@@ -11,7 +11,7 @@ import com.sysgears.filesplitter.model.filesystem.util.MemoryUnits;
 import com.sysgears.filesplitter.model.math.partiterator.IPartIterator;
 import com.sysgears.filesplitter.model.math.partiterator.PartIterator;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.workers.StaticDataWorkersFactory;
+import com.sysgears.filesplitter.model.worker.StaticDataWorkersFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.apache.log4j.Logger;
 

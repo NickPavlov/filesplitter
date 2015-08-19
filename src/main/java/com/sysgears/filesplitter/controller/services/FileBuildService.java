@@ -8,7 +8,7 @@ import com.sysgears.filesplitter.model.filesystem.file.FileData;
 import com.sysgears.filesplitter.model.filesystem.file.FileFinder;
 import com.sysgears.filesplitter.model.filesystem.file.filebuilder.FileBuilder;
 import com.sysgears.filesplitter.model.statistics.monitor.IProgressMonitor;
-import com.sysgears.filesplitter.model.workers.WorkersFactory;
+import com.sysgears.filesplitter.model.worker.WorkersFactory;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.apache.log4j.Logger;
 
