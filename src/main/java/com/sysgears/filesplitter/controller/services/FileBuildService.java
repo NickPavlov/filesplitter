@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * The FileBuildService class provides functionality to create file form parts.
  */
-public class FileBuildService implements Runnable {
+public class FileBuildService implements IService {
 
     /**
      * Pool of threads.
@@ -62,9 +62,8 @@ public class FileBuildService implements Runnable {
     /**
      * Starts a service.
      */
-    public void run() {
+    public void start() {
         try {
-
             // temporarily
             final String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
             final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
@@ -88,9 +87,22 @@ public class FileBuildService implements Runnable {
                     pool.execute(factory.create(filePart, new FileBuilder(fileData, progressMonitor)));
                 }
             }
-            pool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Stops a service.
+     */
+    public void stop() {
+        pool.shutdown();
+    }
+
+    /**
+     * Starts a service. It behaves exactly like method <code>start()</code>.
+     */
+    public void run() {
+        start();
     }
 }

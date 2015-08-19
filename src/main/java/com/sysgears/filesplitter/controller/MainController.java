@@ -1,5 +1,6 @@
 package com.sysgears.filesplitter.controller;
 
+import com.sysgears.filesplitter.controller.services.IService;
 import com.sysgears.filesplitter.model.console.commands.Commands;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
@@ -20,7 +21,7 @@ public class MainController implements IController {
     /**
      * FileSplitService instance.
      */
-    private final Runnable fileSplitService;
+    private final IService fileSplitService;
 
     /**
      * FileBuildService instance.
@@ -51,7 +52,7 @@ public class MainController implements IController {
      * @param buildCmdOptions     build command line arguments options
      * @param progressInfoService progress info service
      */
-    public MainController(final Runnable fileSplitService,
+    public MainController(final IService fileSplitService,
                           final Runnable fileCreateService,
                           final Runnable progressInfoService,
                           final SplitOptions splitCmdOptions,
