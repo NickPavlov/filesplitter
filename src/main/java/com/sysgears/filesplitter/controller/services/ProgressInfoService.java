@@ -6,6 +6,7 @@ import com.sysgears.filesplitter.model.statistics.state.IProgressState;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
@@ -75,9 +76,8 @@ public class ProgressInfoService implements IService {
                 Thread.sleep(updateInterval);
             }
             sendProgressInfo(progressMonitor.getProgressInfo(), ui);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             LOG.error(e.getMessage());
-            e.printStackTrace();
         }
         LOG.info("ProgressInfoService stopped.");
     }
@@ -101,12 +101,13 @@ public class ProgressInfoService implements IService {
      *
      * @param progress progress state
      * @param ui       user interface
+     * @throws IOException if an I/O error occurred
      */
     private void sendProgressInfo(final Map<String, IProgressState> progress,
-                                  final IUserInterface ui) {
+                                  final IUserInterface ui) throws IOException {
 
         if ((progress != null) && !progress.isEmpty()) {
-            System.out.println(progress);
+            ui.sendMessage(progress.toString() + "\n");
         }
     }
 }
