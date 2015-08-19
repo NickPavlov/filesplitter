@@ -26,8 +26,16 @@ public class TestPartIterator {
     }
 
     @Test
-    public void hasNextTwoPartTest() {
+    public void hasNextTwoPartsTest() {
         final PartIterator partIterator = new PartIterator(20, 10);
+        Assert.assertEquals(partIterator.hasNext(), true);
+        Assert.assertEquals(partIterator.hasNext(), true);
+    }
+
+    @Test
+    public void hasNextTreePartsTest() {
+        final PartIterator partIterator = new PartIterator(20, 9);
+        Assert.assertEquals(partIterator.hasNext(), true);
         Assert.assertEquals(partIterator.hasNext(), true);
         Assert.assertEquals(partIterator.hasNext(), true);
     }
@@ -39,9 +47,17 @@ public class TestPartIterator {
     }
 
     @Test
-    public void nextTwoPartTest() {
+    public void nextTwoPartsTest() {
         final PartIterator partIterator = new PartIterator(20, 10);
         Assert.assertEquals(partIterator.next(), 10);
         Assert.assertEquals(partIterator.next(), 10);
+    }
+
+    @Test
+    public void nextThreePartsTest() {
+        final PartIterator partIterator = new PartIterator(20, 9);
+        Assert.assertEquals(partIterator.next(), 9);
+        Assert.assertEquals(partIterator.next(), 9);
+        Assert.assertEquals(partIterator.next(), 2);
     }
 }
