@@ -67,8 +67,8 @@ public class ProgressInfoService implements IService {
      */
     public void start() {
         isRunning = true;
+        LOG.info("ProgressInfoService started.");
         try {
-            LOG.info("ProgressInfoService started.");
             while (!pool.isTerminated() && isRunning) {
                 sendProgressMessage(progressMonitor.getProgressInfo(), ui);
                 Thread.sleep(updateInterval);
