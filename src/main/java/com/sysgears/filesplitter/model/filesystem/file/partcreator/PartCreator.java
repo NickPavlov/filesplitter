@@ -60,17 +60,19 @@ public class PartCreator implements IDataProcessor {
      * Creates the PartCreator instance specified by part name and size.
      *
      * @param partNumber      file part number
+     * @param position        position in in the original file
      * @param partSize        part size
      * @param outputDirectory output directory
      */
     public PartCreator(final int partNumber,
+                       final long position,
                        final long partSize,
                        final String outputDirectory,
                        final IProgressMonitor progressMonitor) {
 
         this.partName = "part" + partNumber;
+        this.position = position;
         this.partSize = partSize;
-        this.position = partNumber * partSize;
         //temporary
         this.outputFileNameSuffix = "_" + partName + ".bin";
         this.outputDirectory = outputDirectory;

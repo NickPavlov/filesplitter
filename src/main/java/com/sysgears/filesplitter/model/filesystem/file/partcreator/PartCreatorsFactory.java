@@ -10,7 +10,7 @@ public class PartCreatorsFactory {
     /**
      * Part size.
      */
-    private final long partSize;
+    private final long userPartSize;
 
     /**
      * Part number.
@@ -30,14 +30,14 @@ public class PartCreatorsFactory {
     /**
      * Creates the PartCreatorsFactory instance specified by part size.
      *
-     * @param partSize        part size
+     * @param userPartSize    user part size
      * @param outputDirectory output directory
      */
-    public PartCreatorsFactory(final long partSize,
+    public PartCreatorsFactory(final long userPartSize,
                                final String outputDirectory,
                                final IProgressMonitor progressMonitor) {
-        this.partSize = partSize;
         this.partNumber = 0;
+        this.userPartSize = userPartSize;
         this.outputDirectory = outputDirectory;
         this.progressMonitor = progressMonitor;
     }
@@ -47,7 +47,10 @@ public class PartCreatorsFactory {
      *
      * @return PartCreator object
      */
-    public PartCreator create() {
-        return new PartCreator(partNumber++, partSize, outputDirectory, progressMonitor);
+    public PartCreator create(final long partSize) {
+        PartCreator partCreator
+                = new PartCreator(partNumber, userPartSize * partNumber, partSize, outputDirectory, progressMonitor);
+        ++partNumber;
+        return partCreator;
     }
 }

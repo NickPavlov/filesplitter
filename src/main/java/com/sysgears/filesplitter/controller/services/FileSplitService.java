@@ -64,31 +64,29 @@ public class FileSplitService implements Runnable {
      */
     public void run() {
         try {
-            // only for s
             System.out.println();
             System.out.println("Path: " + splitOptions.getFilePath());
             System.out.println("PartSize: " + splitOptions.getPartSize());
             System.out.println("MB: " + splitOptions.isMegabytes());
             System.out.println("kB: " + splitOptions.isKilobytes());
 
-            int partSize = splitOptions.getPartSize();
+            int userPartSize = splitOptions.getPartSize();
             if (splitOptions.isMegabytes()) {
-                partSize *= MemoryUnits.MEGABYTE;
+                userPartSize *= MemoryUnits.MEGABYTE;
             } else if (splitOptions.isKilobytes()) {
-                partSize *= MemoryUnits.KILOBYTE;
+                userPartSize *= MemoryUnits.KILOBYTE;
             }
-            System.out.println("partSize: " + partSize);
+            System.out.println("partSize: " + userPartSize);
 
             final String filePath = splitOptions.getFilePath();
             final IData file = new FileFinder().getByName(filePath);
             final IDirectory partsDirectory = new Directory(filePath).appendInnerDirectory(file.getName() + "_parts");
             final PartCreatorsFactory partCreator =
-                    new PartCreatorsFactory(partSize, partsDirectory.getAbsolutePath(), progressMonitor);
+                    new PartCreatorsFactory(userPartSize, partsDirectory.getAbsolutePath(), progressMonitor);
             final StaticDataWorkersFactory workerFactory = new StaticDataWorkersFactory(file);
-            IPartIterator partIterator = new PartIterator(file.getSize(), partSize);
+            IPartIterator partIterator = new PartIterator(file.getSize(), userPartSize);
             while (partIterator.hasNext()) {
-                pool.execute(workerFactory.create(partCreator.create()));
-                partIterator.next();
+                pool.execute(workerFactory.create(partCreator.create(partIterator.next())));
             }
             pool.shutdown();
         } catch (IOException e) {
