@@ -78,34 +78,36 @@ public class MainController implements IController {
             String[] options = new String[args.length - 1];
             System.arraycopy(args, 1, options, 0, args.length - 1);
             new Thread(progressInfoService).start();
+
             switch (command) {
                 case SPLIT:
                     try {
                         new CmdLineParser(splitCmdOptions).parseArgument(options);
+                        // only for testing
+                        System.out.println();
+                        System.out.println("Path: " + splitCmdOptions.getFilePath());
+                        System.out.println("PartSize: " + splitCmdOptions.getPartSize());
+                        System.out.println("MB: " + splitCmdOptions.isMegabytes());
+                        System.out.println("kB: " + splitCmdOptions.isKilobytes());
+
+                        fileSplitService.start();
                     } catch (CmdLineException e) {
                         LOG.error(e.getMessage());
                         e.getParser().printUsage(System.out);
+                    } finally {
                         fileSplitService.stop();
                     }
-
-                    // only for testing
-                    System.out.println();
-                    System.out.println("Path: " + splitCmdOptions.getFilePath());
-                    System.out.println("PartSize: " + splitCmdOptions.getPartSize());
-                    System.out.println("MB: " + splitCmdOptions.isMegabytes());
-                    System.out.println("kB: " + splitCmdOptions.isKilobytes());
-
-                    fileSplitService.start();
                     break;
                 case BUILD:
                     try {
                         new CmdLineParser(buildCmdOptions).parseArgument(options);
+                        fileBuildService.start();
                     } catch (CmdLineException e) {
                         LOG.error(e.getMessage());
                         e.getParser().printUsage(System.out);
+                    } finally {
                         fileBuildService.stop();
                     }
-                    fileBuildService.start();
                     break;
             }
         }
