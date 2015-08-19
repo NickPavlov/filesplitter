@@ -52,7 +52,6 @@ public class Worker implements Runnable {
             dataProcessor.process(data);
         } catch (IOException e) {
             LOG.error("<" + name + "> " + e.getMessage());
-            System.err.println("An I/O error has occurred while processing " + data.getName());
         }
     }
 
