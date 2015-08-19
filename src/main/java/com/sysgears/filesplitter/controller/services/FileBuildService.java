@@ -75,8 +75,9 @@ public class FileBuildService implements IService {
 
             // temporarily
             //final String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
+            //final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
             final String partPath = buildOptions.getPartSource();
-            final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
+            final String outputPath = buildOptions.getOutputDirectory();
             final String regexPattern = ".+(?=_part[0-9]+\\.bin)";
 
             final Pattern pattern = Pattern.compile(regexPattern);
