@@ -66,23 +66,21 @@ public class MainController implements IController {
     public void start(final String[] args) {
         try {
             Commands command = Commands.getCommand(args[0]);
-            String[] options = new String[args.length - 1];
-            System.arraycopy(args, 1, options, 0, args.length - 1);
-            new Thread(progressInfoService).start();
-            switch (command) {
-                case SPLIT:
-
-                    new CmdLineParser(splitCmdOptions).parseArgument(options);
-
-                    fileSplitService.run();
-
-                    break;
-                case BUILD:
-                    fileBuildService.run();
-                    break;
-                case UNKNOWN_COMMAND:
-                    System.out.println("Unknown command.");
-                    break;
+            if (command == Commands.UNKNOWN_COMMAND) {
+                System.out.println("Unknown command.");
+            } else {
+                String[] options = new String[args.length - 1];
+                System.arraycopy(args, 1, options, 0, args.length - 1);
+                new Thread(progressInfoService).start();
+                switch (command) {
+                    case SPLIT:
+                        new CmdLineParser(splitCmdOptions).parseArgument(options);
+                        fileSplitService.run();
+                        break;
+                    case BUILD:
+                        fileBuildService.run();
+                        break;
+                }
             }
         } catch (CmdLineException e) {
             e.getParser().printUsage(System.out);
