@@ -59,8 +59,8 @@ public class ProgressInfoService implements IService {
                                final ExecutorService pool,
                                final int updateInterval) {
         this.ui = ui;
-        this.progressMonitor = progressMonitor;
         this.pool = pool;
+        this.progressMonitor = progressMonitor;
         this.updateInterval = updateInterval;
     }
 
