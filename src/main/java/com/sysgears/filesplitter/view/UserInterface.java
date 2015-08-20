@@ -35,12 +35,6 @@ public class UserInterface implements IUserInterface {
      * @throws IllegalArgumentException if input or output stream is null
      */
     public UserInterface(final InputStream input, final OutputStream output, final String charsetName) {
-        if (input == null) {
-            throw new IllegalArgumentException("Input stream can't be null.");
-        }
-        if (output == null) {
-            throw new IllegalArgumentException("Output stream can't be null.");
-        }
         this.inputStream = input;
         this.outputStream = output;
         this.charsetName = (charsetName == null || charsetName.isEmpty()) ? DEFAULT_CHARSET : charsetName;

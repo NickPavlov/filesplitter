@@ -25,13 +25,6 @@ public class Directory implements IDirectory {
      * @throws IOException              if an I/O error occurred
      */
     public Directory(final String directory) throws IOException {
-        if (directory == null) {
-            throw new IllegalArgumentException("Directory can't be null.");
-        }
-        if (directory.isEmpty()) {
-            throw new IllegalArgumentException("Directory can't be empty.");
-        }
-
         File tempDirectory = new File(directory);
         if (tempDirectory.exists()) {
             if (!tempDirectory.isDirectory()) {
