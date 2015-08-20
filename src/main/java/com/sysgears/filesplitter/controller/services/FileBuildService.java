@@ -28,6 +28,9 @@ public class FileBuildService implements IService {
      */
     private static final Logger LOG = Logger.getLogger(FileBuildService.class);
 
+    /**
+     * Part name pattern.
+     */
     private static final String PATTERN = ".+(?=_part[0-9]+\\.bin)";
 
     /**
