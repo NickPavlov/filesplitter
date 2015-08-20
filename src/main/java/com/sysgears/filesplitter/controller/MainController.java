@@ -83,6 +83,10 @@ public class MainController implements IController {
      */
     public void start(final String[] args) {
         try {
+            if (args.length == 0) {
+                ui.sendMessage("split/build command required.");
+                return;
+            }
             Commands command = Commands.getCommand(args[0]);
             if (command == Commands.UNKNOWN_COMMAND) {
                 ui.sendMessage("Unknown command.\n");
@@ -106,7 +110,7 @@ public class MainController implements IController {
                             fileSplitService.start();
                         } catch (CmdLineException e) {
                             LOG.error(e.getMessage());
-                            e.getParser().printUsage(System.out);
+                            e.getParser().printUsage(ui.getOutputStream());
                         } finally {
                             fileSplitService.stop();
                         }
@@ -117,7 +121,7 @@ public class MainController implements IController {
                             fileBuildService.start();
                         } catch (CmdLineException e) {
                             LOG.error(e.getMessage());
-                            e.getParser().printUsage(System.out);
+                            e.getParser().printUsage(ui.getOutputStream());
                         } finally {
                             fileBuildService.stop();
                         }
