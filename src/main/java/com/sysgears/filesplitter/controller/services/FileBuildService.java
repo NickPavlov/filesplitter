@@ -111,7 +111,7 @@ public class FileBuildService implements IService {
     }
 
     /**
-     * Starts a service. It behaves exactly like method <code>start()</code>.
+     * Starts a service. It behaves exactly like the method <code>start()</code>.
      */
     public void run() {
         start();
