@@ -26,7 +26,9 @@ public class FileBuildService implements IService {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(FileBuildService.class);
+    private static final Logger LOG = Logger.getLogger(FileBuildService.class);
+
+    private static final String PATTERN = ".+(?=_part[0-9]+\\.bin)";
 
     /**
      * Pool of threads.
@@ -73,20 +75,14 @@ public class FileBuildService implements IService {
         try {
             LOG.info("FileBuildService started.");
 
-            // temporarily
-            //final String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
-            //final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
-            final String regexPattern = ".+(?=_part[0-9]+\\.bin)";
             final String partPath = buildOptions.getPartSource();
             final String outputPath = buildOptions.getOutputDirectory();
-
-            final Pattern pattern = Pattern.compile(regexPattern);
+            final Pattern pattern = Pattern.compile(PATTERN);
             String originalFileName = Long.toString(System.nanoTime());
             Matcher matcher = pattern.matcher(new File(partPath).getName());
             if (matcher.find()) {
                 originalFileName = matcher.group();
             }
-
             IDataIterator fileIterator = new FileFinder(partPath).iterator();
             FileData fileData = new FileData(new File(outputPath, originalFileName));
             WorkersFactory factory = new WorkersFactory();
