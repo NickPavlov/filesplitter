@@ -1,5 +1,8 @@
 package com.sysgears.filesplitter.model.console.commands;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The Commands class provides set of commands.
  */
@@ -38,6 +41,15 @@ public enum Commands {
         }
 
         return result;
+    }
+
+    /**
+     * Returns list of commands.
+     *
+     * @return list of commands
+     */
+    public static List<Commands> getCommandsList() {
+        return Arrays.asList(Commands.values());
     }
 
     /**
