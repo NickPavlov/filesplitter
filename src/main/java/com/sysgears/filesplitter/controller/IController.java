@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.controller.util;
+package com.sysgears.filesplitter.controller;
 
 /**
  * The IController interface defines the behavior of a controller object.

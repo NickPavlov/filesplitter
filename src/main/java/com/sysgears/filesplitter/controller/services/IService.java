@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.controller.services.util;
+package com.sysgears.filesplitter.controller.services;
 
 /**
  * The IService interface defines the behavior of a service object.

@@ -1,6 +1,5 @@
 package com.sysgears.filesplitter.controller.services;
 
-import com.sysgears.filesplitter.controller.services.util.IService;
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
