@@ -5,6 +5,7 @@ import com.sysgears.filesplitter.controller.util.IController;
 import com.sysgears.filesplitter.model.console.commands.Commands;
 import com.sysgears.filesplitter.model.console.options.BuildOptions;
 import com.sysgears.filesplitter.model.console.options.SplitOptions;
+import com.sysgears.filesplitter.model.util.StringCreator;
 import com.sysgears.filesplitter.view.IUserInterface;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -84,12 +85,12 @@ public class MainController implements IController {
     public void start(final String[] args) {
         try {
             if (args.length == 0) {
-                ui.sendMessage("split/build command required.");
+                ui.sendMessage(StringCreator.createFromCollection(Commands.getCommandsList()));
                 return;
             }
             Commands command = Commands.getCommand(args[0]);
             if (command == Commands.UNKNOWN_COMMAND) {
-                ui.sendMessage("Unknown command.\n");
+                ui.sendMessage(StringCreator.createFromCollection(Commands.getCommandsList()));
             } else {
                 String[] options = new String[args.length - 1];
                 System.arraycopy(args, 1, options, 0, args.length - 1);
