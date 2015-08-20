@@ -25,7 +25,7 @@ public class FileSplitService implements IService {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(FileSplitService.class);
+    private final static Logger log = Logger.getLogger(FileSplitService.class);
 
     /**
      * Pool of threads.
@@ -70,7 +70,7 @@ public class FileSplitService implements IService {
      */
     public void start() {
         try {
-            LOG.info("FileSplitService started.");
+            log.info("FileSplitService started.");
 
             int userPartSize = splitOptions.getPartSize();
             if (splitOptions.isMegabytes()) {
@@ -89,9 +89,8 @@ public class FileSplitService implements IService {
             while (partIterator.hasNext()) {
                 pool.execute(workerFactory.create(partCreator.create(partIterator.next())));
             }
-            pool.shutdown();
         } catch (IOException e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -100,7 +99,7 @@ public class FileSplitService implements IService {
      * Stops a service.
      */
     public void stop() {
-        LOG.info("FileSplitService stopped.");
+        log.info("FileSplitService stopped.");
         pool.shutdown();
     }
 

@@ -14,7 +14,7 @@ public class Worker implements Runnable {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(Worker.class);
+    private final static Logger log = Logger.getLogger(Worker.class);
 
     /**
      * Worker's name.
@@ -51,7 +51,7 @@ public class Worker implements Runnable {
         try {
             dataProcessor.process(data);
         } catch (IOException e) {
-            LOG.error("<" + name + "> " + e.getMessage());
+            log.error("<" + name + "> " + e.getMessage());
         }
     }
 

@@ -25,7 +25,7 @@ public class FileBuildService implements IService {
     /**
      * Logger.
      */
-    private static final Logger LOG = Logger.getLogger(FileBuildService.class);
+    private static final Logger log = Logger.getLogger(FileBuildService.class);
 
     /**
      * Part name pattern.
@@ -75,7 +75,7 @@ public class FileBuildService implements IService {
      */
     public void start() {
         try {
-            LOG.info("FileBuildService started.");
+            log.info("FileBuildService started.");
 
             final String partPath = buildOptions.getPartSource();
             final String outputPath = buildOptions.getOutputDirectory();
@@ -96,7 +96,7 @@ public class FileBuildService implements IService {
                 }
             }
         } catch (IOException e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -105,7 +105,7 @@ public class FileBuildService implements IService {
      * Stops a service.
      */
     public void stop() {
-        LOG.info("FileBuildService stopped.");
+        log.info("FileBuildService stopped.");
         pool.shutdown();
     }
 

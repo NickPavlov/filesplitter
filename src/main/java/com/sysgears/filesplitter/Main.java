@@ -12,7 +12,7 @@ public class Main {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(Main.class);
+    private final static Logger log = Logger.getLogger(Main.class);
 
     /**
      * Application context paths.
@@ -34,7 +34,7 @@ public class Main {
             context.getBean(MainController.class).start(args);
 
         } catch (Throwable t) {
-            LOG.fatal(t.getMessage());
+            log.fatal(t.getMessage());
             t.printStackTrace();
         }
     }

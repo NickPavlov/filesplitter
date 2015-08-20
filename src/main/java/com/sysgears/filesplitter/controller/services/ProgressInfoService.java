@@ -17,7 +17,7 @@ public class ProgressInfoService implements IService {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(ProgressInfoService.class);
+    private final static Logger log = Logger.getLogger(ProgressInfoService.class);
 
     /**
      * User interface.
@@ -68,7 +68,7 @@ public class ProgressInfoService implements IService {
      */
     public void start() {
         isRunning = true;
-        LOG.info("ProgressInfoService started.");
+        log.info("ProgressInfoService started.");
         try {
             while (!pool.isTerminated() && isRunning) {
                 sendProgressInfo(progressMonitor.getProgressInfo(), ui);
@@ -76,9 +76,9 @@ public class ProgressInfoService implements IService {
             }
             sendProgressInfo(progressMonitor.getProgressInfo(), ui);
         } catch (IOException | InterruptedException e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
         }
-        LOG.info("ProgressInfoService stopped.");
+        log.info("ProgressInfoService stopped.");
     }
 
     /**

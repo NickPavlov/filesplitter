@@ -20,7 +20,7 @@ public class MainController implements IController {
     /**
      * Logger.
      */
-    private final static Logger LOG = Logger.getLogger(MainController.class);
+    private final static Logger log = Logger.getLogger(MainController.class);
 
     /**
      * FileSplitService instance.
@@ -109,7 +109,7 @@ public class MainController implements IController {
 
                             fileSplitService.start();
                         } catch (CmdLineException e) {
-                            LOG.error(e.getMessage());
+                            log.error(e.getMessage());
                             e.getParser().printUsage(ui.getOutputStream());
                         } finally {
                             fileSplitService.stop();
@@ -120,7 +120,7 @@ public class MainController implements IController {
                             new CmdLineParser(buildCmdOptions).parseArgument(options);
                             fileBuildService.start();
                         } catch (CmdLineException e) {
-                            LOG.error(e.getMessage());
+                            log.error(e.getMessage());
                             e.getParser().printUsage(ui.getOutputStream());
                         } finally {
                             fileBuildService.stop();
@@ -129,7 +129,7 @@ public class MainController implements IController {
                 }
             }
         } catch (IOException e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
