@@ -76,9 +76,9 @@ public class FileBuildService implements IService {
             // temporarily
             //final String partPath = "/home/nick/Documents/jdk.tar.gz_parts/jdk.tar.gz_part0.bin";
             //final String outputPath = "/home/nick/Documents/jdk.tar.gz_parts/";
+            final String regexPattern = ".+(?=_part[0-9]+\\.bin)";
             final String partPath = buildOptions.getPartSource();
             final String outputPath = buildOptions.getOutputDirectory();
-            final String regexPattern = ".+(?=_part[0-9]+\\.bin)";
 
             final Pattern pattern = Pattern.compile(regexPattern);
             String originalFileName = Long.toString(System.nanoTime());
@@ -88,7 +88,7 @@ public class FileBuildService implements IService {
             }
 
             IDataIterator fileIterator = new FileFinder(partPath).iterator();
-            FileData fileData = new FileData(new File(outputPath + originalFileName));
+            FileData fileData = new FileData(new File(outputPath, originalFileName));
             WorkersFactory factory = new WorkersFactory();
             IData filePart;
             while (fileIterator.hasNext()) {
