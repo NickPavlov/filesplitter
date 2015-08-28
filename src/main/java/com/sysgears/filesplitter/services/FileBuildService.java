@@ -1,4 +1,4 @@
-package com.sysgears.filesplitter.controller.services;
+package com.sysgears.filesplitter.services;
 
 import com.sysgears.filesplitter.model.abstractmodel.IData;
 import com.sysgears.filesplitter.model.abstractmodel.IDataIterator;

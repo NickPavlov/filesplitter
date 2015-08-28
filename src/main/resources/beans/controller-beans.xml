@@ -15,21 +15,21 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- services -->
 
-    <bean id="progressInfoService" class="com.sysgears.filesplitter.controller.services.ProgressInfoService">
+    <bean id="progressInfoService" class="com.sysgears.filesplitter.services.ProgressInfoService">
         <constructor-arg index="0" ref="userInterface" />
         <constructor-arg index="1" ref="progressMonitor" />
         <constructor-arg index="2" ref="pool" />
         <constructor-arg index="3" value="100" />
     </bean>
 
-    <bean id="fileSplitService" class="com.sysgears.filesplitter.controller.services.FileSplitService">
+    <bean id="fileSplitService" class="com.sysgears.filesplitter.services.FileSplitService">
         <constructor-arg index="0" ref="pool" />
         <constructor-arg index="1" ref="userInterface" />
         <constructor-arg index="2" ref="splitOptions" />
         <constructor-arg index="3" ref="progressMonitor" />
     </bean>
 
-    <bean id="fileBuildService" class="com.sysgears.filesplitter.controller.services.FileBuildService" >
+    <bean id="fileBuildService" class="com.sysgears.filesplitter.services.FileBuildService" >
         <constructor-arg index="0" ref="pool" />
         <constructor-arg index="1" ref="userInterface" />
         <constructor-arg index="2" ref="buildOptions" />
